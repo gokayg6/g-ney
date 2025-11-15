@@ -1,0 +1,54 @@
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+
+export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
+  return bcrypt.compare(password, hashedPassword);
+}
+
+export async function hashPassword(password: string): Promise<string> {
+  return bcrypt.hash(password, 10);
+}
+
+export function generateToken(email: string): string {
+  return jwt.sign({ email }, JWT_SECRET, { expiresIn: '7d' });
+}
+
+export function verifyToken(token: string): { email: string } | null {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as { email: string };
+    return decoded;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function authenticateAdmin(email: string, password: string): Promise<boolean> {
+  // Trim and compare
+  const trimmedEmail = email.trim().toLowerCase();
+  const expectedEmail = ADMIN_EMAIL.trim().toLowerCase();
+  
+  if (trimmedEmail !== expectedEmail) {
+    console.log('Email mismatch:', { received: trimmedEmail, expected: expectedEmail });
+    return false;
+  }
+  
+  // Check plain text match (for initial setup)
+  // In production, you should hash the password and store it, then compare hashes
+  const passwordMatch = password === ADMIN_PASSWORD;
+  if (!passwordMatch) {
+    console.log('Password mismatch');
+  }
+  return passwordMatch;
+}
+
+export function getAdminCredentials() {
+  return {
+    email: ADMIN_EMAIL,
+    // Don't return password
+  };
+}
+

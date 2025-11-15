@@ -1,0 +1,391 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.font-serif {
+  font-family: "Playfair Display", serif;
+}
+
+/* iOS-like Animations - Faster and smoother */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.1);
+    filter: blur(10px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-slide-down {
+  animation: slide-down 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-slide-up {
+  animation: slide-up 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-zoom-in {
+  animation: zoom-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-zoom-out {
+  animation: zoom-out 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* Page transition effects */
+.page-transition-enter {
+  animation: zoom-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-transition-exit {
+  animation: zoom-out 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth transitions for interactive elements - Faster */
+button, a, input, textarea {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* iOS-like button press effect */
+button:active {
+  transform: scale(0.96);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Page container for transitions */
+main {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Blur effect during transitions */
+.transitioning {
+  filter: blur(8px);
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+/* Intersection Observer animations - Default visible, animate when scrolled into view */
+.animate-on-scroll {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Checkbox Styles */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #a855f7;
+  border-radius: 4px;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #a855f7;
+  border-color: #a855f7;
+}
+
+input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #c084fc;
+  transform: scale(1.1);
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #a855f7;
+  ring-offset: 2px;
+  ring-offset-color: #111;
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Blog Card Hover Effects - Force zoom */
+.blog-card {
+  transition: transform 0.5s ease-out, box-shadow 0.5s ease-out, border-color 0.5s ease-out !important;
+}
+
+.blog-card:hover {
+  transform: translateY(-16px) scale(1.05) !important;
+  box-shadow: 0 40px 120px rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Blur card content on hover - STRONG BLUR */
+.blog-card:hover > *:not(.view-details-btn):not(button):not([class*="absolute"]) {
+  filter: blur(6px) !important;
+  transition: filter 0.5s ease-out !important;
+}
+
+.blog-card:hover img {
+  filter: blur(8px) !important;
+  transition: filter 0.5s ease-out !important;
+}
+
+.blog-card:hover .view-details-btn {
+  filter: none !important;
+  z-index: 1000000 !important;
+}
+
+.blog-card img,
+.blog-card picture img {
+  transition: transform 0.7s ease-out !important;
+}
+
+.blog-card:hover img,
+.blog-card:hover picture img {
+  transform: scale(1.4) rotate(2deg) !important;
+}
+
+/* Blog Card Button - Ensure it's clickable and responsive */
+.blog-card a[href*="/blog/"],
+.blog-card button {
+  z-index: 9999 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.blog-card a[href*="/blog/"]:hover,
+.blog-card a[href*="/blog/"]:active,
+.blog-card button:hover,
+.blog-card button:active {
+  transform: scale(1.1) !important;
+}
+
+/* Ensure overlay is clickable */
+.blog-card .absolute.inset-0 {
+  pointer-events: none;
+}
+
+.blog-card .absolute.inset-0 a,
+.blog-card .absolute.inset-0 button {
+  pointer-events: auto !important;
+}
+
+/* Arrow Button - RESPONSIVE AND CLICKABLE - FORCE IT TO WORK */
+.arrow-btn {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.5) !important;
+  touch-action: manipulation !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  z-index: 99999 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  isolation: isolate !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.arrow-btn * {
+  pointer-events: none !important;
+}
+
+.arrow-btn:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.6) !important;
+  outline-offset: 3px !important;
+}
+
+.arrow-btn:active {
+  transform: scale(0.85) !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.arrow-btn:hover {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Ensure parent doesn't block clicks */
+.blog-card > div:last-child {
+  pointer-events: auto !important;
+}
+
+.blog-card > div:last-child > div:last-child {
+  pointer-events: auto !important;
+}
+
+/* View Details Button - Responsive and Clickable - FORCE IT TO WORK */
+.view-details-btn {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.5) !important;
+  touch-action: manipulation !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  z-index: 1000000 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  isolation: isolate !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.1em !important;
+}
+
+.view-details-btn:hover {
+  transform: scale(1.15) !important;
+  box-shadow: 0 25px 50px rgba(255, 255, 255, 0.5) !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.view-details-btn:active {
+  transform: scale(0.9) !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Ensure button container is clickable */
+.blog-card > div[class*="absolute"]:has(.view-details-btn) {
+  pointer-events: auto !important;
+}
+
+/* Expanded Content Animation */
+@keyframes slide-down-expand {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 2000px;
+    transform: translateY(0);
+  }
+}
+
+.blog-card .animate-fade-in {
+  animation: slide-down-expand 0.4s ease-out forwards;
+}

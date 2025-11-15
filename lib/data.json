@@ -1,0 +1,467 @@
+{
+  "hero": {
+    "name": "Loegs.com",
+    "tagline": "Kodlama &",
+    "taglineHighlight": "Programlama",
+    "description": "React Native geliştirme odaklı tutkulu bir Yazılım Mühendisi, zarif ve kullanıcı dostu mobil uygulamalar oluşturmaya adanmış.",
+    "buttonText": "İletişime Geç",
+    "buttonLink": "mail:mustafakarakus@gmail.com",
+    "image": "/loegs.png"
+  },
+  "about": {
+    "title": "BİZİM HAKKIMIZDA",
+    "subtitle": "KEŞFET",
+    "description": "Tutkulu bir yazılım mühendisi olarak, mantık ve yaratıcılık arasındaki karmaşık dansın tadını çıkarıyorum. Şu anda WebHR'nin dinamik dünyasında, teknolojiyi yenilikle sorunsuz bir şekilde harmanladığım React Native çevresinde uzmanlığımı merkeze alıyorum.\n\nZarif çözümler üretme tutkusuyla, yazılım geliştirmenin sürekli evrim geçiren manzarasında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve mümkün olanın sınırlarını sürekli zorlamayı içeriyor"
+  },
+  "experience": {
+    "title": "DENEYİM",
+    "subtitle": "KEŞFET",
+    "items": [
+      {
+        "id": "1",
+        "company": "WebHR",
+        "companyLogo": "/WebHR.svg",
+        "position": "Yazılım Mühendisi",
+        "period": "Mayıs 2022 - Şimdi, Amerika Birleşik Devletleri",
+        "description": "Şu anda WebHR Mobil Uygulaması üzerinde çalışıyorum. WebHR, Verge Systems Inc. tarafından KOBİ'ler için bulut tabanlı bir Sosyal İK Yazılımıdır. WebHR şu anda dünya çapında 160'tan fazla ülkede binlerce organizasyon tarafından İK yönetimi için kullanılmaktadır. 2.5 yıllık deneyime sahip bir React.js geliştiricisi olarak, dinamik ve duyarlı mobil ve web uygulamaları oluşturmada güçlü bir temele sahibim.\n\nReact Native deneyimim, hem iOS hem de Android platformlarında sorunsuz çalışan platformlar arası mobil uygulamalar geliştirmeme olanak sağladı. Ayrıca, React.js konusundaki yeterliliğim, mükemmel kullanıcı deneyimleriyle hızlı, ölçeklenebilir ve dinamik web sayfaları oluşturma becerileriyle donattı. Bileşen tabanlı mimari ve durum yönetimi konusunda derin bir anlayışa sahibim ve en son web geliştirme trendleri ve teknolojileri konusunda bilgiliyim.",
+        "skills": [
+          "React Native",
+          "React",
+          "JavaScript",
+          "Typescript"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "MUSTAFA",
+    "subtitle": "KEŞFET",
+    "items": [
+      {
+        "id": "1",
+        "title": "WebHR",
+        "description": "Next.js kullanarak 50'den fazla ekrandan oluşan modern bir UI web sitesi tasarladım, ayrıca bir blog entegrasyonu yaptım.",
+        "image": "/FirstProject.png",
+        "link": "https://web.hr/",
+        "type": "saas"
+      },
+      {
+        "id": "2",
+        "title": "MOBİL UYGULAMA",
+        "description": "Kullanıcıların iş başvurusu yapmasına, iş ilanları oluşturmasına ve şirket profillerini yönetmesine olanak tanıyan Next.js üzerinde bir web uygulaması geliştirdim.",
+        "image": "/SecondProject.png",
+        "link": "https://hireside.com/",
+        "type": "mobile-app-template"
+      },
+      {
+        "id": "3",
+        "title": "Verge Systems",
+        "description": "React.js kullanarak Verge Systems web sitesini geliştirdim.",
+        "image": "/ThirdProject.png",
+        "link": "https://www.vergesystems.com/",
+        "type": "web"
+      },
+      {
+        "id": "4",
+        "title": "Payoasis",
+        "description": "Gatsby kullanarak bir bankacılık web sitesi için modern UI tasarladım.",
+        "image": "/FourProject.png",
+        "link": "http://44.201.47.75/",
+        "type": "ecommerce"
+      },
+      {
+        "id": "1763147303959",
+        "title": "projem",
+        "description": "rsgrsggsgsr",
+        "image": "",
+        "link": "https://www.instagram.com/",
+        "type": "game",
+        "privacyPolicy": "gsgsgssgsg"
+      }
+    ]
+  },
+  "contact": {
+    "title": "İLETİŞİM",
+    "subtitle": "BANA ULAŞIN",
+    "email": "mustafakarakus@gmail.com",
+    "description": "İşbirlikleri, fırsatlar veya sadece merhaba demek için çekinmeden iletişime geçin!"
+  },
+  "social": [
+    {
+      "link": "https://github.com/",
+      "image": "/Github.svg",
+      "alt": "Mustafa Karakuş - Social Media"
+    },
+    {
+      "link": "https://www.instagram.com/gokaygulustann",
+      "image": "/Instagram.svg",
+      "alt": "Mustafa Karakuş - Social Media"
+    },
+    {
+      "link": "https://www.linkedin.com/in/",
+      "image": "/LinkedIn.svg",
+      "alt": "Mustafa Karakuş - Social Media"
+    },
+    {
+      "link": "https://twitter.com/",
+      "image": "/Twitter.svg",
+      "alt": "Mustafa Karakuş - Social Media"
+    },
+    {
+      "link": "",
+      "image": "",
+      "alt": ""
+    }
+  ],
+  "blog": {
+    "title": "BLOG",
+    "subtitle": "KEŞFET",
+    "introTitle": "Atölyeden Günlük Notlar",
+    "introDescription": "Her sabahın kokusunu, öğle arasında karalanan fikirleri ve gecenin sessizliğinde biten işleri burada topluyorum. Bu sayfa; üretim masasından sesler, yeni kokular, küçük aksaklıklar ve beklenmedik ilhamların günlük gibi kaydedildiği bir yer.",
+    "posts": [
+      {
+        "id": "1",
+        "title": "Günlük Notlar: Camomile Tea & Lavanta Atölyesi",
+        "excerpt": "Bugün üretim masasını yeni kokumuz Camomile Tea & French Lavender için hazırladım. Lavanta demetleri stüdyoyu sakinleştiriyor.",
+        "content": "06:30 — Atölyeye girdiğimde lavanta demetleri hâlâ gece lambalarının altında parlıyordu. Camomile yapraklarını öğütürken çıkan ses, sabah sessizliğine eşlik etti.\n\n12:10 — İlk deneme partisini hazırladım. Renk tam istediğim gibi pastel krem oldu. Ekibin geri bildirimi \"şifa gibi\" oldu.\n\n19:45 — Etiket taslağını güncelledim. Camomile illüstrasyonunu bir tık yumuşattım. Yarın fotoğraf çekimi var, enerjimiz yüksek.",
+        "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=2400&q=80",
+        "date": "20 Ocak 2024",
+        "author": "Loegs",
+        "category": "journal",
+        "readTime": "4 dk",
+        "published": true
+      },
+      {
+        "id": "2",
+        "title": "Stüdyodan Günlük: %25 İndirim Hazırlığı",
+        "excerpt": "Black Friday için etiketleri bastık, paketleri katladık, kahvelerimizi tazeledik. Bu yıl 100.000 ağaç hedefine herkes hazır.",
+        "content": "09:00 — Kampanya planını son kez gözden geçirdik. Her sipariş için ağaç dikim kartlarını paketlere ekleyeceğiz.\n\n13:30 — Depoda hummalı bir hazırlık vardı. Yeni kutularımızı test ettik, bantları güçlendirdik.\n\n21:15 — Kampanya sayfasını yeniden yazdım. Bir arkadaşına anlatır gibi... çünkü gerçekten öyle.",
+        "image": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=2400&q=80",
+        "date": "18 Ocak 2024",
+        "author": "Loegs",
+        "category": "campaign",
+        "readTime": "3 dk",
+        "published": true
+      },
+      {
+        "id": "3",
+        "title": "Retro Swirl Kutusu ve İlham Panosu",
+        "excerpt": "Bugün Retro Swirl için 70'ler posterleri, neon renkler ve eski dergilerle dolu bir masa kurdum.",
+        "content": "09:15 — Eski plaklarımızı dinleyerek işe başladım. Mor ve turuncu tonların bir arada ne kadar sıcak durduğunu tekrar hatırladım.\n\n14:00 — Fotoğraf çekimi yaptık. Kutunun üzerine sinen ışık, ekibin moralini yükseltti.\n\n17:30 — Blog yazısını bitirdim; Retro Swirl'ün hikâyesini yazarken çocukluğumdan kalan defterleri bile karıştırdım.",
+        "image": "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=2400&q=80",
+        "date": "15 Ocak 2024",
+        "author": "Loegs",
+        "category": "design",
+        "readTime": "5 dk",
+        "published": true
+      },
+      {
+        "id": "4",
+        "title": "Atölyede Genç Misafir: Çocuklar ve Doğal Formüller",
+        "excerpt": "Küçük kuzenim Ada bugün atölyeye geldi, deodorant yapımını adım adım anlattım. Çocuklar için doğal seçimlerin notlarını aldım.",
+        "content": "10:05 — Ada ile birlikte laboratuvar önlüğü giydik. Malzemeleri tek tek kokladı, en çok shea yağını sevdi.\n\n14:20 — Çocuklar için neden alüminyum içermeyen formül kullandığımızı anlattım. Ada, \"Bu çok mantıklı\" deyip defterine not aldı.\n\n18:40 — Blog yazısını Ada'nın sorularıyla şekillendirdim. Çocukların merakı gerçekten bize yön veriyor.",
+        "image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=2400&q=80",
+        "date": "12 Ocak 2024",
+        "author": "Loegs",
+        "category": "lifestyle",
+        "readTime": "4 dk",
+        "published": true
+      },
+      {
+        "id": "5",
+        "title": "Sabah Raporu: Espresso, Playlist ve Tedarik Listesi",
+        "excerpt": "Haftanın ilk siparişlerini hazırlarken kahve lekeli tedarik listeleri ve lo-fi çalma listesi masamdaydı.",
+        "content": "07:20 — Espresso makinesi sesine karışan kesme tahtası vuruşları. Yeni kavanoz kapakları için tedarik listesini güncelledim.\n\n11:50 — Lo-fi çalma listemiz, paketleme temposunu koruyor. Çıkışa hazır 84 sipariş var.\n\n16:10 — Depo listelerini Notion'a aktardım. Eksik kalan yalnızca pamuk kurdele.",
+        "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2400&q=80",
+        "date": "9 Ocak 2024",
+        "author": "Loegs",
+        "category": "studio",
+        "readTime": "3 dk",
+        "published": true
+      },
+      {
+        "id": "6",
+        "title": "Kutu Tasarımında Dokulu Kağıt Denemeleri",
+        "excerpt": "Yeni koleksiyon için pamuk dokulu kağıtları kalın vernikle buluşturduk. Test masasında güzel sürprizler oldu.",
+        "content": "08:45 — Pamuk dokulu kağıtları keserken makas sesi bile terapi oldu.\n\n13:05 — Kalın vernik ilk katında hafif kabarcık yaptı; sıcak hava tabancasıyla düzelttim.\n\n20:00 — Nihai kutu numunesini raflara yerleştirdim. Işığa göre renk değiştirmesi tam istediğimiz gibi.",
+        "image": "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=2400&q=80",
+        "date": "7 Ocak 2024",
+        "author": "Loegs",
+        "category": "design",
+        "readTime": "4 dk",
+        "published": true
+      },
+      {
+        "id": "7",
+        "title": "Küçük Paketleme Ritüeli",
+        "excerpt": "Her paket çıkmadan önce kurdelelerin eşit olduğuna üç kez bakıyorum. Bugün taktığım krem kurdeleler tam iOS butonları gibi pürüzsüz.",
+        "content": "09:40 — Kurdele uzunluklarını lazer kesiciyle eşitledik. Artık milim sapma yok.\n\n15:25 — Paketlerin üzerine isim yazarken Apple Pencil kullanıyorum; yazı daha akıcı.\n\n22:10 — Yola çıkacak son paket için çalma listemizin en sakin parçasını seçtim.",
+        "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2400&q=80",
+        "date": "5 Ocak 2024",
+        "author": "Loegs",
+        "category": "studio",
+        "readTime": "3 dk",
+        "published": true
+      },
+      {
+        "id": "8",
+        "title": "Kod ve Koku: Ürün Sayfası Güncellemesi",
+        "excerpt": "Ürün sayfasına yeni animasyonlar ekledim. Kod yazarken arka planda yeni mum koleksiyonumuz yanıyordu.",
+        "content": "10:00 — Hero bölümüne iOS tarzı scale animasyonu ekledim.\n\n14:40 — Yeni fotoğrafları optimize ederken sandalwood mum masamda yandı. Tarayıcı testleri mis gibi kokuyor.\n\n18:30 — Deploy öncesi QA turunu tamamladım. Artık ürün sayfası daha akışkan.",
+        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2400&q=80",
+        "date": "3 Ocak 2024",
+        "author": "Loegs",
+        "category": "development",
+        "readTime": "4 dk",
+        "published": true
+      },
+      {
+        "id": "9",
+        "title": "Hafta Sonu Pop-up Güncesi",
+        "excerpt": "Cumartesi pop-up standımızda 48 kişiyle sohbet ettik. Not defterim ilham dolu cümlelerle kaplandı.",
+        "content": "07:50 — Stand kurulumunu tamamladık, tüm ürünler hizalandı.\n\n12:30 — Ziyaretçilerin soruları not defterimi doldurdu: \"Bu kokuyu hangi şehirden ilham aldınız?\"\n\n21:00 — Defteri karıştırırken yeni koleksiyon fikri çıktı. Pop-up'lar her seferinde sürpriz getiriyor.",
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=2400&q=80",
+        "date": "30 Aralık 2023",
+        "author": "Loegs",
+        "category": "journal",
+        "readTime": "4 dk",
+        "published": true
+      },
+      {
+        "id": "10",
+        "title": "Gece Vardiyası ve Mumlar",
+        "excerpt": "Stüdyoda gece vardiyası yaparken playlist ve mumlar eşlik etti. Kod satırlarıyla kokular aynı ritimde ilerledi.",
+        "content": "23:15 — Gece vardiyasına açık gri hoodie ile başladım. Lo-fi beats yumuşak gidiyor.\n\n01:40 — Mobil optimizasyonu bitirdim, kartlardaki animasyonlar iOS hissi veriyor.\n\n03:05 — Mum tamamen eridiğinde build tamamlandı. Gece vardiyası hedefi: başarı.",
+        "image": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=2400&q=80",
+        "date": "28 Aralık 2023",
+        "author": "Loegs",
+        "category": "nightshift",
+        "readTime": "5 dk",
+        "published": true
+      }
+    ]
+  },
+  "subdomainProjects": [
+    {
+      "id": "biorhythm-app",
+      "name": "Biorhythm",
+      "subdomain": "app",
+      "category": "mobile-app",
+      "title": "Biorhythm - Daily Wellness Tracker",
+      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
+      "tagline": "Understand yourself better every day",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80",
+      "features": [
+        "Daily biorhythm tracking",
+        "Personalized wellness insights",
+        "AI-powered recommendations",
+        "Beautiful visualizations",
+        "Daily affirmations",
+        "Mood tracking & analysis"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80",
+        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80",
+        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80",
+        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "React Native",
+        "TypeScript",
+        "ML Kit",
+        "HealthKit"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "Biorhythm - Daily Wellness Tracker",
+        "metaDescription": "Track your biorhythms and get personalized wellness insights",
+        "keywords": [
+          "wellness",
+          "biorhythm",
+          "health",
+          "meditation"
+        ]
+      }
+    },
+    {
+      "id": "shadow-quest-game",
+      "name": "Shadow Quest",
+      "subdomain": "testgame",
+      "category": "game",
+      "title": "Shadow Quest - Epic Adventure RPG",
+      "description": "Embark on an epic journey through mystical realms. Battle fierce enemies, discover ancient secrets, and become the ultimate hero.",
+      "tagline": "Your destiny awaits in the shadows",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80",
+      "features": [
+        "Stunning 3D graphics",
+        "Immersive storyline",
+        "Real-time multiplayer battles",
+        "100+ unique heroes",
+        "Epic boss raids",
+        "Guild system & events"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80",
+        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&q=80",
+        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80",
+        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "Unity",
+        "C#",
+        "Photon",
+        "Firebase",
+        "PlayFab"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "Shadow Quest - Epic Mobile RPG",
+        "metaDescription": "Battle through mystical realms in this epic RPG adventure",
+        "keywords": [
+          "rpg",
+          "game",
+          "mobile game",
+          "multiplayer"
+        ]
+      }
+    },
+    {
+      "id": "luxestyle-shop",
+      "name": "LuxeStyle",
+      "subdomain": "shop",
+      "category": "ecommerce",
+      "title": "LuxeStyle - Premium Fashion Marketplace",
+      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
+      "tagline": "Elevate your style, discover luxury",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
+      "features": [
+        "Curated premium collections",
+        "AR virtual try-on",
+        "One-tap checkout",
+        "Personalized recommendations",
+        "Exclusive member deals",
+        "Fast & free shipping"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
+        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
+        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "React Native",
+        "Shopify",
+        "Stripe",
+        "AR Kit"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "LuxeStyle - Premium Fashion App",
+        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
+        "keywords": [
+          "fashion",
+          "shopping",
+          "ecommerce",
+          "luxury"
+        ]
+      }
+    },
+    {
+      "id": "falla-social",
+      "name": "Falla",
+      "subdomain": "falla",
+      "category": "mobile-app",
+      "title": "Falla - Social Discovery Platform",
+      "description": "Connect with like-minded people, discover new communities, and share your passions. Falla brings people together through shared interests.",
+      "tagline": "Discover connections, share passions",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80",
+      "features": [
+        "Interest-based matching",
+        "Real-time messaging",
+        "Community groups",
+        "Event discovery",
+        "Privacy-first design",
+        "Global reach"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&q=80",
+        "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80",
+        "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80",
+        "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "React Native",
+        "Firebase",
+        "GraphQL",
+        "WebRTC"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "Falla - Social Discovery Platform",
+        "metaDescription": "Connect with people who share your interests and passions",
+        "keywords": [
+          "social",
+          "discovery",
+          "community",
+          "networking"
+        ]
+      }
+    },
+    {
+      "id": "loegs-analytics",
+      "name": "Loegs Analytics",
+      "subdomain": "analytics",
+      "category": "saas",
+      "title": "Loegs Analytics - Product & User Insights SaaS",
+      "description": "Monitor user behavior, feature adoption, and product funnels in real time. Designed for app & product teams who want clear answers, not just charts.",
+      "tagline": "See what really happens inside your product",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80",
+      "features": [
+        "Real-time user analytics",
+        "Custom funnels & cohorts",
+        "Event-based tracking",
+        "Team workspaces",
+        "Export to CSV / BigQuery",
+        "GDPR-ready data model"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=80",
+        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80",
+        "https://images.unsplash.com/photo-1553877522-5b7695e648b5?w=400&q=80",
+        "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=400&q=80"
+      ],
+      "appStoreLink": "",
+      "playStoreLink": "",
+      "techStack": [
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Kafka"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "Loegs Analytics - Product & User Insights SaaS",
+        "metaDescription": "Understand how users move through your product with real-time analytics",
+        "keywords": [
+          "saas",
+          "analytics",
+          "product analytics",
+          "dashboards"
+        ]
+      }
+    }
+  ]
+}
