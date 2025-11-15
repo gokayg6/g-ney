@@ -39,8 +39,10 @@ export default function SubdomainPage({ params }: SubdomainPageProps) {
             <code>lib/data.json</code> içindeki{" "}
             <code>subdomainProjects</code> dizisinde
             <br />
-            <code>"subdomain": "{rawSubdomain}"</code> olan bir kayıt
-            olduğundan emin ol.
+            <code>
+              &quot;subdomain&quot;: &quot;{rawSubdomain}&quot;
+            </code>{" "}
+            olan bir kayıt olduğundan emin ol.
           </p>
         </div>
       </main>
@@ -75,7 +77,7 @@ export default function SubdomainPage({ params }: SubdomainPageProps) {
             <p className="text-white/60 text-sm max-w-lg mx-auto leading-relaxed">
               <code>app/subdomain/[subdomain]/page.tsx</code> içindeki{" "}
               <code>switch</code> bloğuna{" "}
-              <code>case "{sub}":</code> eklemen gerekiyor.
+              <code>case &quot;{sub}&quot;:</code> eklemen gerekiyor.
             </p>
           </div>
         </main>

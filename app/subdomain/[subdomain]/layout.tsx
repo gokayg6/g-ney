@@ -5,7 +5,6 @@
 
 import type { ReactNode } from "react";
 import { Inter } from "next/font/google";
-import "../../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,12 +14,10 @@ interface SubdomainLayoutProps {
 
 export default function SubdomainLayout({ children }: SubdomainLayoutProps) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} bg-[#0a0a0a] overflow-y-scroll overflow-x-hidden`}
-      >
-        {children}
-      </body>
-    </html>
+    <div
+      className={`${inter.className} bg-[#0a0a0a] min-h-screen overflow-y-scroll overflow-x-hidden`}
+    >
+      {children}
+    </div>
   );
 }
