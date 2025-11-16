@@ -30,6 +30,13 @@ export default function EditSection() {
       .finally(() => setLoading(false));
   }, [router, section]);
 
+  // Update allSubdomainProjects when data changes (for template cloning)
+  useEffect(() => {
+    if (section === 'subdomainProjects' && Array.isArray(data)) {
+      setAllSubdomainProjects(data);
+    }
+  }, [data, section]);
+
   const loadData = async () => {
     try {
       const res = await fetch('/api/content');
@@ -233,36 +240,250 @@ export default function EditSection() {
             newArray[index] = {};
           }
           
-          newArray[index] = { ...newArray[index], [field]: url };
+          // Deep clone to ensure React detects the change
+          const updatedItem = { ...newArray[index], [field]: url };
+          newArray[index] = updatedItem;
+          
           return newArray;
         });
       } else {
         updateItem(arrayName, index, field, url);
       }
     } catch (error) {
-      // Error already handled in handleFileUpload
+      console.error('Error updating image:', error);
+      alert('Görsel yüklenirken bir hata oluştu. Lütfen tekrar deneyin.');
     }
   };
 
-  // Map categories to template subdomains
-  const getTemplateSubdomain = (category: string): string => {
-    const categoryMap: { [key: string]: string } = {
-      'mobile-app': 'app',
-      'ecommerce': 'shop',
-      'game': 'testgame',
-      'saas': 'app',
-      'website': 'falla',
-      'software': 'app'
+  // Hardcoded templates - these are always available even if data.json is empty
+  const getTemplateProject = (category: string): SubdomainProject | null => {
+    const templates: { [key: string]: SubdomainProject } = {
+      'mobile-app': {
+        id: 'template-app',
+        name: 'Biorhythm',
+        subdomain: 'app',
+        category: 'mobile-app',
+        title: 'Biorhythm - Daily Wellness Tracker',
+        description: 'Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.',
+        tagline: 'Understand yourself better every day',
+        logo: '/loegs.png',
+        coverImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80',
+        features: [
+          'Daily biorhythm tracking',
+          'Personalized wellness insights',
+          'AI-powered recommendations',
+          'Beautiful visualizations',
+          'Daily affirmations',
+          'Mood tracking & analysis'
+        ],
+        screenshots: [
+          'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80',
+          'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80',
+          'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80',
+          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80'
+        ],
+        appStoreLink: 'https://apps.apple.com',
+        playStoreLink: 'https://play.google.com',
+        techStack: ['React Native', 'TypeScript', 'ML Kit', 'HealthKit'],
+        published: true,
+        metadata: {
+          metaTitle: 'Biorhythm - Daily Wellness Tracker',
+          metaDescription: 'Track your biorhythms and get personalized wellness insights',
+          keywords: ['wellness', 'biorhythm', 'health', 'meditation']
+        }
+      },
+      'ecommerce': {
+        id: 'template-luxestyle',
+        name: 'LuxeStyle',
+        subdomain: 'luxestyle',
+        category: 'ecommerce',
+        title: 'LuxeStyle - Premium Fashion Marketplace',
+        description: 'Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.',
+        tagline: 'Elevate your style, discover luxury',
+        logo: '/loegs.png',
+        coverImage: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80',
+        features: [
+          'Curated premium collections',
+          'AR virtual try-on',
+          'One-tap checkout',
+          'Personalized recommendations',
+          'Exclusive member deals',
+          'Fast & free shipping'
+        ],
+        screenshots: [
+          'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80',
+          'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80',
+          'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80',
+          'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80'
+        ],
+        appStoreLink: '',
+        playStoreLink: '',
+        techStack: ['React Native', 'Shopify', 'Stripe', 'AR Kit'],
+        published: true,
+        metadata: {
+          metaTitle: 'LuxeStyle - Premium Fashion App',
+          metaDescription: 'Shop premium fashion with AR try-on and exclusive deals',
+          keywords: ['fashion', 'shopping', 'ecommerce', 'luxury']
+        },
+        siteLink: ''
+      } as any,
+      'game': {
+        id: 'template-testgame',
+        name: 'Shadow Quest',
+        subdomain: 'testgame',
+        category: 'game',
+        title: 'Shadow Quest - Epic Adventure RPG',
+        description: 'Embark on an epic journey through mystical realms. Battle fierce enemies, discover ancient secrets, and become the ultimate hero.',
+        tagline: 'Your destiny awaits in the shadows',
+        logo: '/loegs.png',
+        coverImage: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80',
+        features: [
+          'Stunning 3D graphics',
+          'Immersive storyline',
+          'Real-time multiplayer battles',
+          '100+ unique heroes',
+          'Epic boss raids',
+          'Guild system & events'
+        ],
+        screenshots: [
+          'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80',
+          'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&q=80',
+          'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80',
+          'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80'
+        ],
+        appStoreLink: 'https://apps.apple.com',
+        playStoreLink: 'https://play.google.com',
+        techStack: ['Unity', 'C#', 'Photon', 'Firebase', 'PlayFab'],
+        published: true,
+        metadata: {
+          metaTitle: 'Shadow Quest - Epic Mobile RPG',
+          metaDescription: 'Battle through mystical realms in this epic RPG adventure',
+          keywords: ['rpg', 'game', 'mobile game', 'multiplayer']
+        }
+      },
+      'saas': {
+        id: 'template-app',
+        name: 'Biorhythm',
+        subdomain: 'app',
+        category: 'mobile-app',
+        title: 'Biorhythm - Daily Wellness Tracker',
+        description: 'Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.',
+        tagline: 'Understand yourself better every day',
+        logo: '/loegs.png',
+        coverImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80',
+        features: [
+          'Daily biorhythm tracking',
+          'Personalized wellness insights',
+          'AI-powered recommendations',
+          'Beautiful visualizations',
+          'Daily affirmations',
+          'Mood tracking & analysis'
+        ],
+        screenshots: [
+          'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80',
+          'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80',
+          'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80',
+          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80'
+        ],
+        appStoreLink: 'https://apps.apple.com',
+        playStoreLink: 'https://play.google.com',
+        techStack: ['React Native', 'TypeScript', 'ML Kit', 'HealthKit'],
+        published: true,
+        metadata: {
+          metaTitle: 'Biorhythm - Daily Wellness Tracker',
+          metaDescription: 'Track your biorhythms and get personalized wellness insights',
+          keywords: ['wellness', 'biorhythm', 'health', 'meditation']
+        }
+      },
+      'website': {
+        id: 'template-falla',
+        name: 'Falla',
+        subdomain: 'falla',
+        category: 'website',
+        title: 'Falla - Social Discovery Platform',
+        description: 'Connect with like-minded people, discover new communities, and share your passions. Falla brings people together through shared interests.',
+        tagline: 'Discover connections, share passions',
+        logo: '/loegs.png',
+        coverImage: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80',
+        features: [
+          'Interest-based matching',
+          'Real-time messaging',
+          'Community groups',
+          'Event discovery',
+          'Privacy-first design',
+          'Global reach'
+        ],
+        screenshots: [
+          'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&q=80',
+          'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80',
+          'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80',
+          'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&q=80'
+        ],
+        appStoreLink: 'https://apps.apple.com',
+        playStoreLink: 'https://play.google.com',
+        techStack: ['React Native', 'Firebase', 'GraphQL', 'WebRTC'],
+        published: true,
+        metadata: {
+          metaTitle: 'Falla - Social Discovery Platform',
+          metaDescription: 'Connect with people who share your interests and passions',
+          keywords: ['social', 'discovery', 'community', 'networking']
+        }
+      },
+      'software': {
+        id: 'template-app',
+        name: 'Biorhythm',
+        subdomain: 'app',
+        category: 'mobile-app',
+        title: 'Biorhythm - Daily Wellness Tracker',
+        description: 'Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.',
+        tagline: 'Understand yourself better every day',
+        logo: '/loegs.png',
+        coverImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80',
+        features: [
+          'Daily biorhythm tracking',
+          'Personalized wellness insights',
+          'AI-powered recommendations',
+          'Beautiful visualizations',
+          'Daily affirmations',
+          'Mood tracking & analysis'
+        ],
+        screenshots: [
+          'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80',
+          'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80',
+          'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80',
+          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80'
+        ],
+        appStoreLink: 'https://apps.apple.com',
+        playStoreLink: 'https://play.google.com',
+        techStack: ['React Native', 'TypeScript', 'ML Kit', 'HealthKit'],
+        published: true,
+        metadata: {
+          metaTitle: 'Biorhythm - Daily Wellness Tracker',
+          metaDescription: 'Track your biorhythms and get personalized wellness insights',
+          keywords: ['wellness', 'biorhythm', 'health', 'meditation']
+        }
+      }
     };
-    return categoryMap[category] || 'app';
+    
+    return templates[category] || templates['mobile-app'];
   };
 
   // Clone template data when category changes
   const handleCategoryChange = (index: number, newCategory: string) => {
     if (section !== 'subdomainProjects') return;
     
-    const templateSubdomain = getTemplateSubdomain(newCategory);
-    const templateProject = allSubdomainProjects.find(p => p.subdomain === templateSubdomain);
+    // Only clone if the project is new (no name or subdomain set)
+    const currentData = Array.isArray(data) ? data : [];
+    const currentProject = currentData[index];
+    
+    // If project already has content, just update category
+    if (currentProject && (currentProject.name || currentProject.subdomain || currentProject.title)) {
+      updateItem('subdomainProjects', index, 'category', newCategory);
+      return;
+    }
+    
+    // Get template from hardcoded templates (always available)
+    const templateProject = getTemplateProject(newCategory);
     
     if (templateProject) {
       // Clone template data but keep the current project's id, name, subdomain
@@ -270,12 +491,12 @@ export default function EditSection() {
         const currentArray = Array.isArray(prev) ? prev : [];
         const newArray = [...currentArray];
         
-        const currentProject = newArray[index] || {};
+        const existingProject = newArray[index] || {};
         newArray[index] = {
           ...templateProject,
-          id: currentProject.id || Date.now().toString(),
-          name: currentProject.name || templateProject.name,
-          subdomain: currentProject.subdomain || templateProject.subdomain,
+          id: existingProject.id || Date.now().toString(),
+          name: existingProject.name || '',
+          subdomain: existingProject.subdomain || '',
           category: newCategory as any,
         };
         
@@ -806,8 +1027,8 @@ export default function EditSection() {
                       onClick={() => {
                         const categorySelect = document.getElementById('new-project-category') as HTMLSelectElement;
                         const selectedCategory = categorySelect?.value || 'mobile-app';
-                        const templateSubdomain = getTemplateSubdomain(selectedCategory);
-                        const templateProject = allSubdomainProjects.find(p => p.subdomain === templateSubdomain);
+                        // Get template from hardcoded templates (always available)
+                        const templateProject = getTemplateProject(selectedCategory);
                         
                         const newProject = templateProject 
                           ? {
@@ -885,7 +1106,7 @@ export default function EditSection() {
                           style={{ ...inputStyle, backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
                         >
                           <option value="mobile-app">📱 Mobile App (App template)</option>
-                          <option value="ecommerce">🛒 E-commerce (Shop template)</option>
+                          <option value="ecommerce">🛒 E-commerce (LuxeStyle template)</option>
                           <option value="game">🎮 Game (Testgame template)</option>
                           <option value="saas">💼 SaaS/Software (App template)</option>
                           <option value="website">🌐 Website (Falla template)</option>
@@ -941,9 +1162,13 @@ export default function EditSection() {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => {
+                            onChange={async (e) => {
                               const file = e.target.files?.[0];
-                              if (file) handleImageChange('subdomainProjects', index, 'logo', file);
+                              if (file) {
+                                await handleImageChange('subdomainProjects', index, 'logo', file);
+                                // Reset input to allow same file selection again
+                                e.target.value = '';
+                              }
                             }}
                             className="hidden"
                             id={`logo-upload-${index}`}
@@ -959,6 +1184,7 @@ export default function EditSection() {
                         {project.logo && (
                           <img src={project.logo} alt="Logo preview" className="mt-2 w-16 h-16 object-cover rounded-lg border border-white/20" />
                         )}
+                        <p className="text-white/50 text-xs mt-1">Önerilen boyut: 512x512px (PNG, şeffaf arka plan)</p>
                       </div>
                       <div>
                         <label className="block text-white/90 mb-2 text-sm font-medium">Cover Image</label>
@@ -974,9 +1200,13 @@ export default function EditSection() {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => {
+                            onChange={async (e) => {
                               const file = e.target.files?.[0];
-                              if (file) handleImageChange('subdomainProjects', index, 'coverImage', file);
+                              if (file) {
+                                await handleImageChange('subdomainProjects', index, 'coverImage', file);
+                                // Reset input to allow same file selection again
+                                e.target.value = '';
+                              }
                             }}
                             className="hidden"
                             id={`cover-upload-${index}`}
@@ -992,6 +1222,7 @@ export default function EditSection() {
                         {project.coverImage && (
                           <img src={project.coverImage} alt="Cover preview" className="mt-2 w-full h-32 object-cover rounded-lg border border-white/20" />
                         )}
+                        <p className="text-white/50 text-xs mt-1">Önerilen boyut: 1920x1080px (JPG/PNG, 16:9 oran)</p>
                       </div>
                       <div>
                         <label className="block text-white/90 mb-2 text-sm font-medium">App Store Link</label>
@@ -1014,6 +1245,22 @@ export default function EditSection() {
                           style={inputStyle}
                           placeholder="https://play.google.com/..."
                         />
+                      </div>
+                      <div>
+                        <label className="block text-white/90 mb-2 text-sm font-medium">
+                          Site Link (Website URL) {project.category === 'ecommerce' && <span className="text-purple-400">*</span>}
+                        </label>
+                        <input
+                          type="text"
+                          value={(project as any).siteLink || ''}
+                          onChange={(e) => updateItem('subdomainProjects', index, 'siteLink', e.target.value)}
+                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          style={inputStyle}
+                          placeholder="https://example.com"
+                        />
+                        {project.category === 'ecommerce' && (
+                          <p className="text-white/50 text-xs mt-1">E-ticaret projeleri için site linki gereklidir</p>
+                        )}
                       </div>
                     </div>
                     
@@ -1081,8 +1328,11 @@ export default function EditSection() {
                                       
                                       return newArray;
                                     });
+                                    // Reset input to allow same file selection again
+                                    e.target.value = '';
                                   } catch (error) {
-                                    // Error already handled in handleFileUpload
+                                    console.error('Error uploading screenshot:', error);
+                                    alert('Screenshot yüklenirken bir hata oluştu. Lütfen tekrar deneyin.');
                                   }
                                 }
                               }}
@@ -1119,6 +1369,7 @@ export default function EditSection() {
                           + Screenshot Ekle
                         </button>
                       </div>
+                      <p className="text-white/50 text-xs mt-1">Önerilen boyut: 1080x1920px (Mobil) veya 1920x1080px (Web) (JPG/PNG)</p>
                     </div>
 
                     <div className="mb-4">

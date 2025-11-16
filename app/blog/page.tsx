@@ -51,8 +51,7 @@ const fallbackPosts: BlogPost[] = [
   },
   {
     id: "placeholder-4",
-    title:
-      "Atölyede Genç Misafir: Çocuklar ve Doğal Formüller",
+    title: "Atölyede Genç Misafir: Çocuklar ve Doğal Formüller",
     excerpt:
       "Küçük kuzenim Ada bugün atölyeye geldi; doğal formüller hakkında konuşup notlar aldık.",
     content: "",
@@ -99,7 +98,7 @@ export default function BlogPage() {
           });
         }
       })
-      .catch((_error: unknown) => {
+      .catch(() => {
         setPosts(fallbackPosts);
         setMeta(defaultMeta);
       })
@@ -118,155 +117,166 @@ export default function BlogPage() {
 
   return (
     <main className="min-h-screen bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center">
-      <section className="px-4 pt-16 pb-4 text-center">
-        <p className="text-xs tracking-[0.6em] uppercase text-white/60 mb-5 animate-fade-in">
+      {/* HERO / INTRO */}
+      <section className="px-4 pt-16 pb-6 text-center">
+        <p className="text-[10px] sm:text-xs tracking-[0.4em] sm:tracking-[0.6em] uppercase text-white/60 mb-4 animate-fade-in">
           {meta.subtitle}
         </p>
-        <h1 className="font-serif text-[50px] md:text-[70px] text-white mb-6 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] animate-slide-down">
+        <h1 className="font-serif text-[36px] sm:text-[46px] md:text-[60px] lg:text-[70px] text-white mb-6 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] animate-slide-down leading-tight">
           {meta.title}
         </h1>
-        <div className="max-w-3xl mx-auto text-left bg-white/10 backdrop-blur-xl rounded-[32px] border border-white/20 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.3)] animate-scale-in">
-          <h2 className="text-white text-xl font-semibold mb-3">
+        <div className="max-w-3xl mx-auto text-left bg-white/10 backdrop-blur-xl rounded-[24px] md:rounded-[32px] border border-white/20 p-4 sm:p-6 md:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.3)] animate-scale-in">
+          <h2 className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3">
             {meta.introTitle}
           </h2>
-          <p className="text-white/80 leading-relaxed">
+          <p className="text-white/80 text-sm sm:text-base leading-relaxed">
             {meta.introDescription}
           </p>
         </div>
       </section>
 
-      <section className="px-3 sm:px-4 md:px-6 lg:px-8 pb-20 sm:pb-24 md:pb-28">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+      {/* BLOG GRID */}
+      <section className="px-3 sm:px-4 md:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
           {posts.map((post, index) => (
             <article
               key={post.id}
-              className="blog-card group rounded-[24px] sm:rounded-[32px] md:rounded-[36px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_18px_60px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden animate-fade-in relative"
-              style={{ animationDelay: `${index * 0.05}s` }}
+              className="group relative flex flex-col bg-white/10 backdrop-blur-xl border border-white/20 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] shadow-[0_18px_60px_rgba(0,0,0,0.3)] overflow-hidden animate-fade-in h-full"
+              style={{ animationDelay: `${index * 0.05}s`, position: 'relative', zIndex: 1 }}
             >
-              {/* Hover blur overlay - More visible on mobile */}
-              <div className="absolute inset-0 bg-black/40 sm:bg-black/60 backdrop-blur-lg opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-500 ease-out z-50 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] pointer-events-none" />
+              {/* üst glow */}
+              <div className="pointer-events-none absolute -inset-1 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] bg-gradient-to-br from-white/0 via-white/0 to-white/0 group-hover:from-white/20 group-hover:via-white/10 group-hover:to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out blur-sm" />
 
-              {/* View Details Button - Always visible on mobile, hover on desktop */}
-              <div className="absolute inset-0 flex items-center justify-center z-[60] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    window.location.href = `/blog/${post.id}`;
-                  }}
-                  className="view-details-btn px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-4.5 lg:py-5 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-extrabold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white bg-white/30 backdrop-blur-xl border-2 border-white/70 hover:bg-white/40 active:bg-white/50 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_20px_60px_rgba(255,255,255,0.4)] pointer-events-auto cursor-pointer touch-manipulation"
-                  style={{
-                    zIndex: 1000000,
-                    position: "relative",
-                    pointerEvents: "auto",
-                  }}
-                >
-                  <span className="hidden sm:inline">VIEW DETAILS</span>
-                  <span className="sm:hidden">DETAYLAR</span>
-                </button>
-              </div>
-
-              {/* Hover glow */}
-              <div className="absolute -inset-1 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] bg-gradient-to-br from-white/0 via-white/0 to-white/0 group-hover:from-white/20 group-hover:via-white/10 group-hover:to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none blur-sm" />
-
+              {/* IMAGE */}
               {post.image && (
-                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-t-[24px] sm:rounded-t-[32px] md:rounded-t-[36px]">
+                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-t-[20px] sm:rounded-t-[24px] md:rounded-t-[28px]">
                   <Image
                     src={post.image}
                     fill
                     alt={post.title}
-                    className="object-cover"
-                    sizes="(min-width: 1280px) 280px, (min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                    sizes="(min-width: 1280px) 280px, (min-width: 1024px) 30vw, (min-width: 768px) 45vw, 95vw"
                     priority={index < 4}
                   />
-                  {/* Image hover content - More visible on mobile */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-black/90 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-center items-center p-3 sm:p-4 md:p-5 lg:p-6 z-20">
-                    <div className="transform translate-y-8 scale-95 group-hover:translate-y-0 group-hover:scale-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-center w-full px-2 sm:px-4">
-                      <h4 className="text-white text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 md:mb-4 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500 line-clamp-2">
+
+                  {/* gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/90 opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                  {/* image içi content */}
+                  <div className="absolute inset-0 flex flex-col justify-end sm:justify-center items-center p-3 sm:p-4 md:p-5 lg:p-6 pointer-events-none z-30">
+                    <div className="w-full sm:w-auto text-center transform translate-y-3 sm:translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+                      <h4 className="text-white text-sm sm:text-base md:text-lg font-semibold mb-2 line-clamp-2 drop-shadow-xl">
                         {post.title}
                       </h4>
-                      <p className="text-white/95 text-[11px] sm:text-xs md:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 mb-3 sm:mb-4 md:mb-6 drop-shadow-lg">
+                      <p className="hidden sm:block text-white/90 text-xs md:text-sm leading-relaxed line-clamp-2 mb-3 drop-shadow-lg">
                         {post.excerpt}
                       </p>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.location.href = `/blog/${post.id}`;
-                        }}
-                        className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 md:px-6 lg:px-7 py-2 sm:py-2.5 md:py-3 lg:py-3.5 rounded-full text-[10px] sm:text-[11px] md:text-xs lg:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-white bg-white/30 backdrop-blur-lg border-2 border-white/60 hover:bg-white/40 active:bg-white/50 hover:scale-110 active:scale-95 transition-all duration-300 shadow-2xl min-h-[36px] sm:min-h-[40px] md:min-h-[44px] lg:min-h-[48px] w-full sm:w-auto font-semibold touch-manipulation"
-                        style={{
-                          zIndex: 9999,
-                          position: "relative",
-                          pointerEvents: "auto",
-                        }}
-                      >
-                        <span className="whitespace-nowrap text-xs sm:text-sm">Detayları Gör</span>
-                        <svg
-                          className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0 transform group-hover:translate-x-1 transition-transform duration-300"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          strokeWidth={3}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </button>
                     </div>
                   </div>
-                </div>
-              )}
 
-              <div className="p-3 sm:p-4 md:p-5 lg:p-7 flex flex-col flex-1 relative z-10 group-hover:bg-white/5 transition-all duration-500 rounded-b-[24px] sm:rounded-b-[32px] md:rounded-b-[36px]">
-                <div className="flex items-center justify-between text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-white/50 mb-3 sm:mb-4 group-hover:text-white/70 transition-colors duration-500">
-                  <span className="truncate transform group-hover:scale-105 transition-transform duration-300 inline-block">
-                    {post.category || "NEWS"}
-                  </span>
-                  <span className="ml-2 transform group-hover:scale-105 transition-transform duration-300 inline-block">
-                    {post.readTime || "3 dk"}
-                  </span>
-                </div>
-
-                <h3 className="text-white text-lg sm:text-xl md:text-2xl font-semibold leading-snug mb-2 sm:mb-3 group-hover:text-white transition-colors duration-500 line-clamp-2 transform group-hover:scale-[1.02] group-hover:translate-x-1 transition-all duration-500">
-                  {post.title}
-                </h3>
-
-                <p className="text-white/70 text-[11px] sm:text-xs md:text-sm leading-relaxed flex-1 line-clamp-3 group-hover:text-white/85 transition-colors duration-500 transform group-hover:translate-x-0.5 transition-transform duration-500">
-                  {post.excerpt}
-                </p>
-
-                <div className="mt-4 sm:mt-5 flex items-center justify-between pt-2 border-t border-white/10 group-hover:border-white/20 transition-colors duration-500">
-                  <span className="text-white/40 text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] uppercase group-hover:text-white/60 transition-colors duration-500 transform group-hover:scale-105 transition-transform duration-300">
-                    {post.date}
-                  </span>
-
+                  {/* DETAYLARI GÖR BUTONU - Ayrı container, en üstte */}
                   <button
                     type="button"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      const nextExpandedId =
-                        expandedPostId === post.id ? null : post.id;
-
-                      setExpandedPostId(nextExpandedId);
-
-                      if (nextExpandedId) {
-                        requestAnimationFrame(() => {
+                      console.log('Button clicked for post:', post.id);
+                      const willBeOpen = expandedPostId !== post.id;
+                      setExpandedPostId((prev) =>
+                        prev === post.id ? null : post.id
+                      );
+                      if (willBeOpen) {
+                        setTimeout(() => {
                           const detailsSection = document.getElementById(
                             `post-details-${post.id}`
                           );
-                          detailsSection?.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                          });
-                        });
+                          if (detailsSection) {
+                            detailsSection.scrollIntoView({
+                              behavior: "smooth",
+                              block: "nearest",
+                            });
+                          }
+                        }, 200);
                       }
                     }}
-                    className="arrow-button text-white/70 hover:text-white text-lg sm:text-xl md:text-2xl font-bold cursor-pointer min-w-[44px] sm:min-w-[48px] md:min-w-[52px] min-h-[44px] sm:min-h-[48px] md:min-h-[52px] flex items-center justify-center rounded-full hover:bg-white/20 active:bg-white/30 transition-all duration-200"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      console.log('Button mousedown for post:', post.id);
+                    }}
+                    onTouchStart={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      console.log('Button touch for post:', post.id);
+                    }}
+                    className="absolute inset-0 flex items-center justify-center z-[100000] opacity-100 sm:opacity-30 sm:group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-3.5 rounded-full text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-white bg-white/40 backdrop-blur-xl border-2 border-white/80 hover:bg-white/50 active:bg-white/60 hover:scale-110 active:scale-95 transition-all duration-200 shadow-[0_15px_40px_rgba(255,255,255,0.4)] min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[170px]"
+                    style={{
+                      zIndex: 100000,
+                      position: "absolute",
+                      pointerEvents: "auto",
+                      cursor: "pointer",
+                      touchAction: "manipulation",
+                      isolation: "isolate",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  >
+                    <span className="whitespace-nowrap font-extrabold">DETAYLARI GÖR</span>
+                    <svg
+                      className={`w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-4.5 md:h-4.5 flex-shrink-0 transition-transform duration-300 ${
+                        expandedPostId === post.id ? "rotate-90" : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      strokeWidth={3}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              )}
+
+              {/* CARD CONTENT */}
+              <div className="relative z-10 flex flex-col flex-1 p-3 sm:p-4 md:p-5 lg:p-6 bg-black/10 group-hover:bg-black/20 transition-colors duration-500">
+                {/* üst meta */}
+                <div className="flex items-center justify-between text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-white/50 mb-3">
+                  <span className="truncate">
+                    {post.category || "NEWS"}
+                  </span>
+                  <span>{post.readTime || "3 dk"}</span>
+                </div>
+
+                {/* title + excerpt */}
+                <h3 className="text-white text-base sm:text-lg md:text-xl font-semibold leading-snug mb-2 line-clamp-2 group-hover:text-white">
+                  {post.title}
+                </h3>
+                <p className="text-white/70 text-[11px] sm:text-xs md:text-sm leading-relaxed line-clamp-3 mb-3 group-hover:text-white/85">
+                  {post.excerpt}
+                </p>
+
+                {/* alt kısım */}
+                <div className="mt-auto pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+                  <span className="text-white/40 text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.25em] sm:tracking-[0.3em] uppercase">
+                    {post.date}
+                  </span>
+
+                  {/* ok butonu: kart içi expandable alanı aç/kapat */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setExpandedPostId((prev) =>
+                        prev === post.id ? null : post.id
+                      );
+                    }}
+                    className="flex items-center justify-center min-w-[38px] sm:min-w-[42px] md:min-w-[46px] min-h-[38px] sm:min-h-[42px] md:min-h-[46px] rounded-full bg-white/10 hover:bg-white/25 text-white text-lg sm:text-xl font-bold transition-all duration-200"
                     aria-expanded={expandedPostId === post.id}
                   >
                     <span
@@ -279,24 +289,22 @@ export default function BlogPage() {
                   </button>
                 </div>
 
-                {expandedPostId === post.id && (
-                  <div
-                    id={`post-details-${post.id}`}
-                    className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t-2 border-white/30 animate-fade-in overflow-hidden"
-                  >
-                    <div className="bg-white/15 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border-2 border-white/30 shadow-2xl">
-                      <h4 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-5">
+                 {/* EXPANDED CONTENT */}
+                 {expandedPostId === post.id && (
+                   <div
+                     id={`post-details-${post.id}`}
+                     className="mt-4 pt-4 border-t border-white/20 animate-fade-in"
+                   >
+                    <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-5 md:p-6 border border-white/25">
+                      <h4 className="text-white text-base sm:text-lg md:text-xl font-bold mb-3">
                         {post.title}
                       </h4>
 
-                      <div className="space-y-4 sm:space-y-5 text-white/95 text-sm sm:text-base md:text-lg leading-relaxed">
+                      <div className="space-y-3 sm:space-y-4 text-white/95 text-sm sm:text-base leading-relaxed">
                         {post.content && post.content.trim() ? (
                           post.content
                             .split("\n")
-                            .filter(
-                              (paragraph: string) =>
-                                paragraph.trim().length > 0
-                            )
+                            .filter((paragraph: string) => paragraph.trim())
                             .map((paragraph: string, idx: number) => (
                               <p
                                 key={idx}
@@ -307,14 +315,14 @@ export default function BlogPage() {
                               </p>
                             ))
                         ) : (
-                          <p className="text-white/70 italic text-base">
+                          <p className="text-white/70 italic">
                             İçerik bulunamadı.
                           </p>
                         )}
                       </div>
 
-                      <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-white/10 flex items-center justify-between">
-                        <div className="flex flex-wrap gap-2 sm:gap-3 text-white/50 text-[10px] sm:text-xs">
+                      <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between gap-3 flex-wrap">
+                        <div className="flex flex-wrap gap-2 text-white/60 text-[11px] sm:text-xs">
                           {post.author && <span>{post.author}</span>}
                           {post.readTime && (
                             <>
@@ -325,7 +333,7 @@ export default function BlogPage() {
                           {post.category && (
                             <>
                               <span>•</span>
-                              <span className="px-2 py-0.5 rounded-full bg-white/10 text-white/70">
+                              <span className="px-2 py-0.5 rounded-full bg-white/10">
                                 {post.category}
                               </span>
                             </>
@@ -334,19 +342,19 @@ export default function BlogPage() {
 
                         <Link
                           href={`/blog/${post.id}`}
-                          className="text-white/60 hover:text-white text-xs sm:text-sm uppercase tracking-[0.2em] transition-colors duration-300 flex items-center gap-1.5 sm:gap-2"
+                          className="text-white/70 hover:text-white text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.2em] flex items-center gap-1.5 transition-colors"
                         >
                           <span>Devamını oku</span>
                           <svg
-                            className="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                            className="w-3 h-3 sm:w-3.5 sm:h-3.5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
+                            strokeWidth={2}
                           >
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              strokeWidth={2}
                               d="M9 5l7 7-7 7"
                             />
                           </svg>

@@ -18,7 +18,7 @@ export default function LuxeStyleTemplate({ project }: LuxeStyleTemplateProps) {
       <section className="relative z-10 px-4 sm:px-6 lg:px-10 py-16 lg:py-20">
         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-14 items-center">
           {/* Left */}
-          <div className="w-full lg:w-[40%]">
+          <div className="w-full lg:w-[40%] relative z-10">
             <p className="text-xs uppercase tracking-[0.4em] text-white/60 mb-4">
               {project.category.toUpperCase()}
             </p>
@@ -41,26 +41,53 @@ export default function LuxeStyleTemplate({ project }: LuxeStyleTemplateProps) {
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              {project.appStoreLink && (
+            <div className="flex flex-wrap gap-3 relative z-20">
+              {(project as any).siteLink ? (
                 <a
-                  href={project.appStoreLink}
+                  href={(project as any).siteLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-3 hover:bg-white rounded-3xl text-white font-semibold hover:text-black border-[0.1px] border-white hover:border-transparent transition-all duration-150 active:scale-95 text-xs tracking-[0.18em] uppercase"
+                  className="px-8 py-4 hover:bg-white rounded-3xl text-white font-semibold hover:text-black border-[0.1px] border-white hover:border-transparent transition-all duration-150 active:scale-95 flex items-center justify-center gap-3 cursor-pointer relative z-20"
+                  style={{ pointerEvents: 'auto', position: 'relative' }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
                 >
-                  iOS Shopping App
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                    />
+                  </svg>
+                  <span>Siteye Git</span>
                 </a>
-              )}
-              {project.playStoreLink && (
-                <a
-                  href={project.playStoreLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-3 hover:bg-white rounded-3xl text-white font-semibold hover:text-black border-[0.1px] border-white hover:border-transparent transition-all duration-150 active:scale-95 text-xs tracking-[0.18em] uppercase"
+              ) : (
+                <button
+                  disabled
+                  className="px-8 py-4 rounded-3xl text-white font-semibold border-[0.1px] border-white opacity-50 cursor-not-allowed flex items-center justify-center gap-3"
                 >
-                  Android Shopping App
-                </a>
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                    />
+                  </svg>
+                  <span>Siteye Git</span>
+                </button>
               )}
             </div>
           </div>

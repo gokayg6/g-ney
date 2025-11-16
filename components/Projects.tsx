@@ -22,9 +22,28 @@ function getTypeBadge(type: string) {
       return { text: "Oyun", color: "from-purple-500 to-pink-500" };
     case "saas":
       return { text: "SaaS", color: "from-orange-500 to-red-500" };
+    case "website":
+      return { text: "Website", color: "from-indigo-500 to-purple-500" };
     case "web":
     default:
       return { text: "Web Projesi", color: "from-indigo-500 to-purple-500" };
+  }
+}
+
+function getCategoryLabel(category: string) {
+  switch (category) {
+    case "mobile-app":
+      return "Mobil Uygulama";
+    case "ecommerce":
+      return "E-Ticaret";
+    case "game":
+      return "Oyun";
+    case "saas":
+      return "SaaS";
+    case "website":
+      return "Website";
+    default:
+      return "Proje";
   }
 }
 
@@ -99,9 +118,16 @@ const Projects: React.FC = () => {
   const filteredProjects = allProjects.filter((project) => {
     if (activeFilter === "all") return true;
     if (activeFilter === "regular") return !project.isSubdomain;
-    if (activeFilter === "subdomain") return project.isSubdomain;
 
-    // type bazlı filtreler (mobile-app, saas, web, game, ecommerce)
+    // Subdomain projeler için category'ye göre filtrele
+    if (project.isSubdomain) {
+      const subdomainProject = project as SubdomainProject;
+      if (subdomainProject.category) {
+        return subdomainProject.category === activeFilter;
+      }
+    }
+
+    // Standart projeler için type'a göre filtrele
     if ("type" in project && project.type) {
       return project.type === activeFilter;
     }
@@ -112,7 +138,6 @@ const Projects: React.FC = () => {
   const filters = [
     { id: "all", label: "Tümü" },
     { id: "regular", label: "Standart Projeler" },
-    { id: "subdomain", label: "Subdomain Projeleri" },
     { id: "mobile-app", label: "Mobil Uygulamalar" },
     { id: "saas", label: "SaaS" },
     { id: "web", label: "Web" },
@@ -209,13 +234,19 @@ const Projects: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8">
             {filteredProjects.map((project, index) => {
-              const projectTypeKey =
-                "type" in project && project.type ? project.type : "web";
-              const badge = getTypeBadge(projectTypeKey);
-
               const subdomainProject = project.isSubdomain
                 ? (project as SubdomainProject)
                 : null;
+
+              // Subdomain projeler için category'den, standart projeler için type'dan badge al
+              let badge;
+              if (project.isSubdomain && subdomainProject?.category) {
+                badge = getTypeBadge(subdomainProject.category);
+              } else {
+                const projectTypeKey =
+                  "type" in project && project.type ? project.type : "web";
+                badge = getTypeBadge(projectTypeKey);
+              }
 
               const projectImage = project.isSubdomain
                 ? subdomainProject?.coverImage || subdomainProject?.logo
@@ -252,23 +283,28 @@ const Projects: React.FC = () => {
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
 
-                    {/* Type Badge */}
-                    <div className="absolute top-4 right-4 z-10 pointer-events-none">
-                      <span
-                        className={`px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${badge.color} text-white shadow-lg backdrop-blur-sm border border-white/20`}
-                      >
-                        {badge.text}
-                      </span>
-                    </div>
-
-                    {/* Subdomain Badge */}
-                    {project.isSubdomain && (
-                      <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                        <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg backdrop-blur-sm border border-white/20">
-                          🌐 Subdomain
+                    {/* Category Badge - Admin panelden seçilen kategori */}
+                    {project.isSubdomain && subdomainProject?.category && (
+                      <div className="absolute top-4 right-4 z-10 pointer-events-none">
+                        <span
+                          className={`px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${badge.color} text-white shadow-lg backdrop-blur-sm border border-white/20`}
+                        >
+                          {getCategoryLabel(subdomainProject.category)}
                         </span>
                       </div>
                     )}
+
+                    {/* Type Badge - Standart projeler için */}
+                    {!project.isSubdomain && (
+                      <div className="absolute top-4 right-4 z-10 pointer-events-none">
+                        <span
+                          className={`px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${badge.color} text-white shadow-lg backdrop-blur-sm border border-white/20`}
+                        >
+                          {badge.text}
+                        </span>
+                      </div>
+                    )}
+
                   </div>
 
                   {/* Content */}

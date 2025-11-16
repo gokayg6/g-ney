@@ -286,6 +286,11 @@ img, video {
   pointer-events: auto !important;
 }
 
+/* Make sure view details button container is interactive on hover */
+.blog-card:hover .absolute.inset-0:has(.view-details-btn) {
+  pointer-events: auto !important;
+}
+
 /* Arrow Button - RESPONSIVE AND CLICKABLE - FORCE IT TO WORK */
 .arrow-btn {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0.5) !important;
@@ -341,19 +346,163 @@ img, video {
   touch-action: manipulation !important;
   user-select: none !important;
   -webkit-user-select: none !important;
-  z-index: 1000000 !important;
-  position: relative !important;
+  z-index: 99999 !important;
+  position: absolute !important;
   pointer-events: auto !important;
   cursor: pointer !important;
   isolation: isolate !important;
   -webkit-appearance: none !important;
   appearance: none !important;
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   white-space: nowrap !important;
   font-weight: 900 !important;
   letter-spacing: 0.1em !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Ensure button is always on top and clickable */
+.view-details-btn,
+.view-details-btn * {
+  pointer-events: auto !important;
+  z-index: 99999 !important;
+}
+
+/* Force button to be above everything */
+.blog-card .view-details-btn {
+  z-index: 1000000 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+}
+
+/* Ensure button container is on top */
+.blog-card > div.absolute.inset-0.flex.items-center.justify-center:has(.view-details-btn) {
+  z-index: 999999 !important;
+  pointer-events: none !important;
+}
+
+/* Responsive button sizing */
+@media (max-width: 375px) {
+  .view-details-btn {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.625rem !important;
+    min-width: 100px !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .view-details-btn {
+    padding: 0.75rem 1.5rem !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .view-details-btn {
+    padding: 1rem 2rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .view-details-btn {
+    padding: 1.125rem 2.5rem !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .view-details-btn {
+    padding: 1.25rem 3rem !important;
+  }
+}
+
+/* Ensure blog card Link buttons are clickable */
+.blog-card a[href*="/blog/"] {
+  z-index: 1000 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+}
+
+.blog-card a[href*="/blog/"]:hover {
+  transform: scale(1.05) !important;
+}
+
+.blog-card a[href*="/blog/"]:active {
+  transform: scale(0.95) !important;
+}
+
+/* Ensure Detayları Gör button is clickable */
+.blog-card button[type="button"]:has(span:contains("Detayları Gör")) {
+  z-index: 1000 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+}
+
+/* Make sure image overlay content buttons are clickable */
+.blog-card > div > div.absolute.inset-0.flex button,
+.blog-card button[type="button"] {
+  z-index: 1000 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+}
+
+/* Ensure button inside image overlay is clickable */
+.blog-card > div.relative > div.absolute.inset-0.flex button,
+.blog-card > div.relative > div.absolute.inset-0.flex.flex-col button {
+  z-index: 10000 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+}
+
+/* Force button to be on top of everything in image overlay */
+.blog-card > div.relative > div.absolute.inset-0.flex.flex-col.justify-end button,
+.blog-card > div.relative > div.absolute.inset-0.flex.flex-col.justify-center button,
+.blog-card > div.relative > div.absolute.inset-0.flex.items-center.justify-center button {
+  z-index: 100000 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+}
+
+/* Ensure button container allows clicks */
+.blog-card > div.relative > div.absolute.inset-0.flex.items-center.justify-center {
+  pointer-events: none !important;
+  z-index: 100 !important;
+}
+
+.blog-card > div.relative > div.absolute.inset-0.flex.items-center.justify-center > button {
+  pointer-events: auto !important;
+  z-index: 100000 !important;
+  position: relative !important;
+}
+
+/* Force all buttons in blog cards to be clickable */
+article.group button[type="button"] {
+  pointer-events: auto !important;
+  z-index: 100000 !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  position: relative !important;
+}
+
+/* Make sure button container doesn't block */
+article.group > div.relative > div.absolute.inset-0.flex.items-center.justify-center {
+  pointer-events: none !important;
+  z-index: 100 !important;
+}
+
+article.group > div.relative > div.absolute.inset-0.flex.items-center.justify-center > button {
+  pointer-events: auto !important;
+  z-index: 100000 !important;
+  position: relative !important;
 }
 
 .view-details-btn:hover {
@@ -367,8 +516,77 @@ img, video {
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Ensure button container is clickable */
+/* Ensure button container is clickable and shows on hover */
 .blog-card > div[class*="absolute"]:has(.view-details-btn) {
+  pointer-events: auto !important;
+}
+
+/* Make sure the button container shows on hover */
+.blog-card:hover > div[class*="absolute"]:has(.view-details-btn),
+.blog-card:hover > div[class*="absolute"]:has(.view-details-btn) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure blog card hover works properly */
+.blog-card:hover .view-details-btn,
+.blog-card.group:hover .view-details-btn {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  display: inline-flex !important;
+}
+
+/* Force button visibility on card hover */
+.blog-card.group:hover > div.absolute.inset-0.flex.items-center.justify-center {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 100 !important;
+}
+
+/* Ensure button container allows clicks through to button */
+.blog-card > div.absolute.inset-0.flex.items-center.justify-center:has(.view-details-btn),
+.blog-card > a.absolute.inset-0.flex.items-center.justify-center:has(.view-details-btn) {
+  pointer-events: auto !important;
+  z-index: 100 !important;
+}
+
+.blog-card > div.absolute.inset-0.flex.items-center.justify-center:has(.view-details-btn) > button,
+.blog-card > a.absolute.inset-0.flex.items-center.justify-center:has(.view-details-btn) > div {
+  pointer-events: auto !important;
+  z-index: 1000 !important;
+}
+
+/* Make sure Link is clickable */
+.blog-card a.absolute.inset-0 {
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+/* Ensure nothing blocks the view details link */
+.blog-card a.absolute.inset-0.flex.items-center.justify-center {
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+/* Make sure content div doesn't block */
+.blog-card > div.p-3,
+.blog-card > div.p-4,
+.blog-card > div.p-5,
+.blog-card > div.p-7 {
+  position: relative;
+  z-index: 1;
+  pointer-events: none !important;
+}
+
+/* But allow interactive elements inside */
+.blog-card > div.p-3 button,
+.blog-card > div.p-4 button,
+.blog-card > div.p-5 button,
+.blog-card > div.p-7 button,
+.blog-card > div.p-3 a,
+.blog-card > div.p-4 a,
+.blog-card > div.p-5 a,
+.blog-card > div.p-7 a {
   pointer-events: auto !important;
 }
 

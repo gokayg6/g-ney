@@ -243,7 +243,7 @@
       "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
       "tagline": "Understand yourself better every day",
       "logo": "/loegs.png",
-      "coverImage": "/uploads/1763278819792_ChatGPT_Image_11_Kas_2025_00_15_44.png",
+      "coverImage": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80",
       "features": [
         "Daily biorhythm tracking",
         "Personalized wellness insights",
@@ -253,7 +253,7 @@
         "Mood tracking & analysis"
       ],
       "screenshots": [
-        "/uploads/1763278881893_ChatGPT_Image_13_Kas_2025_14_55_01.png",
+        "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80",
         "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80",
         "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80",
         "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80"
@@ -287,7 +287,7 @@
       "description": "Embark on an epic journey through mystical realms. Battle fierce enemies, discover ancient secrets, and become the ultimate hero.",
       "tagline": "Your destiny awaits in the shadows",
       "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80",
+      "coverImage": "/uploads/1763335134838_premium_photo-1669349127520-fa1e30b02055.jpeg",
       "features": [
         "Stunning 3D graphics",
         "Immersive storyline",
@@ -368,10 +368,54 @@
       }
     },
     {
+      "id": "luxestyle-luxestyle",
+      "name": "LuxeStyle",
+      "subdomain": "luxestyle",
+      "category": "ecommerce",
+      "title": "LuxeStyle - Premium Fashion Marketplace",
+      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
+      "tagline": "Elevate your style, discover luxury",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
+      "features": [
+        "Curated premium collections",
+        "AR virtual try-on",
+        "One-tap checkout",
+        "Personalized recommendations",
+        "Exclusive member deals",
+        "Fast & free shipping"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
+        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
+        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "React Native",
+        "Shopify",
+        "Stripe",
+        "AR Kit"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "LuxeStyle - Premium Fashion App",
+        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
+        "keywords": [
+          "fashion",
+          "shopping",
+          "ecommerce",
+          "luxury"
+        ]
+      }
+    },
+    {
       "id": "falla-social",
       "name": "Falla",
       "subdomain": "falla",
-      "category": "mobile-app",
+      "category": "website",
       "title": "Falla - Social Discovery Platform",
       "description": "Connect with like-minded people, discover new communities, and share your passions. Falla brings people together through shared interests.",
       "tagline": "Discover connections, share passions",
@@ -412,136 +456,95 @@
       }
     },
     {
-      "id": "loegs-analytics",
-      "name": "Loegs Analytics",
-      "subdomain": "analytics",
-      "category": "saas",
-      "title": "Loegs Analytics - Product & User Insights SaaS",
-      "description": "Monitor user behavior, feature adoption, and product funnels in real time. Designed for app & product teams who want clear answers, not just charts.",
-      "tagline": "See what really happens inside your product",
+      "id": "1763331294737",
+      "name": "Mustafa  Hoca",
+      "subdomain": "mustafa",
+      "category": "mobile-app",
+      "title": "Mustafa Hoca",
+      "description": "",
+      "tagline": "",
+      "logo": "/uploads/1763331351891_loegs.png",
+      "coverImage": "/uploads/1763331363561_premium_photo-1669349127520-fa1e30b02055.jpeg",
+      "features": [],
+      "screenshots": [
+        "/uploads/1763331376874_photo-1566895291281-ea63efd4bdbc.jpeg"
+      ],
+      "appStoreLink": "",
+      "playStoreLink": "",
+      "techStack": [],
+      "published": true,
+      "metadata": {
+        "metaTitle": "",
+        "metaDescription": "",
+        "keywords": []
+      }
+    },
+    {
+      "id": "1763334018213",
+      "name": "thdgd",
+      "subdomain": "gdg",
+      "category": "ecommerce",
+      "title": "gdgdg",
+      "description": "gdgdg",
+      "tagline": "dgd",
+      "logo": "",
+      "coverImage": "",
+      "features": [],
+      "screenshots": [],
+      "appStoreLink": "",
+      "playStoreLink": "",
+      "techStack": [],
+      "published": true,
+      "metadata": {
+        "metaTitle": "",
+        "metaDescription": "",
+        "keywords": []
+      }
+    },
+    {
+      "id": "1763334641366",
+      "name": "aaa",
+      "subdomain": "aaa",
+      "category": "ecommerce",
+      "title": "aaaaaaaaaaa",
+      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
+      "tagline": "Elevate your style, discover luxury",
       "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80",
+      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
       "features": [
-        "Real-time user analytics",
-        "Custom funnels & cohorts",
-        "Event-based tracking",
-        "Team workspaces",
-        "Export to CSV / BigQuery",
-        "GDPR-ready data model"
+        "Curated premium collections",
+        "AR virtual try-on",
+        "One-tap checkout",
+        "Personalized recommendations",
+        "Exclusive member deals",
+        "Fast & free shipping"
       ],
       "screenshots": [
-        "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=80",
-        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80",
-        "https://images.unsplash.com/photo-1553877522-5b7695e648b5?w=400&q=80",
-        "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=400&q=80"
+        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
+        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
+        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
       ],
       "appStoreLink": "",
       "playStoreLink": "",
       "techStack": [
-        "Next.js",
-        "TypeScript",
-        "PostgreSQL",
-        "Kafka"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "Loegs Analytics - Product & User Insights SaaS",
-        "metaDescription": "Understand how users move through your product with real-time analytics",
-        "keywords": [
-          "saas",
-          "analytics",
-          "product analytics",
-          "dashboards"
-        ]
-      }
-    },
-    {
-      "id": "1763282855687",
-      "name": "Shadow Quest",
-      "subdomain": "fall",
-      "category": "mobile-app",
-      "title": "Biorhythm - Daily Wellness Tracker",
-      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
-      "tagline": "Understand yourself better every day",
-      "logo": "/loegs.png",
-      "coverImage": "/uploads/1763278819792_ChatGPT_Image_11_Kas_2025_00_15_44.png",
-      "features": [
-        "Daily biorhythm tracking",
-        "Personalized wellness insights",
-        "AI-powered recommendations",
-        "Beautiful visualizations",
-        "Daily affirmations",
-        "Mood tracking & analysis"
-      ],
-      "screenshots": [
-        "/uploads/1763278881893_ChatGPT_Image_13_Kas_2025_14_55_01.png",
-        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80",
-        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80",
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80"
-      ],
-      "appStoreLink": "https://apps.apple.com",
-      "playStoreLink": "https://play.google.com",
-      "techStack": [
         "React Native",
-        "TypeScript",
-        "ML Kit",
-        "HealthKit"
+        "Shopify",
+        "Stripe",
+        "AR Kit"
       ],
       "published": true,
       "metadata": {
-        "metaTitle": "Biorhythm - Daily Wellness Tracker",
-        "metaDescription": "Track your biorhythms and get personalized wellness insights",
+        "metaTitle": "LuxeStyle - Premium Fashion App",
+        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
         "keywords": [
-          "wellness",
-          "biorhythm",
-          "health",
-          "meditation"
+          "fashion",
+          "shopping",
+          "ecommerce",
+          "luxury"
         ]
-      }
-    },
-    {
-      "id": "1763284084889",
-      "name": "",
-      "subdomain": "mustafa",
-      "category": "mobile-app",
-      "title": "Biorhythm - Daily Wellness Tracker",
-      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
-      "tagline": "Understand yourself better every day",
-      "logo": "/loegs.png",
-      "coverImage": "/uploads/1763278819792_ChatGPT_Image_11_Kas_2025_00_15_44.png",
-      "features": [
-        "Daily biorhythm tracking",
-        "Personalized wellness insights",
-        "AI-powered recommendations",
-        "Beautiful visualizations",
-        "Daily affirmations",
-        "Mood tracking & analysis"
-      ],
-      "screenshots": [
-        "/uploads/1763278881893_ChatGPT_Image_13_Kas_2025_14_55_01.png",
-        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80",
-        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80",
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80"
-      ],
-      "appStoreLink": "https://apps.apple.com",
-      "playStoreLink": "https://play.google.com",
-      "techStack": [
-        "React Native",
-        "TypeScript",
-        "ML Kit",
-        "HealthKit"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "Biorhythm - Daily Wellness Tracker",
-        "metaDescription": "Track your biorhythms and get personalized wellness insights",
-        "keywords": [
-          "wellness",
-          "biorhythm",
-          "health",
-          "meditation"
-        ]
-      }
+      },
+      "siteLink": ""
     }
   ]
 }

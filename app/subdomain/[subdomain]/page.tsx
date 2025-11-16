@@ -51,6 +51,11 @@ export default function SubdomainPage({ params }: SubdomainPageProps) {
   }
 
   // Subdomain → Template eşleştirmesi
+  // E-ticaret kategorisi için her zaman LuxeStyleTemplate kullan
+  if (project.category === 'ecommerce') {
+    return <LuxeStyleTemplate project={project} />;
+  }
+
   switch (sub) {
     case "app":
       return <BiorhythmTemplate project={project} />;
@@ -59,6 +64,7 @@ export default function SubdomainPage({ params }: SubdomainPageProps) {
       return <ShadowQuestTemplate project={project} />;
 
     case "shop":
+    case "luxestyle":
       return <LuxeStyleTemplate project={project} />;
 
     case "falla":
