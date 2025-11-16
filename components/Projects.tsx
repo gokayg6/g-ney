@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
 import type { ProjectsData, ProjectItem } from "@/lib/data";
 import type { SubdomainProject } from "@/lib/subdomain-data";
@@ -29,7 +28,7 @@ function getTypeBadge(type: string) {
   }
 }
 
-// Birleştirilmiş tip
+// Normal proje + subdomain projeyi tek tipe çeviriyoruz
 type CombinedProject =
   | (ProjectItem & { isSubdomain: false })
   | (SubdomainProject & { isSubdomain: true });
@@ -70,8 +69,7 @@ const Projects: React.FC = () => {
           } else {
             setSubdomainProjects([]);
           }
-        } catch (err) {
-          console.error("Error loading subdomain projects:", err);
+        } catch {
           setSubdomainProjects([]);
         }
       } catch {
@@ -97,18 +95,17 @@ const Projects: React.FC = () => {
     ...subdomainProjects.map((item) => ({ ...item, isSubdomain: true as const })),
   ];
 
-  // Filtre
+  // Filtreleme
   const filteredProjects = allProjects.filter((project) => {
     if (activeFilter === "all") return true;
     if (activeFilter === "regular") return !project.isSubdomain;
     if (activeFilter === "subdomain") return project.isSubdomain;
 
-    // Diğer filtreler (type bazlı)
+    // type bazlı filtreler (mobile-app, saas, web, game, ecommerce)
     if ("type" in project && project.type) {
       return project.type === activeFilter;
     }
 
-    // type alanı olmayan subdomain projeler, type filtresinde görünmesin
     return false;
   });
 
@@ -182,7 +179,7 @@ const Projects: React.FC = () => {
               e.preventDefault();
               e.stopPropagation();
             }}
-            className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
+            className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
               activeFilter === filter.id
                 ? "bg-white text-black shadow-lg shadow-white/30 scale-105"
                 : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:scale-105"
@@ -190,7 +187,6 @@ const Projects: React.FC = () => {
             style={{
               position: "relative",
               zIndex: 1000,
-              pointerEvents: "auto",
               cursor: "pointer",
             }}
           >
@@ -201,7 +197,7 @@ const Projects: React.FC = () => {
 
       {/* Projects Grid */}
       <div
-        className="container mx-auto max-w-7xl"
+        className="container mx-auto max-w-6xl"
         style={{ position: "relative", zIndex: 1 }}
       >
         {filteredProjects.length === 0 ? (
@@ -211,7 +207,7 @@ const Projects: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
             {filteredProjects.map((project, index) => {
               const projectTypeKey =
                 "type" in project && project.type ? project.type : "web";
@@ -233,7 +229,7 @@ const Projects: React.FC = () => {
               return (
                 <div
                   key={project.id || index}
-                  className="group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 animate-fade-in"
+                  className="group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-purple-500/20 animate-fade-in min-h-[420px]"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     animationFillMode: "both",
@@ -276,7 +272,7 @@ const Projects: React.FC = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 space-y-4 relative z-10">
+                  <div className="p-6 space-y-4 relative z-10 flex flex-col justify-between h-[calc(100%-16rem)]">
                     <div>
                       <h3 className="text-white text-xl font-bold mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors">
                         {project.title}
@@ -316,10 +312,7 @@ const Projects: React.FC = () => {
                       )}
 
                     {/* Action Button */}
-                    <div
-                      className="mt-4"
-                      style={{ position: "relative", zIndex: 9999 }}
-                    >
+                    <div className="mt-4">
                       {subdomainProject ? (
                         <button
                           type="button"
@@ -329,12 +322,6 @@ const Projects: React.FC = () => {
                             e.stopPropagation();
                           }}
                           className="w-full px-6 py-3 rounded-xl font-semibold text-sm bg-transparent backdrop-blur-sm border border-white/20 text-white hover:bg-white/10 hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                          style={{
-                            position: "relative",
-                            zIndex: 9999,
-                            pointerEvents: "auto",
-                            cursor: "pointer",
-                          }}
                         >
                           <span>Keşfet</span>
                           <span className="text-lg">→</span>
@@ -348,12 +335,6 @@ const Projects: React.FC = () => {
                             e.stopPropagation();
                           }}
                           className="block w-full px-6 py-3 rounded-xl font-semibold text-sm bg-transparent backdrop-blur-sm border border-white/20 text-white hover:bg-white/10 hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                          style={{
-                            position: "relative",
-                            zIndex: 9999,
-                            pointerEvents: "auto",
-                            cursor: "pointer",
-                          }}
                         >
                           <span>Ziyaret Et</span>
                           <span className="text-lg">↗</span>
