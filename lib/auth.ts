@@ -30,6 +30,17 @@ export async function authenticateAdmin(email: string, password: string): Promis
   // Trim and compare
   const trimmedEmail = email.trim().toLowerCase();
   const expectedEmail = ADMIN_EMAIL.trim().toLowerCase();
+  const trimmedPassword = password.trim();
+  const expectedPassword = ADMIN_PASSWORD.trim();
+  
+  console.log('Auth attempt:', { 
+    receivedEmail: trimmedEmail, 
+    expectedEmail: expectedEmail,
+    receivedPassword: trimmedPassword,
+    expectedPassword: expectedPassword,
+    emailMatch: trimmedEmail === expectedEmail,
+    passwordMatch: trimmedPassword === expectedPassword
+  });
   
   if (trimmedEmail !== expectedEmail) {
     console.log('Email mismatch:', { received: trimmedEmail, expected: expectedEmail });
@@ -38,9 +49,9 @@ export async function authenticateAdmin(email: string, password: string): Promis
   
   // Check plain text match (for initial setup)
   // In production, you should hash the password and store it, then compare hashes
-  const passwordMatch = password === ADMIN_PASSWORD;
+  const passwordMatch = trimmedPassword === expectedPassword;
   if (!passwordMatch) {
-    console.log('Password mismatch');
+    console.log('Password mismatch:', { received: trimmedPassword, expected: expectedPassword });
   }
   return passwordMatch;
 }
