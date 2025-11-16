@@ -8,16 +8,22 @@ export async function GET(
 ) {
   try {
     const data = getData();
-    const section = params.section as keyof PortfolioData;
+    const section = params.section;
     
-    if (!(section in data)) {
+    // Special handling for array sections
+    if (section === 'social' || section === 'subdomainProjects') {
+      return NextResponse.json((data as any)[section] || []);
+    }
+    
+    const sectionKey = section as keyof PortfolioData;
+    if (!(sectionKey in data)) {
       return NextResponse.json(
         { error: 'Section not found' },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(data[section]);
+    return NextResponse.json(data[sectionKey]);
   } catch (error) {
     console.error('Error fetching section:', error);
     return NextResponse.json(
@@ -53,11 +59,11 @@ export async function PUT(
     const section = params.section as keyof PortfolioData;
     const sectionData = await request.json();
 
-    // Special handling for social section (it's an array)
-    if (section === 'social') {
+    // Special handling for array sections
+    if (section === 'social' || section === 'subdomainProjects') {
       if (!Array.isArray(sectionData)) {
         return NextResponse.json(
-          { error: 'Social section must be an array' },
+          { error: `${section} section must be an array` },
           { status: 400 }
         );
       }

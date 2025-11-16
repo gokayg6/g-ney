@@ -17,6 +17,7 @@ const Contact: React.FC<{}> = () => {
           title: "CONTACT",
           subtitle: "GET IN TOUCH",
           email: "mustafakarakus@gmail.com",
+          phone: "+90 555 123 45 67",
           description: "İşbirlikleri, fırsatlar veya sadece merhaba demek için çekinmeden iletişime geçin!",
         });
       });
@@ -43,14 +44,25 @@ const Contact: React.FC<{}> = () => {
         <p className="text-gray-300 text-center text-base md:text-lg lg:text-xl max-w-3xl">
           {data.description}
         </p>
-        <div className="text-center mt-4">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
           <a
             href={`mailto:${data.email}`}
-            className="z-[1] hover:bg-white rounded-3xl text-white font-semibold hover:text-black py-3 px-10 border border-white hover:border-transparent transition-all duration-150 active:scale-95 inline-block animate-slide-up"
+            className="z-[1] hover:bg-white rounded-3xl text-white font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent transition-all duration-150 active:scale-95 inline-block animate-slide-up flex items-center gap-2"
             style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
           >
-            {data.email}
+            <span>📧</span>
+            <span>{data.email}</span>
           </a>
+          {data.phone && (
+            <a
+              href={`tel:${data.phone.replace(/\s/g, '')}`}
+              className="z-[1] hover:bg-white rounded-3xl text-white font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent transition-all duration-150 active:scale-95 inline-block animate-slide-up flex items-center gap-2"
+              style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+            >
+              <span>📞</span>
+              <span>{data.phone}</span>
+            </a>
+          )}
         </div>
       </div>
     </section>

@@ -30,22 +30,7 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
   }, [screenshots.length]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#f0f9ff] via-[#e0f2fe] to-[#bae6fd] relative overflow-hidden">
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-blue-200/30 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
+    <main className="min-h-screen bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center text-white relative overflow-hidden">
 
       {/* Hero Section */}
       <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
@@ -56,7 +41,7 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
               {/* Logo */}
               {project.logo && (
                 <div className="flex justify-center lg:justify-start mb-6">
-                  <div className="w-24 h-24 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50 relative">
+                  <div className="w-24 h-24 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/20 relative">
                     <Image
                       src={project.logo}
                       alt={project.name}
@@ -67,15 +52,15 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
                 </div>
               )}
 
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#0c4a6e] mb-4 leading-tight">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
                 {project.name}
               </h1>
 
-              <p className="text-2xl sm:text-3xl text-[#075985] mb-6 font-light">
+              <p className="text-2xl sm:text-3xl text-gray-300 mb-6 font-light">
                 {project.tagline}
               </p>
 
-              <p className="text-lg sm:text-xl text-[#0369a1] leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-lg sm:text-xl text-gray-200 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 {project.description}
               </p>
 
@@ -86,7 +71,7 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
                     href={project.appStoreLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-8 py-4 bg-[#0c4a6e] text-white rounded-2xl font-semibold text-lg hover:bg-[#075985] transition-all duration-300 hover:scale-105 shadow-xl flex items-center justify-center gap-3"
+                    className="px-8 py-4 hover:bg-white rounded-3xl text-white font-semibold hover:text-black border-[0.1px] border-white hover:border-transparent transition-all duration-150 active:scale-95 flex items-center justify-center gap-3"
                   >
                     <svg
                       className="w-6 h-6"
@@ -105,7 +90,7 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
                       href={project.playStoreLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-8 py-4 bg-white text-[#0c4a6e] rounded-2xl font-semibold text-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105 shadow-xl flex items-center justify-center gap-3 border-2 border-[#0c4a6e]"
+                      className="px-8 py-4 hover:bg-white rounded-3xl text-white font-semibold hover:text-black border-[0.1px] border-white hover:border-transparent transition-all duration-150 active:scale-95 flex items-center justify-center gap-3"
                     >
                       <svg
                         className="w-6 h-6"
@@ -123,11 +108,8 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
             {/* Right - iPhone Mockup */}
             <div className="flex items-center justify-center">
               <div className="relative w-[300px] sm:w-[340px] lg:w-[380px]">
-                {/* Glow */}
-                <div className="absolute inset-0 bg-blue-300/30 blur-3xl rounded-full scale-110 animate-pulse" />
-
                 {/* Phone Frame */}
-                <div className="relative bg-gradient-to-b from-white to-blue-50 rounded-[48px] p-3 shadow-2xl ring-2 ring-blue-200">
+                <div className="relative bg-gradient-to-b from-white to-gray-100 rounded-[48px] p-3 shadow-2xl ring-2 ring-white/30">
                   {/* Notch */}
                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-32 h-6 bg-white rounded-full z-20 shadow-md" />
 
@@ -154,15 +136,15 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
                         ))}
 
                         {/* Dots */}
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-white/80 backdrop-blur-lg rounded-full px-3 py-2">
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-white/80 backdrop-blur-lg rounded-full px-3 py-2 border border-white/40">
                           {screenshots.map((_, index) => (
                             <button
                               key={index}
                               onClick={() => setCurrentScreenshot(index)}
                               className={`transition-all duration-300 rounded-full ${
                                 currentScreenshot === index
-                                  ? "w-6 h-2 bg-blue-500"
-                                  : "w-2 h-2 bg-blue-200"
+                                  ? "w-6 h-2 bg-gray-800"
+                                  : "w-2 h-2 bg-gray-400"
                               }`}
                               aria-label={`Screenshot ${index + 1}`}
                             />
@@ -173,7 +155,7 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
                   </div>
 
                   {/* Home Indicator */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-blue-200 rounded-full" />
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-gray-300 rounded-full" />
                 </div>
               </div>
             </div>
@@ -183,20 +165,20 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
 
       {/* Features Section */}
       {project.features && project.features.length > 0 && (
-        <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 bg-white/50">
+        <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-[#0c4a6e] text-center mb-12">
+            <h2 className="text-4xl font-bold text-white text-center mb-12">
               Features
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {project.features.map((feature, index) => (
                 <div
                   key={index}
-                  className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300"
+                  className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-lg border border-white/20 hover:shadow-xl hover:border-white/30 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-4 border border-white/20">
                     <svg
-                      className="w-6 h-6 text-blue-600"
+                      className="w-6 h-6 text-white"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -209,7 +191,7 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
                       />
                     </svg>
                   </div>
-                  <p className="text-[#0369a1] font-medium">{feature}</p>
+                  <p className="text-white/90 font-medium">{feature}</p>
                 </div>
               ))}
             </div>
@@ -217,20 +199,7 @@ export default function BiorhythmTemplate({ project }: BiorhythmTemplateProps) {
         </section>
       )}
 
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-20px) rotate(180deg);
-          }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
     </main>
   );
 }
+

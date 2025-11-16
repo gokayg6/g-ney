@@ -94,16 +94,41 @@ export default function BlogPostPage() {
         </div>
       </div>
 
-      <article className="relative max-w-4xl mx-auto -mt-20 sm:-mt-32 mb-12 sm:mb-16 bg-white/10 backdrop-blur-xl rounded-[32px] sm:rounded-[40px] shadow-[0_30px_80px_rgba(0,0,0,0.4)] p-6 sm:p-8 md:p-12 border border-white/20 animate-scale-in mx-4 sm:mx-auto">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-white/60 uppercase tracking-[0.3em] text-xs mb-6 hover:text-white transition-colors duration-300"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Geri dön
-        </Link>
+      <article className="group relative max-w-4xl mx-auto -mt-16 sm:-mt-20 md:-mt-32 mb-8 sm:mb-12 md:mb-16 bg-white/10 backdrop-blur-xl rounded-[24px] sm:rounded-[32px] md:rounded-[40px] shadow-[0_30px_80px_rgba(0,0,0,0.4)] p-4 sm:p-6 md:p-8 lg:p-12 border border-white/20 animate-scale-in mx-3 sm:mx-4 md:mx-auto">
+        {/* Blur Overlay */}
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out z-50 rounded-[24px] sm:rounded-[32px] md:rounded-[40px] pointer-events-none" />
+        
+        {/* View Button */}
+        <div className="absolute inset-0 flex items-center justify-center z-[60] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // Scroll to top of content or do nothing since we're already viewing
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="px-8 sm:px-10 md:px-12 py-4 sm:py-4.5 md:py-5 rounded-full text-base sm:text-lg md:text-xl font-extrabold uppercase tracking-[0.25em] text-white bg-white/30 backdrop-blur-xl border-2 border-white/70 hover:bg-white/40 active:bg-white/50 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_20px_60px_rgba(255,255,255,0.4)] pointer-events-auto cursor-pointer touch-manipulation"
+            style={{
+              zIndex: 1000000,
+              position: "relative",
+              pointerEvents: "auto",
+            }}
+          >
+            VIEW
+          </button>
+        </div>
+
+        <div className="relative z-10">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-white/60 uppercase tracking-[0.3em] text-xs mb-6 hover:text-white transition-colors duration-300"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Geri dön
+          </Link>
 
         <div className="flex flex-wrap gap-2 sm:gap-4 text-white/50 text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-6 sm:mb-10">
           {post.date && <span>{post.date}</span>}
@@ -129,7 +154,7 @@ export default function BlogPostPage() {
           )}
         </div>
 
-        <div className="space-y-4 sm:space-y-6 text-white/90 leading-relaxed text-base sm:text-lg">
+        <div className="space-y-4 sm:space-y-6 text-white/90 leading-relaxed text-base sm:text-lg blog-content">
           {post.content
             ?.split("\n")
             .filter((paragraph) => paragraph.trim().length)

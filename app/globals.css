@@ -389,3 +389,32 @@ img, video {
 .blog-card .animate-fade-in {
   animation: slide-down-expand 0.4s ease-out forwards;
 }
+
+/* Blog Post Page - Blur content on hover */
+article.group:hover .blog-content {
+  filter: blur(8px) !important;
+  transition: filter 0.5s ease-out !important;
+}
+
+article.group:hover .blog-content * {
+  filter: blur(8px) !important;
+  transition: filter 0.5s ease-out !important;
+}
+
+/* Admin Panel - Category Select Styling */
+select.admin-select {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+select.admin-select option {
+  background-color: #1a1a1a !important;
+  color: white !important;
+  padding: 8px 12px !important;
+}
+
+select.admin-select option:hover,
+select.admin-select option:checked {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}

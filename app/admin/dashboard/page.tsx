@@ -62,6 +62,7 @@ export default function AdminDashboard() {
     { href: '/admin/edit/about', title: 'Hakkımda', desc: 'Hakkımda bölümünü düzenle', icon: '👤' },
     { href: '/admin/edit/experience', title: 'Deneyim', desc: 'İş deneyimlerini yönet', icon: '💼' },
     { href: '/admin/edit/projects', title: 'Projeler', desc: 'Projeleri ve şablonları yönet', icon: '🎨' },
+    { href: '/admin/edit/subdomainProjects', title: 'Subdomain Projeleri', desc: 'Subdomain projelerini ve görsellerini yönet', icon: '🌐' },
     { href: '/admin/edit/blog', title: 'Blog', desc: 'Blog yazılarını yönet', icon: '📝' },
     { href: '/admin/edit/contact', title: 'İletişim', desc: 'İletişim bilgilerini düzenle', icon: '📧' },
     { href: '/admin/edit/social', title: 'Sosyal Medya', desc: 'Sosyal medya linklerini düzenle', icon: '🔗' },

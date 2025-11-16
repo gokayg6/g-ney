@@ -2,10 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { HeroData } from "@/lib/data";
 
 const Banner: React.FC<{}> = () => {
   const [data, setData] = useState<HeroData | null>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     fetch("/api/content/hero")
@@ -24,6 +27,32 @@ const Banner: React.FC<{}> = () => {
         });
       });
   }, []);
+
+  const handleContactClick = () => {
+    // If on home page, scroll to contact section
+    if (pathname === "/") {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        // If contact section not found, navigate to contact page
+        router.push("/contact");
+      }
+    } else {
+      // If on another page, navigate to home page first
+      router.push("/");
+      // After navigation, wait a bit and then scroll to contact section
+      setTimeout(() => {
+        const contactSection = document.getElementById("contact");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          // If still not found, navigate to contact page
+          router.push("/contact");
+        }
+      }, 300);
+    }
+  };
 
   if (!data) {
     return <div className="min-h-screen flex items-center justify-center text-white">Yükleniyor...</div>;
@@ -61,7 +90,7 @@ const Banner: React.FC<{}> = () => {
         </p>
         <div className="text-sm md:text-base flex justify-center">
           <button
-            onClick={() => window.open(data.buttonLink)}
+            onClick={handleContactClick}
             className="z-[1] padding-20 hover:bg-white rounded-3xl text-white font-semibold hover:text-black py-3 px-6 md:px-10 border-[0.1px] border-white hover:border-transparent transition-all duration-150 active:scale-95 animate-slide-up"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
           >

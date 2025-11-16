@@ -7,6 +7,7 @@ import BiorhythmTemplate from "@/components/templates/BiorhythmTemplate";
 import ShadowQuestTemplate from "@/components/templates/ShadowQuestTemplate";
 import LuxeStyleTemplate from "@/components/templates/LuxeStyleTemplate";
 import FallaTemplate from "@/components/templates/FallaTemplate";
+import ClassicTemplate from "@/components/templates/ClassicTemplate";
 import {
   getAllSubdomainProjects,
   getProjectBySubdomain,
@@ -64,24 +65,8 @@ export default function SubdomainPage({ params }: SubdomainPageProps) {
       return <FallaTemplate project={project} />;
 
     default:
-      // Proje var ama template case'i eklenmemiş
-      return (
-        <main className="min-h-screen bg-black text-white flex items-center justify-center">
-          <div className="text-center space-y-4 px-6">
-            <p className="text-xs md:text-sm text-white/60 tracking-[0.25em] uppercase">
-              Template missing
-            </p>
-            <h1 className="text-2xl md:text-3xl font-semibold">
-              “{project.name}” için template tanımlı değil.
-            </h1>
-            <p className="text-white/60 text-sm max-w-lg mx-auto leading-relaxed">
-              <code>app/subdomain/[subdomain]/page.tsx</code> içindeki{" "}
-              <code>switch</code> bloğuna{" "}
-              <code>case &quot;{sub}&quot;:</code> eklemen gerekiyor.
-            </p>
-          </div>
-        </main>
-      );
+      // Use classic template for any subdomain without a specific template
+      return <ClassicTemplate project={project} />;
   }
 }
 

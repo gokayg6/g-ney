@@ -59,6 +59,7 @@ export interface ContactData {
   title: string;
   subtitle: string;
   email: string;
+  phone?: string;
   description: string;
 }
 

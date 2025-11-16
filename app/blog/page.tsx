@@ -135,19 +135,19 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 lg:px-8 pb-28">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      <section className="px-3 sm:px-4 md:px-6 lg:px-8 pb-20 sm:pb-24 md:pb-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
           {posts.map((post, index) => (
             <article
               key={post.id}
-              className="blog-card group rounded-[32px] sm:rounded-[36px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_18px_60px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden animate-fade-in relative"
+              className="blog-card group rounded-[24px] sm:rounded-[32px] md:rounded-[36px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_18px_60px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden animate-fade-in relative"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              {/* Hover blur overlay */}
-              <div className="absolute inset-0 bg-black/60 backdrop-blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out z-50 rounded-[32px] sm:rounded-[36px] pointer-events-none" />
+              {/* Hover blur overlay - More visible on mobile */}
+              <div className="absolute inset-0 bg-black/40 sm:bg-black/60 backdrop-blur-lg opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-500 ease-out z-50 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] pointer-events-none" />
 
-              {/* View Details Button */}
-              <div className="absolute inset-0 flex items-center justify-center z-[60] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none">
+              {/* View Details Button - Always visible on mobile, hover on desktop */}
+              <div className="absolute inset-0 flex items-center justify-center z-[60] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none">
                 <button
                   type="button"
                   onClick={(e) => {
@@ -155,22 +155,23 @@ export default function BlogPage() {
                     e.stopPropagation();
                     window.location.href = `/blog/${post.id}`;
                   }}
-                  className="view-details-btn px-8 sm:px-10 md:px-12 py-4 sm:py-4.5 md:py-5 rounded-full text-base sm:text-lg md:text-xl font-extrabold uppercase tracking-[0.25em] text-white bg-white/30 backdrop-blur-xl border-2 border-white/70 hover:bg-white/40 active:bg-white/50 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_20px_60px_rgba(255,255,255,0.4)] pointer-events-auto cursor-pointer"
+                  className="view-details-btn px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-4.5 lg:py-5 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-extrabold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white bg-white/30 backdrop-blur-xl border-2 border-white/70 hover:bg-white/40 active:bg-white/50 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_20px_60px_rgba(255,255,255,0.4)] pointer-events-auto cursor-pointer touch-manipulation"
                   style={{
                     zIndex: 1000000,
                     position: "relative",
                     pointerEvents: "auto",
                   }}
                 >
-                  VIEW DETAILS
+                  <span className="hidden sm:inline">VIEW DETAILS</span>
+                  <span className="sm:hidden">DETAYLAR</span>
                 </button>
               </div>
 
               {/* Hover glow */}
-              <div className="absolute -inset-1 rounded-[32px] sm:rounded-[36px] bg-gradient-to-br from-white/0 via-white/0 to-white/0 group-hover:from-white/20 group-hover:via-white/10 group-hover:to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none blur-sm" />
+              <div className="absolute -inset-1 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] bg-gradient-to-br from-white/0 via-white/0 to-white/0 group-hover:from-white/20 group-hover:via-white/10 group-hover:to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none blur-sm" />
 
               {post.image && (
-                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-t-[32px] sm:rounded-t-[36px]">
+                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-t-[24px] sm:rounded-t-[32px] md:rounded-t-[36px]">
                   <Image
                     src={post.image}
                     fill
@@ -179,8 +180,8 @@ export default function BlogPage() {
                     sizes="(min-width: 1280px) 280px, (min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
                     priority={index < 4}
                   />
-                  {/* Image hover content */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-black/90 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-center items-center p-4 sm:p-5 md:p-6 z-20">
+                  {/* Image hover content - More visible on mobile */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-black/90 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-center items-center p-3 sm:p-4 md:p-5 lg:p-6 z-20">
                     <div className="transform translate-y-8 scale-95 group-hover:translate-y-0 group-hover:scale-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-center w-full px-2 sm:px-4">
                       <h4 className="text-white text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 md:mb-4 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500 line-clamp-2">
                         {post.title}
@@ -193,16 +194,16 @@ export default function BlogPage() {
                           e.stopPropagation();
                           window.location.href = `/blog/${post.id}`;
                         }}
-                        className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-5 sm:px-6 md:px-7 py-2.5 sm:py-3 md:py-3.5 rounded-full text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white bg-white/30 backdrop-blur-lg border-2 border-white/60 hover:bg-white/40 active:bg-white/50 hover:scale-110 active:scale-95 transition-all duration-300 shadow-2xl min-h-[40px] sm:min-h-[44px] md:min-h-[48px] w-full sm:w-auto font-semibold"
+                        className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 md:px-6 lg:px-7 py-2 sm:py-2.5 md:py-3 lg:py-3.5 rounded-full text-[10px] sm:text-[11px] md:text-xs lg:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-white bg-white/30 backdrop-blur-lg border-2 border-white/60 hover:bg-white/40 active:bg-white/50 hover:scale-110 active:scale-95 transition-all duration-300 shadow-2xl min-h-[36px] sm:min-h-[40px] md:min-h-[44px] lg:min-h-[48px] w-full sm:w-auto font-semibold touch-manipulation"
                         style={{
                           zIndex: 9999,
                           position: "relative",
                           pointerEvents: "auto",
                         }}
                       >
-                        <span className="whitespace-nowrap">Detayları Gör</span>
+                        <span className="whitespace-nowrap text-xs sm:text-sm">Detayları Gör</span>
                         <svg
-                          className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0 transform group-hover:translate-x-1 transition-transform duration-300"
+                          className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0 transform group-hover:translate-x-1 transition-transform duration-300"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -220,7 +221,7 @@ export default function BlogPage() {
                 </div>
               )}
 
-              <div className="p-4 sm:p-5 md:p-7 flex flex-col flex-1 relative z-10 group-hover:bg-white/5 transition-all duration-500 rounded-b-[32px] sm:rounded-b-[36px]">
+              <div className="p-3 sm:p-4 md:p-5 lg:p-7 flex flex-col flex-1 relative z-10 group-hover:bg-white/5 transition-all duration-500 rounded-b-[24px] sm:rounded-b-[32px] md:rounded-b-[36px]">
                 <div className="flex items-center justify-between text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-white/50 mb-3 sm:mb-4 group-hover:text-white/70 transition-colors duration-500">
                   <span className="truncate transform group-hover:scale-105 transition-transform duration-300 inline-block">
                     {post.category || "NEWS"}
@@ -230,11 +231,11 @@ export default function BlogPage() {
                   </span>
                 </div>
 
-                <h3 className="text-white text-xl sm:text-2xl font-semibold leading-snug mb-2 sm:mb-3 group-hover:text-white transition-colors duration-500 line-clamp-2 transform group-hover:scale-[1.02] group-hover:translate-x-1 transition-all duration-500">
+                <h3 className="text-white text-lg sm:text-xl md:text-2xl font-semibold leading-snug mb-2 sm:mb-3 group-hover:text-white transition-colors duration-500 line-clamp-2 transform group-hover:scale-[1.02] group-hover:translate-x-1 transition-all duration-500">
                   {post.title}
                 </h3>
 
-                <p className="text-white/70 text-xs sm:text-sm leading-relaxed flex-1 line-clamp-3 group-hover:text-white/85 transition-colors duration-500 transform group-hover:translate-x-0.5 transition-transform duration-500">
+                <p className="text-white/70 text-[11px] sm:text-xs md:text-sm leading-relaxed flex-1 line-clamp-3 group-hover:text-white/85 transition-colors duration-500 transform group-hover:translate-x-0.5 transition-transform duration-500">
                   {post.excerpt}
                 </p>
 

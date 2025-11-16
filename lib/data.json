@@ -34,7 +34,7 @@
     ]
   },
   "projects": {
-    "title": "MUSTAFA",
+    "title": "PROJELER",
     "subtitle": "KEŞFET",
     "items": [
       {
@@ -68,15 +68,6 @@
         "image": "/FourProject.png",
         "link": "http://44.201.47.75/",
         "type": "ecommerce"
-      },
-      {
-        "id": "1763147303959",
-        "title": "projem",
-        "description": "rsgrsggsgsr",
-        "image": "",
-        "link": "https://www.instagram.com/",
-        "type": "game",
-        "privacyPolicy": "gsgsgssgsg"
       }
     ]
   },
@@ -84,6 +75,7 @@
     "title": "İLETİŞİM",
     "subtitle": "BANA ULAŞIN",
     "email": "mustafakarakus@gmail.com",
+    "phone": "+90 555 123 45 67",
     "description": "İşbirlikleri, fırsatlar veya sadece merhaba demek için çekinmeden iletişime geçin!"
   },
   "social": [
@@ -251,7 +243,7 @@
       "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
       "tagline": "Understand yourself better every day",
       "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80",
+      "coverImage": "/uploads/1763278819792_ChatGPT_Image_11_Kas_2025_00_15_44.png",
       "features": [
         "Daily biorhythm tracking",
         "Personalized wellness insights",
@@ -261,7 +253,7 @@
         "Mood tracking & analysis"
       ],
       "screenshots": [
-        "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80",
+        "/uploads/1763278881893_ChatGPT_Image_13_Kas_2025_14_55_01.png",
         "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80",
         "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80",
         "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80"
@@ -460,6 +452,94 @@
           "analytics",
           "product analytics",
           "dashboards"
+        ]
+      }
+    },
+    {
+      "id": "1763282855687",
+      "name": "Shadow Quest",
+      "subdomain": "fall",
+      "category": "mobile-app",
+      "title": "Biorhythm - Daily Wellness Tracker",
+      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
+      "tagline": "Understand yourself better every day",
+      "logo": "/loegs.png",
+      "coverImage": "/uploads/1763278819792_ChatGPT_Image_11_Kas_2025_00_15_44.png",
+      "features": [
+        "Daily biorhythm tracking",
+        "Personalized wellness insights",
+        "AI-powered recommendations",
+        "Beautiful visualizations",
+        "Daily affirmations",
+        "Mood tracking & analysis"
+      ],
+      "screenshots": [
+        "/uploads/1763278881893_ChatGPT_Image_13_Kas_2025_14_55_01.png",
+        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80",
+        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80",
+        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "React Native",
+        "TypeScript",
+        "ML Kit",
+        "HealthKit"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "Biorhythm - Daily Wellness Tracker",
+        "metaDescription": "Track your biorhythms and get personalized wellness insights",
+        "keywords": [
+          "wellness",
+          "biorhythm",
+          "health",
+          "meditation"
+        ]
+      }
+    },
+    {
+      "id": "1763284084889",
+      "name": "",
+      "subdomain": "mustafa",
+      "category": "mobile-app",
+      "title": "Biorhythm - Daily Wellness Tracker",
+      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
+      "tagline": "Understand yourself better every day",
+      "logo": "/loegs.png",
+      "coverImage": "/uploads/1763278819792_ChatGPT_Image_11_Kas_2025_00_15_44.png",
+      "features": [
+        "Daily biorhythm tracking",
+        "Personalized wellness insights",
+        "AI-powered recommendations",
+        "Beautiful visualizations",
+        "Daily affirmations",
+        "Mood tracking & analysis"
+      ],
+      "screenshots": [
+        "/uploads/1763278881893_ChatGPT_Image_13_Kas_2025_14_55_01.png",
+        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80",
+        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80",
+        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "React Native",
+        "TypeScript",
+        "ML Kit",
+        "HealthKit"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "Biorhythm - Daily Wellness Tracker",
+        "metaDescription": "Track your biorhythms and get personalized wellness insights",
+        "keywords": [
+          "wellness",
+          "biorhythm",
+          "health",
+          "meditation"
         ]
       }
     }
