@@ -29,6 +29,11 @@ function getTypeBadge(type: string) {
   }
 }
 
+// Birleştirilmiş tip
+type CombinedProject =
+  | (ProjectItem & { isSubdomain: false })
+  | (SubdomainProject & { isSubdomain: true });
+
 const Projects: React.FC = () => {
   const [data, setData] = useState<ProjectsData | null>(null);
   const [subdomainProjects, setSubdomainProjects] = useState<SubdomainProject[]>([]);
@@ -36,9 +41,9 @@ const Projects: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const loadData = async () => {
+    async function loadData() {
       try {
-        // Load regular projects
+        // Normal projeler
         const res = await fetch("/api/content/projects");
         if (res.ok) {
           const json: ProjectsData = await res.json();
@@ -51,14 +56,15 @@ const Projects: React.FC = () => {
           setData(fallbackProjects);
         }
 
-        // Load subdomain projects from API
+        // Subdomain projeleri
         try {
           const contentRes = await fetch("/api/content/subdomainProjects");
           if (contentRes.ok) {
             const subdomainProjs = await contentRes.json();
-            // Filter only published projects
-            const published = Array.isArray(subdomainProjs) 
-              ? subdomainProjs.filter((p: SubdomainProject) => p.published !== false)
+            const published = Array.isArray(subdomainProjs)
+              ? subdomainProjs.filter(
+                  (p: SubdomainProject) => p.published !== false
+                )
               : [];
             setSubdomainProjects(published);
           } else {
@@ -72,7 +78,7 @@ const Projects: React.FC = () => {
         setData(fallbackProjects);
         setSubdomainProjects([]);
       }
-    };
+    }
 
     loadData();
   }, []);
@@ -85,18 +91,25 @@ const Projects: React.FC = () => {
     );
   }
 
-  // Combine all projects
-  const allProjects = [
-    ...data.items.map((item) => ({ ...item, isSubdomain: false })),
-    ...subdomainProjects.map((item) => ({ ...item, isSubdomain: true })),
+  // Tüm projeleri tek listede birleştir
+  const allProjects: CombinedProject[] = [
+    ...data.items.map((item) => ({ ...item, isSubdomain: false as const })),
+    ...subdomainProjects.map((item) => ({ ...item, isSubdomain: true as const })),
   ];
 
-  // Filter projects
+  // Filtre
   const filteredProjects = allProjects.filter((project) => {
     if (activeFilter === "all") return true;
     if (activeFilter === "regular") return !project.isSubdomain;
     if (activeFilter === "subdomain") return project.isSubdomain;
-    return project.type === activeFilter;
+
+    // Diğer filtreler (type bazlı)
+    if ("type" in project && project.type) {
+      return project.type === activeFilter;
+    }
+
+    // type alanı olmayan subdomain projeler, type filtresinde görünmesin
+    return false;
   });
 
   const filters = [
@@ -110,33 +123,34 @@ const Projects: React.FC = () => {
     { id: "ecommerce", label: "E-Ticaret" },
   ];
 
-  const handleProjectClick = (project: any, e?: React.MouseEvent) => {
+  const handleProjectClick = (project: CombinedProject, e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    
+
     if (project.isSubdomain) {
-      // Navigate to subdomain page
       const subdomain = (project as SubdomainProject).subdomain;
       if (subdomain) {
         window.location.href = `/subdomain/${subdomain}`;
       }
-    } else if ((project as ProjectItem).link) {
-      // Open external link
-      window.open((project as ProjectItem).link, "_blank", "noopener,noreferrer");
+    } else if ("link" in project && project.link) {
+      window.open(project.link, "_blank", "noopener,noreferrer");
     }
   };
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="projects" 
+    <section
+      ref={sectionRef}
+      id="projects"
       className="px-4 py-20 min-h-screen relative"
-      style={{ position: 'relative', zIndex: 1 }}
+      style={{ position: "relative", zIndex: 1 }}
     >
       {/* Header */}
-      <div className="text-center mb-16 animate-zoom-in" style={{ position: 'relative', zIndex: 10 }}>
+      <div
+        className="text-center mb-16 animate-zoom-in"
+        style={{ position: "relative", zIndex: 10 }}
+      >
         <h2 className="text-white font-semibold text-4xl md:text-5xl lg:text-7xl mb-4">
           {data.title}
         </h2>
@@ -146,13 +160,13 @@ const Projects: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div 
-        className="flex flex-wrap justify-center gap-3 mb-12 px-4 animate-fade-in relative" 
-        style={{ 
-          animationDelay: "0.2s", 
+      <div
+        className="flex flex-wrap justify-center gap-3 mb-12 px-4 animate-fade-in relative"
+        style={{
+          animationDelay: "0.2s",
           animationFillMode: "both",
           zIndex: 1000,
-          position: 'relative'
+          position: "relative",
         }}
       >
         {filters.map((filter) => (
@@ -162,7 +176,6 @@ const Projects: React.FC = () => {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              console.log("Filter clicked:", filter.id);
               setActiveFilter(filter.id);
             }}
             onMouseDown={(e) => {
@@ -175,10 +188,10 @@ const Projects: React.FC = () => {
                 : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:scale-105"
             }`}
             style={{
-              position: 'relative',
+              position: "relative",
               zIndex: 1000,
-              pointerEvents: 'auto',
-              cursor: 'pointer'
+              pointerEvents: "auto",
+              cursor: "pointer",
             }}
           >
             {filter.label}
@@ -187,27 +200,44 @@ const Projects: React.FC = () => {
       </div>
 
       {/* Projects Grid */}
-      <div className="container mx-auto max-w-7xl" style={{ position: 'relative', zIndex: 1 }}>
+      <div
+        className="container mx-auto max-w-7xl"
+        style={{ position: "relative", zIndex: 1 }}
+      >
         {filteredProjects.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-white/60 text-lg">Bu kategoride proje bulunamadı.</p>
+            <p className="text-white/60 text-lg">
+              Bu kategoride proje bulunamadı.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project, index) => {
-              const badge = getTypeBadge(project.type || "web");
-              const projectImage = project.isSubdomain 
-                ? (project as SubdomainProject).coverImage || (project as SubdomainProject).logo 
+              const projectTypeKey =
+                "type" in project && project.type ? project.type : "web";
+              const badge = getTypeBadge(projectTypeKey);
+
+              const subdomainProject = project.isSubdomain
+                ? (project as SubdomainProject)
+                : null;
+
+              const projectImage = project.isSubdomain
+                ? subdomainProject?.coverImage || subdomainProject?.logo
                 : (project as ProjectItem).image;
 
-              const subdomainProject = project.isSubdomain ? (project as SubdomainProject) : null;
-              const projectLink = !project.isSubdomain ? (project as ProjectItem).link : null;
+              const projectLink =
+                !project.isSubdomain && "link" in project
+                  ? (project as ProjectItem).link
+                  : null;
 
               return (
                 <div
                   key={project.id || index}
                   className="group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s`, animationFillMode: "both" }}
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                    animationFillMode: "both",
+                  }}
                 >
                   {/* Image Container */}
                   <div className="relative h-64 overflow-hidden pointer-events-none">
@@ -225,10 +255,12 @@ const Projects: React.FC = () => {
                     )}
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
-                    
-                    {/* Badge */}
+
+                    {/* Type Badge */}
                     <div className="absolute top-4 right-4 z-10 pointer-events-none">
-                      <span className={`px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${badge.color} text-white shadow-lg backdrop-blur-sm border border-white/20`}>
+                      <span
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${badge.color} text-white shadow-lg backdrop-blur-sm border border-white/20`}
+                      >
                         {badge.text}
                       </span>
                     </div>
@@ -249,76 +281,59 @@ const Projects: React.FC = () => {
                       <h3 className="text-white text-xl font-bold mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors">
                         {project.title}
                       </h3>
-                      {project.tagline && (
+
+                      {subdomainProject?.tagline && (
                         <p className="text-white/70 text-sm mb-3 italic">
-                          {(project as SubdomainProject).tagline}
+                          {subdomainProject.tagline}
                         </p>
                       )}
+
                       <p className="text-white/60 text-sm line-clamp-3 leading-relaxed">
-                        {project.description || (project as SubdomainProject).description}
+                        {project.description}
                       </p>
                     </div>
 
-                    {/* Tech Stack (for subdomain projects) */}
-                    {project.isSubdomain && (project as SubdomainProject).techStack && (project as SubdomainProject).techStack.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        {(project as SubdomainProject).techStack.slice(0, 3).map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-2 py-1 rounded-lg text-xs bg-white/5 border border-white/10 text-white/70"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                        {(project as SubdomainProject).techStack.length > 3 && (
-                          <span className="px-2 py-1 rounded-lg text-xs bg-white/5 border border-white/10 text-white/70">
-                            +{(project as SubdomainProject).techStack.length - 3}
-                          </span>
-                        )}
-                      </div>
-                    )}
+                    {/* Tech Stack (subdomain projelerde) */}
+                    {subdomainProject?.techStack &&
+                      subdomainProject.techStack.length > 0 && (
+                        <div className="flex flex-wrap gap-2 pt-2">
+                          {subdomainProject.techStack
+                            .slice(0, 3)
+                            .map((tech, techIndex) => (
+                              <span
+                                key={techIndex}
+                                className="px-2 py-1 rounded-lg text-xs bg-white/5 border border-white/10 text-white/70"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          {subdomainProject.techStack.length > 3 && (
+                            <span className="px-2 py-1 rounded-lg text-xs bg-white/5 border border-white/10 text-white/70">
+                              +{subdomainProject.techStack.length - 3}
+                            </span>
+                          )}
+                        </div>
+                      )}
 
                     {/* Action Button */}
-                    <div className="mt-4" style={{ position: 'relative', zIndex: 9999 }}>
+                    <div
+                      className="mt-4"
+                      style={{ position: "relative", zIndex: 9999 }}
+                    >
                       {subdomainProject ? (
                         <button
                           type="button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            const subdomain = subdomainProject?.subdomain;
-                            console.log("=== BUTTON CLICKED ===");
-                            console.log("Subdomain:", subdomain);
-                            console.log("Full project:", subdomainProject);
-                            if (subdomain) {
-                              const baseUrl = window.location.origin;
-                              const url = `${baseUrl}/subdomain/${subdomain}`;
-                              console.log("Redirecting to:", url);
-                              setTimeout(() => {
-                                window.location.href = url;
-                              }, 100);
-                            } else {
-                              console.error("Subdomain is missing!");
-                              alert(`Subdomain bulunamadı! Project: ${JSON.stringify(subdomainProject)}`);
-                            }
-                            return false;
-                          }}
+                          onClick={(e) => handleProjectClick(project, e)}
                           onMouseDown={(e) => {
-                            console.log("Mouse down on button");
-                            e.preventDefault();
-                            e.stopPropagation();
-                          }}
-                          onMouseUp={(e) => {
-                            console.log("Mouse up on button");
                             e.preventDefault();
                             e.stopPropagation();
                           }}
                           className="w-full px-6 py-3 rounded-xl font-semibold text-sm bg-transparent backdrop-blur-sm border border-white/20 text-white hover:bg-white/10 hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                          style={{ 
-                            position: 'relative', 
-                            zIndex: 9999, 
-                            pointerEvents: 'auto',
-                            cursor: 'pointer'
+                          style={{
+                            position: "relative",
+                            zIndex: 9999,
+                            pointerEvents: "auto",
+                            cursor: "pointer",
                           }}
                         >
                           <span>Keşfet</span>
@@ -330,15 +345,14 @@ const Projects: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => {
-                            console.log("External link clicked:", projectLink);
                             e.stopPropagation();
                           }}
                           className="block w-full px-6 py-3 rounded-xl font-semibold text-sm bg-transparent backdrop-blur-sm border border-white/20 text-white hover:bg-white/10 hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                          style={{ 
-                            position: 'relative', 
-                            zIndex: 9999, 
-                            pointerEvents: 'auto',
-                            cursor: 'pointer'
+                          style={{
+                            position: "relative",
+                            zIndex: 9999,
+                            pointerEvents: "auto",
+                            cursor: "pointer",
                           }}
                         >
                           <span>Ziyaret Et</span>
@@ -353,7 +367,10 @@ const Projects: React.FC = () => {
                   </div>
 
                   {/* Hover Glow Effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ zIndex: 0 }}>
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ zIndex: 0 }}
+                  >
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-orange-500/10" />
                   </div>
                 </div>
@@ -365,22 +382,37 @@ const Projects: React.FC = () => {
 
       {/* Stats */}
       {(data.items.length > 0 || subdomainProjects.length > 0) && (
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "both" }}>
+        <div
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto animate-fade-in"
+          style={{ animationDelay: "0.4s", animationFillMode: "both" }}
+        >
           <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="text-3xl font-bold text-white mb-2">{allProjects.length}</div>
+            <div className="text-3xl font-bold text-white mb-2">
+              {allProjects.length}
+            </div>
             <div className="text-white/60 text-sm">Toplam Proje</div>
           </div>
           <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="text-3xl font-bold text-white mb-2">{data.items.length}</div>
+            <div className="text-3xl font-bold text-white mb-2">
+              {data.items.length}
+            </div>
             <div className="text-white/60 text-sm">Standart Proje</div>
           </div>
           <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="text-3xl font-bold text-white mb-2">{subdomainProjects.length}</div>
+            <div className="text-3xl font-bold text-white mb-2">
+              {subdomainProjects.length}
+            </div>
             <div className="text-white/60 text-sm">Subdomain</div>
           </div>
           <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
             <div className="text-3xl font-bold text-white mb-2">
-              {new Set(allProjects.map((p) => p.type)).size}
+              {
+                new Set(
+                  allProjects.map((p) =>
+                    "type" in p && p.type ? p.type : "web"
+                  )
+                ).size
+              }
             </div>
             <div className="text-white/60 text-sm">Kategori</div>
           </div>
