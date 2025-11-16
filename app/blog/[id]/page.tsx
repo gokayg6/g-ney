@@ -97,7 +97,7 @@ export default function BlogPostPage() {
       <article className="group relative max-w-4xl mx-auto -mt-16 sm:-mt-20 md:-mt-32 mb-8 sm:mb-12 md:mb-16 bg-white/10 backdrop-blur-xl rounded-[24px] sm:rounded-[32px] md:rounded-[40px] shadow-[0_30px_80px_rgba(0,0,0,0.4)] p-4 sm:p-6 md:p-8 lg:p-12 border border-white/20 animate-scale-in mx-3 sm:mx-4 md:mx-auto">
         {/* Blur Overlay */}
         <div className="absolute inset-0 bg-black/60 backdrop-blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out z-50 rounded-[24px] sm:rounded-[32px] md:rounded-[40px] pointer-events-none" />
-        
+
         {/* View Button */}
         <div className="absolute inset-0 flex items-center justify-center z-[60] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none">
           <button
@@ -214,71 +214,6 @@ export default function BlogPostPage() {
           </div>
         </div>
       </article>
-
-      {relatedPosts.length > 0 && (
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24 animate-fade-in">
-          <div className="flex items-center justify-between mb-6 sm:mb-8">
-            <h2 className="font-serif text-2xl sm:text-3xl text-white">
-              Benzer Yazılar
-            </h2>
-            <Link
-              href="/blog"
-              className="text-white/60 uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-xs hover:text-white transition-colors duration-300"
-            >
-              Tüm Yazılar
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {relatedPosts.map((item, index) => (
-              <Link
-                key={item.id}
-                href={`/blog/${item.id}`}
-                className="group bg-white/10 backdrop-blur-xl rounded-[24px] sm:rounded-[28px] border border-white/20 shadow-[0_18px_60px_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:shadow-[0_25px_80px_rgba(0,0,0,0.5)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {item.image && (
-                  <div className="relative h-48 sm:h-56 overflow-hidden">
-                    <Image
-                      src={item.image}
-                      fill
-                      alt={item.title}
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-                    />
-                  </div>
-                )}
-                <div className="px-5 sm:px-6 py-5 sm:py-6">
-                  <span className="text-white/50 text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase">
-                    {item.category || "News"}
-                  </span>
-                  <h3 className="text-white text-base sm:text-lg font-semibold leading-snug mt-2 sm:mt-3 mb-2 line-clamp-2 group-hover:text-white/90 transition-colors duration-300">
-                    {item.title}
-                  </h3>
-                  <p className="text-white/70 text-xs sm:text-sm line-clamp-3 leading-relaxed">
-                    {item.excerpt}
-                  </p>
-                  <div className="mt-3 sm:mt-4 flex items-center text-white/60 text-xs group-hover:text-white transition-colors duration-300">
-                    <span>Devamını oku</span>
-                    <svg
-                      className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
 
       <Footer />
     </main>
