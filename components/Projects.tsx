@@ -140,7 +140,7 @@ const Projects: React.FC = () => {
     <section
       ref={sectionRef}
       id="projects"
-      className="px-4 py-20 min-h-screen relative"
+      className="px-4 sm:px-6 lg:px-8 py-20 min-h-screen relative"
       style={{ position: "relative", zIndex: 1 }}
     >
       {/* Header */}
@@ -197,7 +197,7 @@ const Projects: React.FC = () => {
 
       {/* Projects Grid */}
       <div
-        className="container mx-auto max-w-6xl"
+        className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
         style={{ position: "relative", zIndex: 1 }}
       >
         {filteredProjects.length === 0 ? (
@@ -207,7 +207,7 @@ const Projects: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8">
             {filteredProjects.map((project, index) => {
               const projectTypeKey =
                 "type" in project && project.type ? project.type : "web";
