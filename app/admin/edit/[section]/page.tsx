@@ -39,7 +39,8 @@ export default function EditSection() {
 
   const loadData = async () => {
     try {
-      const res = await fetch('/api/content');
+      // Add timestamp to bypass cache
+      const res = await fetch(`/api/content?t=${Date.now()}`);
       const content: PortfolioData = await res.json();
       const sectionData = (content as any)[section];
       
@@ -86,6 +87,8 @@ export default function EditSection() {
           setAllSubdomainProjects(data);
         }
         alert('Saved successfully!');
+        // Reload data to ensure we have the latest version
+        await loadData();
         router.push('/admin/dashboard');
       } else {
         alert(`Failed to save: ${result.error || 'Unknown error'}`);

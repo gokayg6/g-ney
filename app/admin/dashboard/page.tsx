@@ -29,7 +29,8 @@ export default function AdminDashboard() {
 
   const loadData = async () => {
     try {
-      const res = await fetch('/api/content');
+      // Add timestamp to bypass cache
+      const res = await fetch(`/api/content?t=${Date.now()}`);
       const content = await res.json();
       setData(content);
     } catch (error) {

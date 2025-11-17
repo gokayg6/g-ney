@@ -78,6 +78,27 @@ export default function BlogPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [meta, setMeta] = useState(defaultMeta);
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
+  const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
+
+  // Load liked posts and like counts from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('blog-liked-posts');
+      if (stored) {
+        const likedArray = JSON.parse(stored) as string[];
+        setLikedPosts(new Set(likedArray));
+      }
+      
+      const storedCounts = localStorage.getItem('blog-like-counts');
+      if (storedCounts) {
+        const counts = JSON.parse(storedCounts) as Record<string, number>;
+        setLikeCounts(counts);
+      }
+    } catch (error) {
+      console.error('Error loading liked posts:', error);
+    }
+  }, []);
 
   useEffect(() => {
     fetch("/api/content/blog")
@@ -104,6 +125,43 @@ export default function BlogPage() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  const handleLike = (postId: string) => {
+    setLikedPosts((prev) => {
+      const newSet = new Set(prev);
+      const wasLiked = newSet.has(postId);
+      
+      if (wasLiked) {
+        newSet.delete(postId);
+      } else {
+        newSet.add(postId);
+      }
+      
+      // Update like counts
+      setLikeCounts((prevCounts) => {
+        const newCounts = { ...prevCounts };
+        if (wasLiked) {
+          // Decrease count
+          newCounts[postId] = Math.max(0, (newCounts[postId] || 0) - 1);
+        } else {
+          // Increase count
+          newCounts[postId] = (newCounts[postId] || 0) + 1;
+        }
+        
+        // Save to localStorage
+        try {
+          localStorage.setItem('blog-liked-posts', JSON.stringify(Array.from(newSet)));
+          localStorage.setItem('blog-like-counts', JSON.stringify(newCounts));
+        } catch (error) {
+          console.error('Error saving liked posts:', error);
+        }
+        
+        return newCounts;
+      });
+      
+      return newSet;
+    });
+  };
 
   if (loading) {
     return (
@@ -266,27 +324,68 @@ export default function BlogPage() {
                     {post.date}
                   </span>
 
-                  {/* ok butonu: kart içi expandable alanı aç/kapat */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setExpandedPostId((prev) =>
-                        prev === post.id ? null : post.id
-                      );
-                    }}
-                    className="flex items-center justify-center min-w-[38px] sm:min-w-[42px] md:min-w-[46px] min-h-[38px] sm:min-h-[42px] md:min-h-[46px] rounded-full bg-white/10 hover:bg-white/25 text-white text-lg sm:text-xl font-bold transition-all duration-200"
-                    aria-expanded={expandedPostId === post.id}
-                  >
-                    <span
-                      className={`block transform transition-transform duration-300 ${
-                        expandedPostId === post.id ? "rotate-90" : ""
+                  <div className="flex items-center gap-2">
+                    {/* Beğeni butonu */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleLike(post.id);
+                      }}
+                      className={`flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
+                        likedPosts.has(post.id)
+                          ? "bg-red-500/30 border border-red-500/50 text-red-200 hover:bg-red-500/40"
+                          : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
                       }`}
+                      title={likedPosts.has(post.id) ? "Beğenildi" : "Beğen"}
                     >
-                      →
-                    </span>
-                  </button>
+                      <svg
+                        className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-200 ${
+                          likedPosts.has(post.id) ? "fill-current" : "fill-none"
+                        }`}
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        />
+                      </svg>
+                      <span className="hidden sm:inline">
+                        {likedPosts.has(post.id) ? "Beğenildi" : "Beğen"}
+                      </span>
+                      {(likeCounts[post.id] || 0) > 0 && (
+                        <span className="text-[10px] sm:text-xs font-semibold">
+                          ({likeCounts[post.id] || 0})
+                        </span>
+                      )}
+                    </button>
+
+                    {/* ok butonu: kart içi expandable alanı aç/kapat */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setExpandedPostId((prev) =>
+                          prev === post.id ? null : post.id
+                        );
+                      }}
+                      className="flex items-center justify-center min-w-[38px] sm:min-w-[42px] md:min-w-[46px] min-h-[38px] sm:min-h-[42px] md:min-h-[46px] rounded-full bg-white/10 hover:bg-white/25 text-white text-lg sm:text-xl font-bold transition-all duration-200"
+                      aria-expanded={expandedPostId === post.id}
+                    >
+                      <span
+                        className={`block transform transition-transform duration-300 ${
+                          expandedPostId === post.id ? "rotate-90" : ""
+                        }`}
+                      >
+                        →
+                      </span>
+                    </button>
+                  </div>
                 </div>
 
                  {/* EXPANDED CONTENT */}
@@ -340,25 +439,64 @@ export default function BlogPage() {
                           )}
                         </div>
 
-                        <Link
-                          href={`/blog/${post.id}`}
-                          className="text-white/70 hover:text-white text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.2em] flex items-center gap-1.5 transition-colors"
-                        >
-                          <span>Devamını oku</span>
-                          <svg
-                            className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
+                        <div className="flex items-center gap-3">
+                          {/* Beğeni butonu - expanded content içinde */}
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleLike(post.id);
+                            }}
+                            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
+                              likedPosts.has(post.id)
+                                ? "bg-red-500/30 border border-red-500/50 text-red-200 hover:bg-red-500/40"
+                                : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
+                            }`}
+                            title={likedPosts.has(post.id) ? "Beğenildi" : "Beğen"}
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </Link>
+                            <svg
+                              className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-200 ${
+                                likedPosts.has(post.id) ? "fill-current" : "fill-none"
+                              }`}
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                              />
+                            </svg>
+                            <span>{likedPosts.has(post.id) ? "Beğenildi" : "Beğen"}</span>
+                            {(likeCounts[post.id] || 0) > 0 && (
+                              <span className="text-xs sm:text-sm font-semibold">
+                                ({likeCounts[post.id] || 0})
+                              </span>
+                            )}
+                          </button>
+
+                          <Link
+                            href={`/blog/${post.id}`}
+                            className="text-white/70 hover:text-white text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.2em] flex items-center gap-1.5 transition-colors"
+                          >
+                            <span>Devamını oku</span>
+                            <svg
+                              className="w-3 h-3 sm:w-3.5 sm:h-3.5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -13,6 +13,27 @@ export default function BlogPostPage() {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
+
+  // Load liked posts and like counts from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('blog-liked-posts');
+      if (stored) {
+        const likedArray = JSON.parse(stored) as string[];
+        setLikedPosts(new Set(likedArray));
+      }
+      
+      const storedCounts = localStorage.getItem('blog-like-counts');
+      if (storedCounts) {
+        const counts = JSON.parse(storedCounts) as Record<string, number>;
+        setLikeCounts(counts);
+      }
+    } catch (error) {
+      console.error('Error loading liked posts:', error);
+    }
+  }, []);
 
   useEffect(() => {
     if (!postId) return;
@@ -34,6 +55,43 @@ export default function BlogPostPage() {
       })
       .finally(() => setLoading(false));
   }, [postId]);
+
+  const handleLike = (postId: string) => {
+    setLikedPosts((prev) => {
+      const newSet = new Set(prev);
+      const wasLiked = newSet.has(postId);
+      
+      if (wasLiked) {
+        newSet.delete(postId);
+      } else {
+        newSet.add(postId);
+      }
+      
+      // Update like counts
+      setLikeCounts((prevCounts) => {
+        const newCounts = { ...prevCounts };
+        if (wasLiked) {
+          // Decrease count
+          newCounts[postId] = Math.max(0, (newCounts[postId] || 0) - 1);
+        } else {
+          // Increase count
+          newCounts[postId] = (newCounts[postId] || 0) + 1;
+        }
+        
+        // Save to localStorage
+        try {
+          localStorage.setItem('blog-liked-posts', JSON.stringify(Array.from(newSet)));
+          localStorage.setItem('blog-like-counts', JSON.stringify(newCounts));
+        } catch (error) {
+          console.error('Error saving liked posts:', error);
+        }
+        
+        return newCounts;
+      });
+      
+      return newSet;
+    });
+  };
 
   const relatedPosts = useMemo(() => {
     if (!post) return [];
@@ -112,8 +170,8 @@ export default function BlogPostPage() {
       </div>
 
       {/* ANA İÇERİK KARTI */}
-      <article className="relative max-w-4xl mx-auto -mt-14 sm:-mt-18 md:-mt-24 mb-10 sm:mb-14 md:mb-20 px-3 sm:px-4">
-        <div className="relative bg-black/40 md:bg-black/35 backdrop-blur-2xl rounded-[22px] sm:rounded-[28px] md:rounded-[36px] shadow-[0_26px_80px_rgba(0,0,0,0.6)] p-4 sm:p-6 md:p-8 lg:p-10 border border-white/20">
+      <article className="relative max-w-4xl mx-auto -mt-14 sm:-mt-18 md:-mt-24 mb-10 sm:mb-14 md:mb-20 px-3 sm:px-4" style={{ zIndex: 10 }}>
+        <div className="relative bg-black/40 md:bg-black/35 backdrop-blur-2xl rounded-[22px] sm:rounded-[28px] md:rounded-[36px] shadow-[0_26px_80px_rgba(0,0,0,0.6)] p-4 sm:p-6 md:p-8 lg:p-10 border border-white/20" style={{ position: 'relative', zIndex: 10 }}>
           {/* geri linki */}
           <div className="flex items-center justify-between gap-3 mb-5 sm:mb-6">
             <Link
@@ -167,7 +225,7 @@ export default function BlogPostPage() {
           </div>
 
           {/* içerik */}
-          <div className="space-y-4 sm:space-y-5 md:space-y-6 text-white/90 leading-relaxed text-sm sm:text-base md:text-lg blog-content">
+          <div className="space-y-4 sm:space-y-5 md:space-y-6 text-white/90 leading-relaxed text-sm sm:text-base md:text-lg blog-content" style={{ position: 'relative', zIndex: 1 }}>
             {post.content
               ?.split("\n")
               .filter((paragraph) => paragraph.trim().length)
@@ -187,11 +245,14 @@ export default function BlogPostPage() {
           </div>
 
           {/* alt aksiyonlar */}
-          <div className="mt-7 sm:mt-9 md:mt-10 pt-5 sm:pt-6 border-t border-white/15 flex flex-wrap gap-3 sm:gap-4 items-center justify-between">
-            <div className="flex flex-wrap gap-3 sm:gap-4">
+          <div className="mt-7 sm:mt-9 md:mt-10 pt-5 sm:pt-6 border-t border-white/15 flex flex-wrap gap-3 sm:gap-4 items-center justify-between" style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}>
+            <div className="flex flex-wrap gap-3 sm:gap-4" style={{ position: 'relative', zIndex: 100 }}>
               <button
                 type="button"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('Paylaş butonu tıklandı');
                   if (navigator.share) {
                     navigator
                       .share({
@@ -203,10 +264,16 @@ export default function BlogPostPage() {
                   } else {
                     navigator.clipboard
                       .writeText(window.location.href)
-                      .catch(() => undefined);
+                      .then(() => {
+                        alert('Link kopyalandı!');
+                      })
+                      .catch(() => {
+                        alert('Link kopyalanamadı. Lütfen manuel olarak kopyalayın.');
+                      });
                   }
                 }}
-                className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.18em] text-white bg-white/10 border border-white/30 hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-200"
+                className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.18em] text-white bg-white/10 border border-white/30 hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+                style={{ pointerEvents: 'auto', position: 'relative', zIndex: 100, cursor: 'pointer' }}
               >
                 <svg
                   className="w-4 h-4"
@@ -224,15 +291,23 @@ export default function BlogPostPage() {
                 <span>Paylaş</span>
               </button>
 
-              <LikeButton />
+              <LikeButton 
+                postId={postId} 
+                isLiked={likedPosts.has(postId)} 
+                likeCount={likeCounts[postId] || 0}
+                onLike={handleLike}
+              />
             </div>
 
             <button
               type="button"
-              onClick={() =>
-                window.scrollTo({ top: 0, behavior: "smooth" })
-              }
-              className="mt-1 sm:mt-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/70 bg-white/5 border border-white/20 hover:bg-white/15 hover:text-white hover:scale-105 active:scale-95 transition-all duration-200"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="mt-1 sm:mt-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/70 bg-white/5 border border-white/20 hover:bg-white/15 hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 100, cursor: 'pointer' }}
             >
               <span>Başa dön</span>
               <svg
@@ -304,34 +379,50 @@ export default function BlogPostPage() {
   );
 }
 
-// Basit beğen butonu (state'li, responsive)
-function LikeButton() {
-  const [liked, setLiked] = useState(false);
+// Beğen butonu (localStorage ile senkronize, beğeni sayısı ile)
+interface LikeButtonProps {
+  postId: string;
+  isLiked: boolean;
+  likeCount: number;
+  onLike: (postId: string) => void;
+}
 
+function LikeButton({ postId, isLiked, likeCount, onLike }: LikeButtonProps) {
   return (
     <button
       type="button"
-      onClick={() => setLiked((prev) => !prev)}
-      className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.18em] border transition-all duration-200 ${
-        liked
-          ? "text-black bg-white border-white hover:bg-white/90"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Beğen butonu tıklandı', postId);
+        onLike(postId);
+      }}
+      className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.18em] border transition-all duration-200 cursor-pointer ${
+        isLiked
+          ? "bg-red-500/30 border-red-500/50 text-red-200 hover:bg-red-500/40"
           : "text-white bg-white/10 border-white/30 hover:bg-white/20"
       } hover:scale-105 active:scale-95`}
+      style={{ pointerEvents: 'auto', position: 'relative', zIndex: 100, cursor: 'pointer' }}
     >
       <svg
         className="w-4 h-4"
-        fill={liked ? "currentColor" : "none"}
+        fill={isLiked ? "currentColor" : "none"}
         stroke="currentColor"
         viewBox="0 0 24 24"
+        strokeWidth={isLiked ? 0 : 2}
       >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth={liked ? 0 : 2}
           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
         />
       </svg>
-      <span>{liked ? "Beğenildi" : "Beğen"}</span>
+      <span>{isLiked ? "Beğenildi" : "Beğen"}</span>
+      {likeCount > 0 && (
+        <span className="text-[10px] sm:text-xs font-semibold">
+          ({likeCount})
+        </span>
+      )}
     </button>
   );
 }
