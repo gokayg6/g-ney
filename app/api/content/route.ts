@@ -2,21 +2,33 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getData, saveData, PortfolioData } from '@/lib/data';
 import { verifyToken } from '@/lib/auth';
 
-export async function GET() {
+// Force dynamic rendering - disable all caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export async function GET(request: NextRequest) {
   try {
+    // Add timestamp to response to prevent any caching
     const data = getData();
     return NextResponse.json(data, {
       headers: {
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
         'Pragma': 'no-cache',
         'Expires': '0',
+        'X-Timestamp': Date.now().toString(),
+        'X-Content-Version': Date.now().toString(),
       },
     });
   } catch (error) {
     console.error('Error fetching content:', error);
     return NextResponse.json(
       { error: 'Failed to fetch content' },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
     );
   }
 }

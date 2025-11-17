@@ -29,12 +29,17 @@ export default function AdminDashboard() {
 
   const loadData = useCallback(async () => {
     try {
-      // Force no cache with multiple strategies
-      const res = await fetch(`/api/content?t=${Date.now()}`, {
+      // Force no cache with multiple strategies for production
+      const timestamp = Date.now();
+      const random = Math.random().toString(36).substring(7);
+      const res = await fetch(`/api/content?t=${timestamp}&r=${random}`, {
         cache: 'no-store',
+        next: { revalidate: 0 },
         headers: {
-          'Cache-Control': 'no-cache',
+          'Cache-Control': 'no-cache, no-store, must-revalidate, proxy-revalidate',
           'Pragma': 'no-cache',
+          'Expires': '0',
+          'X-Request-ID': `${timestamp}-${random}`,
         },
       });
       const content = await res.json();
@@ -54,6 +59,17 @@ export default function AdminDashboard() {
     
     window.addEventListener('focus', handleFocus);
     return () => window.removeEventListener('focus', handleFocus);
+  }, [authenticated, loadData]);
+
+  // Periodic data refresh every 30 seconds when authenticated
+  useEffect(() => {
+    if (!authenticated) return;
+    
+    const interval = setInterval(() => {
+      loadData();
+    }, 30000); // Refresh every 30 seconds
+    
+    return () => clearInterval(interval);
   }, [authenticated, loadData]);
 
   const handleLogout = async () => {

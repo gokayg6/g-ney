@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getData, saveData, PortfolioData } from '@/lib/data';
 import { verifyToken } from '@/lib/auth';
 
+// Force dynamic rendering - disable all caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { section: string } }
@@ -9,14 +13,17 @@ export async function GET(
   try {
     const data = getData();
     const section = params.section;
+    const timestamp = Date.now();
     
     // Special handling for array sections
     if (section === 'social' || section === 'subdomainProjects') {
       return NextResponse.json((data as any)[section] || [], {
         headers: {
-          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
           'Pragma': 'no-cache',
           'Expires': '0',
+          'X-Timestamp': timestamp.toString(),
+          'X-Content-Version': timestamp.toString(),
         },
       });
     }
@@ -25,22 +32,34 @@ export async function GET(
     if (!(sectionKey in data)) {
       return NextResponse.json(
         { error: 'Section not found' },
-        { status: 404 }
+        { 
+          status: 404,
+          headers: {
+            'Cache-Control': 'no-store, no-cache, must-revalidate',
+          },
+        }
       );
     }
 
     return NextResponse.json(data[sectionKey], {
       headers: {
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
         'Pragma': 'no-cache',
         'Expires': '0',
+        'X-Timestamp': timestamp.toString(),
+        'X-Content-Version': timestamp.toString(),
       },
     });
   } catch (error) {
     console.error('Error fetching section:', error);
     return NextResponse.json(
       { error: 'Failed to fetch section' },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
     );
   }
 }
