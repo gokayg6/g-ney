@@ -154,7 +154,7 @@ const Projects: React.FC = () => {
     if (project.isSubdomain) {
       const subdomain = (project as SubdomainProject).subdomain;
       if (subdomain) {
-        window.location.href = `/subdomain/${subdomain}`;
+        window.location.href = `/${subdomain}`;
       }
     } else if ("link" in project && project.link) {
       window.open(project.link, "_blank", "noopener,noreferrer");
