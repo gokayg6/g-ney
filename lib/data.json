@@ -11,7 +11,7 @@
   "about": {
     "title": "BİZİM HAKKIMIZDA",
     "subtitle": "KEŞFET",
-    "description": "mustafabeymustafamustafamustafa\nZarif çözümler üretme tutkusuyla, yazılım geliştirmenin sürekli evrim geçiren manzarasında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve mümkün olanın sınırlarını sürekli zorlamayı içeriyor"
+    "description": "mustafabeymustafamustafamustafagokay\nZarif çözümler üretme tutkusuyla, yazılım geliştirmenin sürekli evrim geçiren manzarasında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve mümkün olanın sınırlarını sürekli zorlamayı içeriyor"
   },
   "experience": {
     "title": "DENEYİM",
@@ -236,10 +236,10 @@
   "subdomainProjects": [
     {
       "id": "biorhythm-app",
-      "name": "Biorhythm",
+      "name": "mustafahocam",
       "subdomain": "mustafa",
       "category": "mobile-app",
-      "title": "Biorhythm - Daily Wellness Tracker",
+      "title": "mustafahocam",
       "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
       "tagline": "Understand yourself better every day",
       "logo": "/loegs.png",

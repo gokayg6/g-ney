@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { PortfolioData } from '@/lib/data';
@@ -27,16 +27,34 @@ export default function AdminDashboard() {
       .finally(() => setLoading(false));
   }, [router]);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
-      // Add timestamp to bypass cache
-      const res = await fetch(`/api/content?t=${Date.now()}`);
+      // Force no cache with multiple strategies
+      const res = await fetch(`/api/content?t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
+        },
+      });
       const content = await res.json();
       setData(content);
     } catch (error) {
       console.error('Error loading data:', error);
     }
-  };
+  }, []);
+
+  // Reload data when window gains focus (user comes back to tab)
+  useEffect(() => {
+    const handleFocus = () => {
+      if (authenticated) {
+        loadData();
+      }
+    };
+    
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [authenticated, loadData]);
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });

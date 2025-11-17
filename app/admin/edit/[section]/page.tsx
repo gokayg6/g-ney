@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { PortfolioData, HeroData, AboutData, ExperienceData, ProjectsData, ContactData, SocialIcon, ExperienceItem, ProjectItem, BlogPost } from '@/lib/data';
 import { SubdomainProject } from '@/lib/subdomain-data';
@@ -37,10 +37,16 @@ export default function EditSection() {
     }
   }, [data, section]);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
-      // Add timestamp to bypass cache
-      const res = await fetch(`/api/content?t=${Date.now()}`);
+      // Force no cache with multiple strategies
+      const res = await fetch(`/api/content?t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
+        },
+      });
       const content: PortfolioData = await res.json();
       const sectionData = (content as any)[section];
       
@@ -67,7 +73,19 @@ export default function EditSection() {
         setData({});
       }
     }
-  };
+  }, [section]);
+
+  // Reload data when window gains focus (user comes back to tab)
+  useEffect(() => {
+    const handleFocus = () => {
+      if (authenticated) {
+        loadData();
+      }
+    };
+    
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [authenticated, section, loadData]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -87,8 +105,11 @@ export default function EditSection() {
           setAllSubdomainProjects(data);
         }
         alert('Saved successfully!');
-        // Reload data to ensure we have the latest version
+        // Force router refresh and reload data
+        router.refresh();
         await loadData();
+        // Small delay to ensure data is saved
+        await new Promise(resolve => setTimeout(resolve, 100));
         router.push('/admin/dashboard');
       } else {
         alert(`Failed to save: ${result.error || 'Unknown error'}`);

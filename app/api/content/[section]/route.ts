@@ -12,7 +12,13 @@ export async function GET(
     
     // Special handling for array sections
     if (section === 'social' || section === 'subdomainProjects') {
-      return NextResponse.json((data as any)[section] || []);
+      return NextResponse.json((data as any)[section] || [], {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      });
     }
     
     const sectionKey = section as keyof PortfolioData;
@@ -23,7 +29,13 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(data[sectionKey]);
+    return NextResponse.json(data[sectionKey], {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      },
+    });
   } catch (error) {
     console.error('Error fetching section:', error);
     return NextResponse.json(
