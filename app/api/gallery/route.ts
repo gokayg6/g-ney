@@ -3,6 +3,9 @@ import { readdir } from 'fs/promises';
 import { join } from 'path';
 import { verifyToken } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: NextRequest) {
   try {
     // Verify authentication
