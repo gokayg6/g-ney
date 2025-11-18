@@ -15,6 +15,9 @@ export default function EditSection() {
   const [data, setData] = useState<any>(null);
   const [saving, setSaving] = useState(false);
   const [allSubdomainProjects, setAllSubdomainProjects] = useState<SubdomainProject[]>([]);
+  const [showGallery, setShowGallery] = useState(false);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [galleryCallback, setGalleryCallback] = useState<((url: string) => void) | null>(null);
 
   useEffect(() => {
     fetch('/api/auth/verify')
@@ -238,6 +241,36 @@ export default function EditSection() {
     }
   };
 
+  const loadGalleryImages = async () => {
+    try {
+      const res = await fetch('/api/gallery', {
+        credentials: 'include',
+        cache: 'no-store',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setGalleryImages(data.images || []);
+      }
+    } catch (error) {
+      console.error('Error loading gallery:', error);
+      setGalleryImages([]);
+    }
+  };
+
+  const openGallery = (callback: (url: string) => void) => {
+    setGalleryCallback(() => callback);
+    setShowGallery(true);
+    loadGalleryImages();
+  };
+
+  const selectImageFromGallery = (url: string) => {
+    if (galleryCallback) {
+      galleryCallback(url);
+      setShowGallery(false);
+      setGalleryCallback(null);
+    }
+  };
+
   const handleFileUpload = async (file: File, folder: string = 'uploads'): Promise<string> => {
     try {
       const formData = new FormData();
@@ -251,10 +284,15 @@ export default function EditSection() {
       });
 
       if (!response.ok) {
-        throw new Error('Upload failed');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Upload failed');
       }
 
       const result = await response.json();
+      // Refresh gallery after upload
+      if (showGallery) {
+        loadGalleryImages();
+      }
       return result.url;
     } catch (error) {
       console.error('File upload error:', error);
@@ -904,6 +942,15 @@ export default function EditSection() {
                             style={inputStyle}
                             placeholder="/image.png or upload from gallery"
                           />
+                          <button
+                            type="button"
+                            onClick={() => openGallery((url) => updateItem('items', index, 'image', url))}
+                            className="px-3 py-2 bg-blue-600/80 hover:bg-blue-600 text-white rounded-lg text-sm cursor-pointer transition-all duration-200 flex items-center gap-1"
+                            style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
+                          >
+                            <span>🖼️</span>
+                            <span>Galeri</span>
+                          </button>
                           <input
                             type="file"
                             accept="image/*"
@@ -917,6 +964,8 @@ export default function EditSection() {
                                   // Error already handled in handleFileUpload
                                 }
                               }
+                              // Reset input
+                              e.target.value = '';
                             }}
                             className="hidden"
                             id={`project-image-upload-${index}`}
@@ -924,10 +973,10 @@ export default function EditSection() {
                           <label
                             htmlFor={`project-image-upload-${index}`}
                             className="px-3 py-2 bg-purple-600/80 hover:bg-purple-600 text-white rounded-lg text-sm cursor-pointer transition-all duration-200 flex items-center gap-1"
-                            style={inputStyle}
+                            style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
                           >
                             <span>📷</span>
-                            <span>Upload</span>
+                            <span>Yükle</span>
                           </label>
                         </div>
                         {item.image && (
@@ -1199,6 +1248,14 @@ export default function EditSection() {
                             style={inputStyle}
                             placeholder="/logo.png"
                           />
+                          <button
+                            type="button"
+                            onClick={() => openGallery((url) => updateItem('subdomainProjects', index, 'logo', url))}
+                            className="px-3 py-2 bg-blue-600/80 hover:bg-blue-600 text-white rounded-lg text-sm cursor-pointer transition-all duration-200"
+                            style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
+                          >
+                            🖼️
+                          </button>
                           <input
                             type="file"
                             accept="image/*"
@@ -1216,7 +1273,7 @@ export default function EditSection() {
                           <label
                             htmlFor={`logo-upload-${index}`}
                             className="px-3 py-2 bg-purple-600/80 hover:bg-purple-600 text-white rounded-lg text-sm cursor-pointer transition-all duration-200"
-                            style={inputStyle}
+                            style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
                           >
                             📷
                           </label>
@@ -1237,6 +1294,14 @@ export default function EditSection() {
                             style={inputStyle}
                             placeholder="/cover.jpg"
                           />
+                          <button
+                            type="button"
+                            onClick={() => openGallery((url) => updateItem('subdomainProjects', index, 'coverImage', url))}
+                            className="px-3 py-2 bg-blue-600/80 hover:bg-blue-600 text-white rounded-lg text-sm cursor-pointer transition-all duration-200"
+                            style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
+                          >
+                            🖼️
+                          </button>
                           <input
                             type="file"
                             accept="image/*"
@@ -1254,7 +1319,7 @@ export default function EditSection() {
                           <label
                             htmlFor={`cover-upload-${index}`}
                             className="px-3 py-2 bg-purple-600/80 hover:bg-purple-600 text-white rounded-lg text-sm cursor-pointer transition-all duration-200"
-                            style={inputStyle}
+                            style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
                           >
                             📷
                           </label>
@@ -1654,14 +1719,49 @@ export default function EditSection() {
                       </div>
                       <div>
                         <label className="block text-white/90 mb-2 text-sm font-medium">Görsel (path)</label>
-                        <input
-                          type="text"
-                          value={post.image || ''}
-                          onChange={(e) => updateItem('posts', index, 'image', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
-                          style={inputStyle}
-                          placeholder="/image.png"
-                        />
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            value={post.image || ''}
+                            onChange={(e) => updateItem('posts', index, 'image', e.target.value)}
+                            className="flex-1 px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                            style={inputStyle}
+                            placeholder="/image.png"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => openGallery((url) => updateItem('posts', index, 'image', url))}
+                            className="px-3 py-2 bg-blue-600/80 hover:bg-blue-600 text-white rounded-lg text-sm cursor-pointer transition-all duration-200"
+                            style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
+                          >
+                            🖼️
+                          </button>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={async (e) => {
+                              const file = e.target.files?.[0];
+                              if (file) {
+                                try {
+                                  const url = await handleFileUpload(file, 'uploads');
+                                  updateItem('posts', index, 'image', url);
+                                } catch (error) {
+                                  // Error already handled
+                                }
+                              }
+                              e.target.value = '';
+                            }}
+                            className="hidden"
+                            id={`blog-image-upload-${index}`}
+                          />
+                          <label
+                            htmlFor={`blog-image-upload-${index}`}
+                            className="px-3 py-2 bg-purple-600/80 hover:bg-purple-600 text-white rounded-lg text-sm cursor-pointer transition-all duration-200"
+                            style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
+                          >
+                            📷
+                          </label>
+                        </div>
                       </div>
                       <div>
                         <label className="block text-white/90 mb-2 text-sm font-medium">Tarih</label>
@@ -1745,6 +1845,64 @@ export default function EditSection() {
           )}
         </div>
       </div>
+
+      {/* Gallery Modal */}
+      {showGallery && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
+          onClick={() => {
+            setShowGallery(false);
+            setGalleryCallback(null);
+          }}
+          style={{ position: 'fixed', zIndex: 9999 }}
+        >
+          <div 
+            className="bg-[#0a0a0a] border border-white/20 rounded-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+            style={{ position: 'relative', zIndex: 10000 }}
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-white text-xl font-semibold">Galeri</h2>
+              <button
+                onClick={() => {
+                  setShowGallery(false);
+                  setGalleryCallback(null);
+                }}
+                className="text-white/60 hover:text-white text-2xl"
+                style={{ position: 'relative', zIndex: 10001, pointerEvents: 'auto' }}
+              >
+                ×
+              </button>
+            </div>
+            
+            {galleryImages.length === 0 ? (
+              <div className="text-white/60 text-center py-8">
+                Henüz görsel yüklenmemiş. Yeni görsel yüklemek için "Yükle" butonunu kullanın.
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {galleryImages.map((imageUrl, idx) => (
+                  <div
+                    key={idx}
+                    className="relative group cursor-pointer"
+                    onClick={() => selectImageFromGallery(imageUrl)}
+                    style={{ position: 'relative', zIndex: 10001, pointerEvents: 'auto' }}
+                  >
+                    <img
+                      src={imageUrl}
+                      alt={`Gallery ${idx + 1}`}
+                      className="w-full h-32 object-cover rounded-lg border border-white/20 group-hover:border-white/40 transition-all"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 rounded-lg transition-all flex items-center justify-center">
+                      <span className="text-white opacity-0 group-hover:opacity-100 text-sm">Seç</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
