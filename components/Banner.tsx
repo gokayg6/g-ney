@@ -64,11 +64,12 @@ const Banner: React.FC<{}> = () => {
         <div className="justify-center flex animate-zoom-in">
           <Image
             priority
-            src="/loegs.png"
+            src="/loegs.png?v=2"
             height={150}
             width={150}
             alt="Loegs.com"
             className="w-[120px] h-[120px] md:w-[150px] md:h-[150px] object-contain"
+            unoptimized
           />
         </div>
 

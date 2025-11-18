@@ -38,12 +38,13 @@ const Navbar: React.FC<{}> = () => {
           className="h-auto w-auto flex flex-row items-center transition-transform duration-200 hover:scale-105"
         >
           <Image
-            src="/loegs.png"
+            src="/loegs.png?v=2"
             alt="Loegs.com"
             width={50}
             height={50}
             sizes="50px"
             className="h-[50px] w-auto"
+            unoptimized
           />
         </Link>
 
