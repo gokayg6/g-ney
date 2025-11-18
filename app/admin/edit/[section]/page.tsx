@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import Image from 'next/image';
 import { PortfolioData, HeroData, AboutData, ExperienceData, ProjectsData, ContactData, SocialIcon, ExperienceItem, ProjectItem, BlogPost } from '@/lib/data';
 import { SubdomainProject } from '@/lib/subdomain-data';
 import StarsCanvas from '@/components/main/StarsBackground';
@@ -18,27 +19,6 @@ export default function EditSection() {
   const [showGallery, setShowGallery] = useState(false);
   const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [galleryCallback, setGalleryCallback] = useState<((url: string) => void) | null>(null);
-
-  useEffect(() => {
-    fetch('/api/auth/verify')
-      .then(res => res.json())
-      .then(authData => {
-        if (!authData.authenticated) {
-          router.push('/admin');
-        } else {
-          setAuthenticated(true);
-          loadData();
-        }
-      })
-      .finally(() => setLoading(false));
-  }, [router, section]);
-
-  // Update allSubdomainProjects when data changes (for template cloning)
-  useEffect(() => {
-    if (section === 'subdomainProjects' && Array.isArray(data)) {
-      setAllSubdomainProjects(data);
-    }
-  }, [data, section]);
 
   const loadData = useCallback(async () => {
     try {
@@ -82,6 +62,27 @@ export default function EditSection() {
       }
     }
   }, [section]);
+
+  useEffect(() => {
+    fetch('/api/auth/verify')
+      .then(res => res.json())
+      .then(authData => {
+        if (!authData.authenticated) {
+          router.push('/admin');
+        } else {
+          setAuthenticated(true);
+          loadData();
+        }
+      })
+      .finally(() => setLoading(false));
+  }, [router, section, loadData]);
+
+  // Update allSubdomainProjects when data changes (for template cloning)
+  useEffect(() => {
+    if (section === 'subdomainProjects' && Array.isArray(data)) {
+      setAllSubdomainProjects(data);
+    }
+  }, [data, section]);
 
   // Reload data when window gains focus (user comes back to tab)
   useEffect(() => {
@@ -981,9 +982,11 @@ export default function EditSection() {
                         </div>
                         {item.image && (
                           <div className="mt-3">
-                            <img 
+                            <Image 
                               src={item.image} 
                               alt="Project preview" 
+                              width={300}
+                              height={192}
                               className="w-full max-w-xs h-48 object-cover rounded-lg border border-white/20" 
                             />
                           </div>
@@ -1279,7 +1282,7 @@ export default function EditSection() {
                           </label>
                         </div>
                         {project.logo && (
-                          <img src={project.logo} alt="Logo preview" className="mt-2 w-16 h-16 object-cover rounded-lg border border-white/20" />
+                          <Image src={project.logo} alt="Logo preview" width={64} height={64} className="mt-2 w-16 h-16 object-cover rounded-lg border border-white/20" />
                         )}
                         <p className="text-white/50 text-xs mt-1">Önerilen boyut: 512x512px (PNG, şeffaf arka plan)</p>
                       </div>
@@ -1325,7 +1328,7 @@ export default function EditSection() {
                           </label>
                         </div>
                         {project.coverImage && (
-                          <img src={project.coverImage} alt="Cover preview" className="mt-2 w-full h-32 object-cover rounded-lg border border-white/20" />
+                          <Image src={project.coverImage} alt="Cover preview" width={800} height={128} className="mt-2 w-full h-32 object-cover rounded-lg border border-white/20" />
                         )}
                         <p className="text-white/50 text-xs mt-1">Önerilen boyut: 1920x1080px (JPG/PNG, 16:9 oran)</p>
                       </div>
@@ -1877,7 +1880,7 @@ export default function EditSection() {
             
             {galleryImages.length === 0 ? (
               <div className="text-white/60 text-center py-8">
-                Henüz görsel yüklenmemiş. Yeni görsel yüklemek için "Yükle" butonunu kullanın.
+                Henüz görsel yüklenmemiş. Yeni görsel yüklemek için &quot;Yükle&quot; butonunu kullanın.
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -1888,9 +1891,11 @@ export default function EditSection() {
                     onClick={() => selectImageFromGallery(imageUrl)}
                     style={{ position: 'relative', zIndex: 10001, pointerEvents: 'auto' }}
                   >
-                    <img
+                    <Image
                       src={imageUrl}
                       alt={`Gallery ${idx + 1}`}
+                      width={200}
+                      height={128}
                       className="w-full h-32 object-cover rounded-lg border border-white/20 group-hover:border-white/40 transition-all"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 rounded-lg transition-all flex items-center justify-center">

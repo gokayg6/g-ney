@@ -12,21 +12,6 @@ export default function AdminDashboard() {
   const [data, setData] = useState<PortfolioData | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    // Verify authentication
-    fetch('/api/auth/verify')
-      .then(res => res.json())
-      .then(authData => {
-        if (!authData.authenticated) {
-          router.push('/admin');
-        } else {
-          setAuthenticated(true);
-          loadData();
-        }
-      })
-      .finally(() => setLoading(false));
-  }, [router]);
-
   const loadData = useCallback(async () => {
     try {
       // Force no cache with multiple strategies for production
@@ -48,6 +33,21 @@ export default function AdminDashboard() {
       console.error('Error loading data:', error);
     }
   }, []);
+
+  useEffect(() => {
+    // Verify authentication
+    fetch('/api/auth/verify')
+      .then(res => res.json())
+      .then(authData => {
+        if (!authData.authenticated) {
+          router.push('/admin');
+        } else {
+          setAuthenticated(true);
+          loadData();
+        }
+      })
+      .finally(() => setLoading(false));
+  }, [router, loadData]);
 
   // Reload data when window gains focus (user comes back to tab)
   useEffect(() => {
