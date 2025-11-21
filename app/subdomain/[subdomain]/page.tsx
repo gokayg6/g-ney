@@ -50,29 +50,37 @@ export default function SubdomainPage({ params }: SubdomainPageProps) {
     );
   }
 
-  // Subdomain → Template eşleştirmesi
-  // E-ticaret kategorisi için her zaman LuxeStyleTemplate kullan
-  if (project.category === 'ecommerce') {
-    return <LuxeStyleTemplate project={project} />;
-  }
-
-  switch (sub) {
-    case "app":
+  // Template seçimi category'ye göre yapılır
+  // Her kategori için doğru template kullanılır
+  switch (project.category) {
+    case 'mobile-app':
       return <BiorhythmTemplate project={project} />;
-
-    case "testgame":
+    
+    case 'game':
       return <ShadowQuestTemplate project={project} />;
-
-    case "shop":
-    case "luxestyle":
+    
+    case 'ecommerce':
       return <LuxeStyleTemplate project={project} />;
-
-    case "falla":
-      return <FallaTemplate project={project} />;
-
-    default:
-      // Use classic template for any subdomain without a specific template
+    
+    case 'saas':
       return <ClassicTemplate project={project} />;
+    
+    default:
+      // Fallback: Eğer category yoksa veya tanımlı değilse, subdomain'e göre seç
+      // Bu eski projeler için geriye dönük uyumluluk sağlar
+      switch (sub) {
+        case "app":
+          return <BiorhythmTemplate project={project} />;
+        case "testgame":
+          return <ShadowQuestTemplate project={project} />;
+        case "shop":
+        case "luxestyle":
+          return <LuxeStyleTemplate project={project} />;
+        case "falla":
+          return <FallaTemplate project={project} />;
+        default:
+          return <ClassicTemplate project={project} />;
+      }
   }
 }
 

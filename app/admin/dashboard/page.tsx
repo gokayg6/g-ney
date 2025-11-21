@@ -17,16 +17,24 @@ export default function AdminDashboard() {
       // Force no cache with multiple strategies for production
       const timestamp = Date.now();
       const random = Math.random().toString(36).substring(7);
-      const res = await fetch(`/api/content?t=${timestamp}&r=${random}`, {
+      const random2 = Math.random().toString(36).substring(7);
+      const url = `/api/content?t=${timestamp}&r=${random}&r2=${random2}&_=${Date.now()}`;
+      const res = await fetch(url, {
         cache: 'no-store',
         next: { revalidate: 0 },
         headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate, proxy-revalidate',
+          'Cache-Control': 'no-cache, no-store, must-revalidate, proxy-revalidate, max-age=0',
           'Pragma': 'no-cache',
           'Expires': '0',
-          'X-Request-ID': `${timestamp}-${random}`,
+          'X-Request-ID': `${timestamp}-${random}-${random2}`,
+          'X-Request-Time': timestamp.toString(),
         },
       });
+      
+      if (!res.ok) {
+        throw new Error(`Failed to fetch: ${res.status}`);
+      }
+      
       const content = await res.json();
       setData(content);
     } catch (error) {

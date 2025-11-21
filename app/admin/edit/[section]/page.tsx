@@ -25,18 +25,26 @@ export default function EditSection() {
       // Force no cache with multiple strategies for production
       const timestamp = Date.now();
       const random = Math.random().toString(36).substring(7);
-      const res = await fetch(`/api/content?t=${timestamp}&r=${random}`, {
+      const random2 = Math.random().toString(36).substring(7);
+      // Use section-specific endpoint for better cache busting
+      const url = `/api/content/${section}?t=${timestamp}&r=${random}&r2=${random2}&_=${Date.now()}`;
+      const res = await fetch(url, {
         cache: 'no-store',
         next: { revalidate: 0 },
         headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate, proxy-revalidate',
+          'Cache-Control': 'no-cache, no-store, must-revalidate, proxy-revalidate, max-age=0',
           'Pragma': 'no-cache',
           'Expires': '0',
-          'X-Request-ID': `${timestamp}-${random}`,
+          'X-Request-ID': `${timestamp}-${random}-${random2}`,
+          'X-Request-Time': timestamp.toString(),
         },
       });
-      const content: PortfolioData = await res.json();
-      const sectionData = (content as any)[section];
+      
+      if (!res.ok) {
+        throw new Error(`Failed to fetch: ${res.status}`);
+      }
+      
+      const sectionData = await res.json();
       
       // Ensure subdomainProjects is always an array
       if (section === 'subdomainProjects') {
@@ -125,10 +133,13 @@ export default function EditSection() {
           setAllSubdomainProjects(data);
         }
         alert('Saved successfully!');
-        // Force router refresh and reload data
+        // Force router refresh and reload data with aggressive cache busting
         router.refresh();
+        // Wait a bit for the server to process the save
+        await new Promise(resolve => setTimeout(resolve, 200));
+        // Reload data with fresh cache-busting
         await loadData();
-        // Small delay to ensure data is saved
+        // Wait again to ensure data is loaded
         await new Promise(resolve => setTimeout(resolve, 100));
         router.push('/admin/dashboard');
       } else {
@@ -441,39 +452,40 @@ export default function EditSection() {
         }
       },
       'saas': {
-        id: 'template-app',
-        name: 'Biorhythm',
-        subdomain: 'app',
-        category: 'mobile-app',
-        title: 'Biorhythm - Daily Wellness Tracker',
-        description: 'Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.',
-        tagline: 'Understand yourself better every day',
+        id: 'template-saas',
+        name: 'SaaS Platform',
+        subdomain: 'saas',
+        category: 'saas',
+        title: 'SaaS Platform - Business Solutions',
+        description: 'Powerful SaaS platform designed to streamline your business operations. Manage projects, collaborate with teams, and scale your business with enterprise-grade features.',
+        tagline: 'Scale your business with powerful tools',
         logo: '/loegs.png',
-        coverImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80',
+        coverImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
         features: [
-          'Daily biorhythm tracking',
-          'Personalized wellness insights',
-          'AI-powered recommendations',
-          'Beautiful visualizations',
-          'Daily affirmations',
-          'Mood tracking & analysis'
+          'Cloud-based infrastructure',
+          'Real-time collaboration',
+          'Advanced analytics & reporting',
+          'API integrations',
+          'Enterprise security',
+          'Scalable architecture'
         ],
         screenshots: [
-          'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80',
-          'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80',
-          'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80',
-          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80'
+          'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80',
+          'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80',
+          'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=80',
+          'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80'
         ],
-        appStoreLink: 'https://apps.apple.com',
-        playStoreLink: 'https://play.google.com',
-        techStack: ['React Native', 'TypeScript', 'ML Kit', 'HealthKit'],
+        appStoreLink: '',
+        playStoreLink: '',
+        techStack: ['React', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'],
         published: true,
         metadata: {
-          metaTitle: 'Biorhythm - Daily Wellness Tracker',
-          metaDescription: 'Track your biorhythms and get personalized wellness insights',
-          keywords: ['wellness', 'biorhythm', 'health', 'meditation']
-        }
-      },
+          metaTitle: 'SaaS Platform - Business Solutions',
+          metaDescription: 'Streamline your business operations with our powerful SaaS platform',
+          keywords: ['saas', 'business', 'software', 'enterprise']
+        },
+        siteLink: ''
+      } as any,
       'website': {
         id: 'template-falla',
         name: 'Falla',
