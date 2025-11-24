@@ -47,21 +47,6 @@ export default function AdminBlogEditor() {
     tags: "",
   });
 
-  // Authentication check
-  useEffect(() => {
-    fetch("/api/auth/verify")
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.authenticated) {
-          router.push("/admin");
-        } else {
-          setAuthenticated(true);
-          loadBlogs();
-        }
-      })
-      .finally(() => setLoading(false));
-  }, [router, loadBlogs]);
-
   // Load single blog
   const loadBlog = useCallback(async (id: string) => {
     try {
@@ -111,6 +96,21 @@ export default function AdminBlogEditor() {
       console.error("Error loading blogs:", error);
     }
   }, [selectedBlogId, loadBlog]);
+
+  // Authentication check
+  useEffect(() => {
+    fetch("/api/auth/verify")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.authenticated) {
+          router.push("/admin");
+        } else {
+          setAuthenticated(true);
+          loadBlogs();
+        }
+      })
+      .finally(() => setLoading(false));
+  }, [router, loadBlogs]);
 
   // Handle blog selection
   const handleBlogSelect = (id: string) => {
