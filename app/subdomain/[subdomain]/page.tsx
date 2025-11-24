@@ -19,6 +19,9 @@ interface SubdomainPageProps {
   };
 }
 
+// Dynamic route - static generation yapılmaz
+export const dynamic = 'force-dynamic';
+
 export default function SubdomainPage({ params }: SubdomainPageProps) {
   const rawSubdomain = params.subdomain;
   const sub = rawSubdomain?.toLowerCase();
@@ -85,16 +88,4 @@ export default function SubdomainPage({ params }: SubdomainPageProps) {
           return <ClassicTemplate project={project} />;
       }
   }
-}
-
-/**
- * Static params:
- * build sırasında /subdomain/app, /subdomain/shop vb. rotaları üretmek için.
- */
-export async function generateStaticParams() {
-  const projects = getAllSubdomainProjects();
-
-  return projects.map((project) => ({
-    subdomain: project.subdomain,
-  }));
 }

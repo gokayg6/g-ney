@@ -12,6 +12,14 @@ const nextConfig = {
       },
     ],
   },
+  // Exclude liquid-glass-studio-main from build
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /liquid-glass-studio-main/,
+      use: 'ignore-loader',
+    });
+    return config;
+  },
 };
 
 module.exports = nextConfig;
