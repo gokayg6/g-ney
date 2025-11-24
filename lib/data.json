@@ -11,7 +11,7 @@
   "about": {
     "title": "BİZİM HAKKIMIZDA",
     "subtitle": "KEŞFET",
-    "description": "mustafabeymustafamustafamustafagokay\nZarif çözümler üretme tutkusuyla, yazılım geliştirmenin sürekli evrim geçiren manzarasında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve mümkün olanın sınırlarını sürekli zorlamayı içeriyor"
+    "description": "mustafabeymustafamustafamustafagokaywwwwwwwwww\nZarif çözümler üretme tutkusuyla, yazılım geliştirmenin sürekli evrim geçiren manzarasında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve mümkün olanın sınırlarını sürekli zorlamayı içeriyor"
   },
   "experience": {
     "title": "DENEYİM",
@@ -113,7 +113,7 @@
     "posts": [
       {
         "id": "1",
-        "title": "Günlük Notlar: Camomile Tea & Lavanta Atölyesi",
+        "title": "mustafa hocam",
         "excerpt": "Bugün üretim masasını yeni kokumuz Camomile Tea & French Lavender için hazırladım. Lavanta demetleri stüdyoyu sakinleştiriyor.",
         "content": "06:30 — Atölyeye girdiğimde lavanta demetleri hâlâ gece lambalarının altında parlıyordu. Camomile yapraklarını öğütürken çıkan ses, sabah sessizliğine eşlik etti.\n\n12:10 — İlk deneme partisini hazırladım. Renk tam istediğim gibi pastel krem oldu. Ekibin geri bildirimi \"şifa gibi\" oldu.\n\n19:45 — Etiket taslağını güncelledim. Camomile illüstrasyonunu bir tık yumuşattım. Yarın fotoğraf çekimi var, enerjimiz yüksek.",
         "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=2400&q=80",
@@ -545,6 +545,186 @@
         ]
       },
       "siteLink": ""
+    },
+    {
+      "id": "1764001040066",
+      "name": "",
+      "subdomain": "",
+      "category": "game",
+      "title": "Shadow Quest - Epic Adventure RPG",
+      "description": "Embark on an epic journey through mystical realms. Battle fierce enemies, discover ancient secrets, and become the ultimate hero.",
+      "tagline": "Your destiny awaits in the shadows",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80",
+      "features": [
+        "Stunning 3D graphics",
+        "Immersive storyline",
+        "Real-time multiplayer battles",
+        "100+ unique heroes",
+        "Epic boss raids",
+        "Guild system & events"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80",
+        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&q=80",
+        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80",
+        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "Unity",
+        "C#",
+        "Photon",
+        "Firebase",
+        "PlayFab"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "Shadow Quest - Epic Mobile RPG",
+        "metaDescription": "Battle through mystical realms in this epic RPG adventure",
+        "keywords": [
+          "rpg",
+          "game",
+          "mobile game",
+          "multiplayer"
+        ]
+      }
+    },
+    {
+      "id": "1764001041690",
+      "name": "",
+      "subdomain": "",
+      "category": "ecommerce",
+      "title": "LuxeStyle - Premium Fashion Marketplace",
+      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
+      "tagline": "Elevate your style, discover luxury",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
+      "features": [
+        "Curated premium collections",
+        "AR virtual try-on",
+        "One-tap checkout",
+        "Personalized recommendations",
+        "Exclusive member deals",
+        "Fast & free shipping"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
+        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
+        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
+      ],
+      "appStoreLink": "",
+      "playStoreLink": "",
+      "techStack": [
+        "React Native",
+        "Shopify",
+        "Stripe",
+        "AR Kit"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "LuxeStyle - Premium Fashion App",
+        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
+        "keywords": [
+          "fashion",
+          "shopping",
+          "ecommerce",
+          "luxury"
+        ]
+      },
+      "siteLink": ""
+    },
+    {
+      "id": "1764001043250",
+      "name": "",
+      "subdomain": "",
+      "category": "saas",
+      "title": "SaaS Platform - Business Solutions",
+      "description": "Powerful SaaS platform designed to streamline your business operations. Manage projects, collaborate with teams, and scale your business with enterprise-grade features.",
+      "tagline": "Scale your business with powerful tools",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+      "features": [
+        "Cloud-based infrastructure",
+        "Real-time collaboration",
+        "Advanced analytics & reporting",
+        "API integrations",
+        "Enterprise security",
+        "Scalable architecture"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80",
+        "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=80",
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80"
+      ],
+      "appStoreLink": "",
+      "playStoreLink": "",
+      "techStack": [
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "AWS",
+        "Docker"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "SaaS Platform - Business Solutions",
+        "metaDescription": "Streamline your business operations with our powerful SaaS platform",
+        "keywords": [
+          "saas",
+          "business",
+          "software",
+          "enterprise"
+        ]
+      },
+      "siteLink": ""
+    },
+    {
+      "id": "1764001044698",
+      "name": "",
+      "subdomain": "akdo",
+      "category": "website",
+      "title": "Falla - Social Discovery Platform",
+      "description": "Connect with like-minded people, discover new communities, and share your passions. Falla brings people together through shared interests.",
+      "tagline": "Discover connections, share passions",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80",
+      "features": [
+        "Interest-based matching",
+        "Real-time messaging",
+        "Community groups",
+        "Event discovery",
+        "Privacy-first design",
+        "Global reach"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&q=80",
+        "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80",
+        "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80",
+        "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&q=80"
+      ],
+      "appStoreLink": "https://apps.apple.com",
+      "playStoreLink": "https://play.google.com",
+      "techStack": [
+        "React Native",
+        "Firebase",
+        "GraphQL",
+        "WebRTC"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "Falla - Social Discovery Platform",
+        "metaDescription": "Connect with people who share your interests and passions",
+        "keywords": [
+          "social",
+          "discovery",
+          "community",
+          "networking"
+        ]
+      }
     }
   ]
 }

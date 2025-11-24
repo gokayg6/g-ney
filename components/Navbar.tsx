@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar: React.FC<{}> = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ const Navbar: React.FC<{}> = () => {
   };
 
   return (
-    <div className="w-full h-[65px] bg-[#111]/80 fixed backdrop-blur-md z-50 px-4 md:px-10 animate-fade-in">
+    <div className="w-full h-[65px] bg-white/80 dark:bg-[#111]/80 fixed backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 z-50 px-4 md:px-10 animate-fade-in transition-colors duration-500 ease-out">
       <div className="w-full h-full flex flex-row items-center justify-between m-auto px-[10px]">
         <Link
           title="ibrahim logo"
@@ -49,55 +50,64 @@ const Navbar: React.FC<{}> = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex flex-row gap-5">
+        <nav className="hidden md:flex flex-row gap-5 items-center">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`z-[1] bg-transparent cursor-pointer hover:bg-[#2E2E2E] rounded-xl text-white py-2 px-5 transition-all duration-200 active:scale-95 ${
-                isActive(item.href) ? "bg-[#2E2E2E]" : ""
+              className={`z-[1] bg-transparent cursor-pointer hover:bg-slate-100 dark:hover:bg-[#2E2E2E] rounded-xl text-slate-700 dark:text-white py-2 px-5 transition-all duration-200 active:scale-95 ${
+                isActive(item.href) 
+                  ? "bg-slate-300 dark:bg-[#2E2E2E] text-slate-900 dark:text-white font-semibold shadow-sm" 
+                  : ""
               }`}
             >
               {item.label}
             </Link>
           ))}
+          {/* Theme Toggle */}
+          <ThemeToggle />
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden z-[1] bg-transparent cursor-pointer hover:bg-[#2E2E2E] rounded-xl text-white py-2 px-4"
-          aria-label="Toggle menu"
+        {/* Mobile Menu Button & Theme Toggle */}
+        <div className="md:hidden flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="z-[1] bg-transparent cursor-pointer hover:bg-slate-100 dark:hover:bg-[#2E2E2E] rounded-xl text-slate-700 dark:text-white py-2 px-4 transition-colors duration-200"
+            aria-label="Toggle menu"
           >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            {mobileMenuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-          </div>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {mobileMenuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-[65px] left-0 w-full bg-[#111] border-t border-[#2E2E2E] backdrop-blur-sm">
+        <div className="md:hidden absolute top-[65px] left-0 w-full bg-white/95 dark:bg-[#111]/95 backdrop-blur-xl border-t border-slate-200 dark:border-[#2E2E2E] transition-colors duration-500 ease-out">
           <nav className="flex flex-col p-4">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`z-[1] bg-transparent cursor-pointer hover:bg-[#2E2E2E] rounded-xl text-white py-3 px-5 mb-2 transition ${
-                  isActive(item.href) ? "bg-[#2E2E2E]" : ""
+                className={`z-[1] bg-transparent cursor-pointer hover:bg-slate-100 dark:hover:bg-[#2E2E2E] rounded-xl text-slate-700 dark:text-white py-3 px-5 mb-2 transition-colors duration-200 ${
+                  isActive(item.href) 
+                    ? "bg-slate-300 dark:bg-[#2E2E2E] text-slate-900 dark:text-white font-semibold shadow-sm" 
+                    : ""
                 }`}
               >
                 {item.label}

@@ -168,18 +168,6 @@ const Projects: React.FC = () => {
       className="px-4 sm:px-6 lg:px-8 py-20 min-h-screen relative"
       style={{ position: "relative", zIndex: 1 }}
     >
-      {/* Header */}
-      <div
-        className="text-center mb-16 animate-zoom-in"
-        style={{ position: "relative", zIndex: 10 }}
-      >
-        <h2 className="text-white font-semibold text-4xl md:text-5xl lg:text-7xl mb-4">
-          {data.title}
-        </h2>
-        <p className="tracking-[0.5em] text-transparent font-light bg-clip-text bg-gradient-to-r from-purple-700 to-orange-500 text-sm md:text-lg lg:text-xl">
-          {data.subtitle}
-        </p>
-      </div>
 
       {/* Filters */}
       <div
@@ -206,8 +194,8 @@ const Projects: React.FC = () => {
             }}
             className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
               activeFilter === filter.id
-                ? "bg-white text-black shadow-lg shadow-white/30 scale-105"
-                : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:scale-105"
+                ? "bg-slate-900 dark:bg-white text-white dark:text-black shadow-lg shadow-slate-900/30 dark:shadow-white/30 scale-105"
+                : "bg-white/90 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-50 hover:bg-white dark:hover:bg-slate-700/80 hover:scale-105 shadow-md dark:shadow-lg"
             }`}
             style={{
               position: "relative",
@@ -227,7 +215,7 @@ const Projects: React.FC = () => {
       >
         {filteredProjects.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-white/60 text-lg">
+            <p className="text-slate-600 dark:text-white/60 text-lg">
               Bu kategoride proje bulunamadı.
             </p>
           </div>
@@ -260,7 +248,7 @@ const Projects: React.FC = () => {
               return (
                 <div
                   key={project.id || index}
-                  className="group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-purple-500/20 animate-fade-in min-h-[420px]"
+                  className="group relative overflow-hidden rounded-3xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-500 hover:scale-[1.03] shadow-lg dark:shadow-xl hover:shadow-2xl hover:shadow-purple-500/30 dark:hover:shadow-purple-500/20 animate-fade-in min-h-[420px]"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     animationFillMode: "both",
@@ -310,17 +298,17 @@ const Projects: React.FC = () => {
                   {/* Content */}
                   <div className="p-6 space-y-4 relative z-10 flex flex-col justify-between h-[calc(100%-16rem)]">
                     <div>
-                      <h3 className="text-white text-xl font-bold mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors">
+                      <h3 className="text-slate-900 dark:text-slate-50 text-xl font-bold mb-2 line-clamp-2 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
                         {project.title}
                       </h3>
 
                       {subdomainProject?.tagline && (
-                        <p className="text-white/70 text-sm mb-3 italic">
+                        <p className="text-slate-600 dark:text-slate-400 text-sm mb-3 italic">
                           {subdomainProject.tagline}
                         </p>
                       )}
 
-                      <p className="text-white/60 text-sm line-clamp-3 leading-relaxed">
+                      <p className="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 leading-relaxed">
                         {project.description}
                       </p>
                     </div>
@@ -334,13 +322,13 @@ const Projects: React.FC = () => {
                             .map((tech, techIndex) => (
                               <span
                                 key={techIndex}
-                                className="px-2 py-1 rounded-lg text-xs bg-white/5 border border-white/10 text-white/70"
+                                className="px-2 py-1 rounded-lg text-xs bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white/70"
                               >
                                 {tech}
                               </span>
                             ))}
                           {subdomainProject.techStack.length > 3 && (
-                            <span className="px-2 py-1 rounded-lg text-xs bg-white/5 border border-white/10 text-white/70">
+                            <span className="px-2 py-1 rounded-lg text-xs bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white/70">
                               +{subdomainProject.techStack.length - 3}
                             </span>
                           )}
@@ -357,7 +345,7 @@ const Projects: React.FC = () => {
                             e.preventDefault();
                             e.stopPropagation();
                           }}
-                          className="w-full px-6 py-3 rounded-xl font-semibold text-sm bg-transparent backdrop-blur-sm border border-white/20 text-white hover:bg-white/10 hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                          className="w-full px-6 py-3 rounded-xl font-semibold text-sm bg-white/80 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <span>Keşfet</span>
                           <span className="text-lg">→</span>
@@ -370,13 +358,13 @@ const Projects: React.FC = () => {
                           onClick={(e) => {
                             e.stopPropagation();
                           }}
-                          className="block w-full px-6 py-3 rounded-xl font-semibold text-sm bg-transparent backdrop-blur-sm border border-white/20 text-white hover:bg-white/10 hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                          className="block w-full px-6 py-3 rounded-xl font-semibold text-sm bg-white/80 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <span>Ziyaret Et</span>
                           <span className="text-lg">↗</span>
                         </a>
                       ) : (
-                        <div className="w-full px-6 py-3 rounded-xl font-semibold text-sm bg-gray-500/50 text-white/50 flex items-center justify-center gap-2">
+                        <div className="w-full px-6 py-3 rounded-xl font-semibold text-sm bg-slate-200 dark:bg-gray-500/50 text-slate-500 dark:text-white/50 flex items-center justify-center gap-2">
                           <span>Link Yok</span>
                         </div>
                       )}
@@ -403,26 +391,26 @@ const Projects: React.FC = () => {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto animate-fade-in"
           style={{ animationDelay: "0.4s", animationFillMode: "both" }}
         >
-          <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="text-3xl font-bold text-white mb-2">
+          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl">
+            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {allProjects.length}
             </div>
-            <div className="text-white/60 text-sm">Toplam Proje</div>
+            <div className="text-slate-600 dark:text-white/60 text-sm">Toplam Proje</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="text-3xl font-bold text-white mb-2">
+          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl">
+            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {data.items.length}
             </div>
-            <div className="text-white/60 text-sm">Standart Proje</div>
+            <div className="text-slate-600 dark:text-white/60 text-sm">Standart Proje</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="text-3xl font-bold text-white mb-2">
+          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl">
+            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {subdomainProjects.length}
             </div>
-            <div className="text-white/60 text-sm">Subdomain</div>
+            <div className="text-slate-600 dark:text-white/60 text-sm">Subdomain</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="text-3xl font-bold text-white mb-2">
+          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl">
+            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {
                 new Set(
                   allProjects.map((p) =>
@@ -431,7 +419,7 @@ const Projects: React.FC = () => {
                 ).size
               }
             </div>
-            <div className="text-white/60 text-sm">Kategori</div>
+            <div className="text-slate-600 dark:text-white/60 text-sm">Kategori</div>
           </div>
         </div>
       )}

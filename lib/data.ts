@@ -92,7 +92,7 @@ export interface BlogData {
 
 // ====== SUBDOMAIN PROJECTS ======
 
-export type SubdomainCategory = "mobile-app" | "game" | "ecommerce" | "saas";
+export type SubdomainCategory = "mobile-app" | "game" | "ecommerce" | "saas" | "social";
 
 export interface SubdomainProject {
   id: string;

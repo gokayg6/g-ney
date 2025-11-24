@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
+import PageHero from "@/components/PageHero";
 import type { BlogPost, BlogData } from "@/lib/data";
 
 const fallbackPosts: BlogPost[] = [
@@ -166,7 +167,7 @@ export default function BlogPage() {
   if (loading) {
     return (
       <main className="min-h-screen bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center flex items-center justify-center">
-        <div className="text-white/80 text-sm tracking-[0.4em] uppercase animate-pulse">
+        <div className="text-slate-600 dark:text-white/80 text-sm tracking-[0.4em] uppercase animate-pulse transition-colors duration-500">
           Yükleniyor
         </div>
       </main>
@@ -176,22 +177,12 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center">
       {/* HERO / INTRO */}
-      <section className="px-4 pt-16 pb-6 text-center">
-        <p className="text-[10px] sm:text-xs tracking-[0.4em] sm:tracking-[0.6em] uppercase text-white/60 mb-4 animate-fade-in">
-          {meta.subtitle}
-        </p>
-        <h1 className="font-serif text-[36px] sm:text-[46px] md:text-[60px] lg:text-[70px] text-white mb-6 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] animate-slide-down leading-tight">
-          {meta.title}
-        </h1>
-        <div className="max-w-3xl mx-auto text-left bg-white/10 backdrop-blur-xl rounded-[24px] md:rounded-[32px] border border-white/20 p-4 sm:p-6 md:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.3)] animate-scale-in">
-          <h2 className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3">
-            {meta.introTitle}
-          </h2>
-          <p className="text-white/80 text-sm sm:text-base leading-relaxed">
-            {meta.introDescription}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title={meta.title}
+        subtitle={meta.subtitle}
+        description={`${meta.introTitle}\n\n${meta.introDescription}`}
+        showLogo={true}
+      />
 
       {/* BLOG GRID */}
       <section className="px-3 sm:px-4 md:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24">
@@ -199,7 +190,7 @@ export default function BlogPage() {
           {posts.map((post, index) => (
             <article
               key={post.id}
-              className="group relative flex flex-col bg-white/10 backdrop-blur-xl border border-white/20 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] shadow-[0_18px_60px_rgba(0,0,0,0.3)] overflow-hidden animate-fade-in h-full"
+              className="group relative flex flex-col bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] shadow-lg dark:shadow-xl overflow-hidden animate-fade-in h-full transition-all duration-500"
               style={{ animationDelay: `${index * 0.05}s`, position: 'relative', zIndex: 1 }}
             >
               {/* üst glow */}
@@ -267,7 +258,7 @@ export default function BlogPage() {
                       e.stopPropagation();
                       console.log('Button touch for post:', post.id);
                     }}
-                    className="absolute inset-0 flex items-center justify-center z-[100000] opacity-100 sm:opacity-30 sm:group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-3.5 rounded-full text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-white bg-white/40 backdrop-blur-xl border-2 border-white/80 hover:bg-white/50 active:bg-white/60 hover:scale-110 active:scale-95 transition-all duration-200 shadow-[0_15px_40px_rgba(255,255,255,0.4)] min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[170px]"
+                    className="absolute inset-0 flex items-center justify-center z-[100000] opacity-100 sm:opacity-30 sm:group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-3.5 rounded-full text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-slate-900 dark:text-white bg-white/90 dark:bg-white/40 backdrop-blur-xl border-2 border-slate-300 dark:border-white/80 hover:bg-white dark:hover:bg-white/50 active:bg-slate-100 dark:active:bg-white/60 hover:scale-110 active:scale-95 transition-all duration-200 shadow-[0_15px_40px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_40px_rgba(255,255,255,0.4)] min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[170px]"
                     style={{
                       zIndex: 100000,
                       position: "absolute",
@@ -301,9 +292,9 @@ export default function BlogPage() {
               )}
 
               {/* CARD CONTENT */}
-              <div className="relative z-10 flex flex-col flex-1 p-3 sm:p-4 md:p-5 lg:p-6 bg-black/10 group-hover:bg-black/20 transition-colors duration-500">
+              <div className="relative z-10 flex flex-col flex-1 p-3 sm:p-4 md:p-5 lg:p-6 bg-transparent group-hover:bg-transparent transition-colors duration-500">
                 {/* üst meta */}
-                <div className="flex items-center justify-between text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-white/50 mb-3">
+                <div className="flex items-center justify-between text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-slate-500 dark:text-white/50 mb-3 transition-colors duration-500">
                   <span className="truncate">
                     {post.category || "NEWS"}
                   </span>
@@ -311,16 +302,16 @@ export default function BlogPage() {
                 </div>
 
                 {/* title + excerpt */}
-                <h3 className="text-white text-base sm:text-lg md:text-xl font-semibold leading-snug mb-2 line-clamp-2 group-hover:text-white">
+                <h3 className="text-slate-900 dark:text-slate-50 text-base sm:text-lg md:text-xl font-semibold leading-snug mb-2 line-clamp-2 group-hover:text-slate-900 dark:group-hover:text-slate-50 transition-colors duration-500">
                   {post.title}
                 </h3>
-                <p className="text-white/70 text-[11px] sm:text-xs md:text-sm leading-relaxed line-clamp-3 mb-3 group-hover:text-white/85">
+                <p className="text-slate-600 dark:text-slate-400 text-[11px] sm:text-xs md:text-sm leading-relaxed line-clamp-3 mb-3 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors duration-500">
                   {post.excerpt}
                 </p>
 
                 {/* alt kısım */}
-                <div className="mt-auto pt-3 border-t border-white/10 flex items-center justify-between gap-2">
-                  <span className="text-white/40 text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.25em] sm:tracking-[0.3em] uppercase">
+                <div className="mt-auto pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between gap-2 transition-colors duration-500">
+                  <span className="text-slate-400 dark:text-white/40 text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-colors duration-500">
                     {post.date}
                   </span>
 
@@ -336,7 +327,7 @@ export default function BlogPage() {
                       className={`flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
                         likedPosts.has(post.id)
                           ? "bg-red-500/30 border border-red-500/50 text-red-200 hover:bg-red-500/40"
-                          : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
+                          : "bg-white dark:bg-white/10 border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/20 transition-colors duration-500"
                       }`}
                       title={likedPosts.has(post.id) ? "Beğenildi" : "Beğen"}
                     >
@@ -364,27 +355,27 @@ export default function BlogPage() {
                       )}
                     </button>
 
-                    {/* ok butonu: kart içi expandable alanı aç/kapat */}
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setExpandedPostId((prev) =>
-                          prev === post.id ? null : post.id
-                        );
-                      }}
-                      className="flex items-center justify-center min-w-[38px] sm:min-w-[42px] md:min-w-[46px] min-h-[38px] sm:min-h-[42px] md:min-h-[46px] rounded-full bg-white/10 hover:bg-white/25 text-white text-lg sm:text-xl font-bold transition-all duration-200"
-                      aria-expanded={expandedPostId === post.id}
+                  {/* ok butonu: kart içi expandable alanı aç/kapat */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setExpandedPostId((prev) =>
+                        prev === post.id ? null : post.id
+                      );
+                    }}
+                    className="flex items-center justify-center min-w-[38px] sm:min-w-[42px] md:min-w-[46px] min-h-[38px] sm:min-h-[42px] md:min-h-[46px] rounded-full bg-white dark:bg-white/10 hover:bg-slate-100 dark:hover:bg-white/25 text-slate-900 dark:text-white text-lg sm:text-xl font-bold transition-all duration-200"
+                    aria-expanded={expandedPostId === post.id}
+                  >
+                    <span
+                      className={`block transform transition-transform duration-300 ${
+                        expandedPostId === post.id ? "rotate-90" : ""
+                      }`}
                     >
-                      <span
-                        className={`block transform transition-transform duration-300 ${
-                          expandedPostId === post.id ? "rotate-90" : ""
-                        }`}
-                      >
-                        →
-                      </span>
-                    </button>
+                      →
+                    </span>
+                  </button>
                   </div>
                 </div>
 
@@ -392,14 +383,14 @@ export default function BlogPage() {
                  {expandedPostId === post.id && (
                    <div
                      id={`post-details-${post.id}`}
-                     className="mt-4 pt-4 border-t border-white/20 animate-fade-in"
+                     className="mt-4 pt-4 border-t border-slate-300 dark:border-white/20 animate-fade-in transition-colors duration-500"
                    >
-                    <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-5 md:p-6 border border-white/25">
-                      <h4 className="text-white text-base sm:text-lg md:text-xl font-bold mb-3">
+                    <div className="bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl transition-colors duration-500">
+                      <h4 className="text-slate-900 dark:text-slate-50 text-base sm:text-lg md:text-xl font-bold mb-3 transition-colors duration-500">
                         {post.title}
                       </h4>
 
-                      <div className="space-y-3 sm:space-y-4 text-white/95 text-sm sm:text-base leading-relaxed">
+                      <div className="space-y-3 sm:space-y-4 text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed transition-colors duration-500">
                         {post.content && post.content.trim() ? (
                           post.content
                             .split("\n")
@@ -414,14 +405,14 @@ export default function BlogPage() {
                               </p>
                             ))
                         ) : (
-                          <p className="text-white/70 italic">
+                          <p className="text-slate-600 dark:text-white/70 italic transition-colors duration-500">
                             İçerik bulunamadı.
                           </p>
                         )}
                       </div>
 
-                      <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between gap-3 flex-wrap">
-                        <div className="flex flex-wrap gap-2 text-white/60 text-[11px] sm:text-xs">
+                      <div className="mt-4 pt-3 border-t border-slate-200 dark:border-white/15 flex items-center justify-between gap-3 flex-wrap transition-colors duration-500">
+                        <div className="flex flex-wrap gap-2 text-slate-600 dark:text-white/60 text-[11px] sm:text-xs transition-colors duration-500">
                           {post.author && <span>{post.author}</span>}
                           {post.readTime && (
                             <>
@@ -451,7 +442,7 @@ export default function BlogPage() {
                             className={`flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
                               likedPosts.has(post.id)
                                 ? "bg-red-500/30 border border-red-500/50 text-red-200 hover:bg-red-500/40"
-                                : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
+                                : "bg-white dark:bg-white/10 border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/20 transition-colors duration-500"
                             }`}
                             title={likedPosts.has(post.id) ? "Beğenildi" : "Beğen"}
                           >
@@ -477,25 +468,25 @@ export default function BlogPage() {
                             )}
                           </button>
 
-                          <Link
-                            href={`/blog/${post.id}`}
-                            className="text-white/70 hover:text-white text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.2em] flex items-center gap-1.5 transition-colors"
+                        <Link
+                          href={`/blog/${post.id}`}
+                          className="text-slate-600 dark:text-white/70 hover:text-slate-900 dark:hover:text-white text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.2em] flex items-center gap-1.5 transition-colors duration-500"
+                        >
+                          <span>Devamını oku</span>
+                          <svg
+                            className="w-3 h-3 sm:w-3.5 sm:h-3.5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
                           >
-                            <span>Devamını oku</span>
-                            <svg
-                              className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              strokeWidth={2}
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M9 5l7 7-7 7"
-                              />
-                            </svg>
-                          </Link>
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </Link>
                         </div>
                       </div>
                     </div>

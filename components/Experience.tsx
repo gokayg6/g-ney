@@ -34,51 +34,63 @@ const Experience: React.FC<{}> = () => {
   }, []);
 
   if (!data) {
-    return <div className="min-h-screen flex items-center justify-center text-white">Yükleniyor...</div>;
+    return <div className="min-h-screen flex items-center justify-center text-slate-900 dark:text-white transition-colors duration-500">Yükleniyor...</div>;
   }
 
   return (
     <section ref={sectionRef} id="experience" className="px-4">
-      <h2 className="text-white font-semibold text-center text-4xl md:text-5xl lg:text-6xl pt-[35px] animate-zoom-in">
+      <h2 className="text-slate-900 dark:text-white font-semibold text-center text-4xl md:text-5xl lg:text-6xl pt-[35px] animate-zoom-in transition-colors duration-500">
         {data.title}
       </h2>
-      <p className="tracking-[0.5em] text-center text-transparent font-light pb-5 bg-clip-text bg-gradient-to-r from-purple-700 to-orange-500 text-sm md:text-lg lg:text-xl animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
+      <p className="tracking-[0.5em] text-center text-transparent font-light pb-5 bg-clip-text bg-gradient-to-r from-purple-600 to-orange-500 dark:from-purple-700 dark:to-orange-500 text-sm md:text-lg lg:text-xl animate-fade-in transition-colors duration-500" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
         {data.subtitle}
       </p>
       <div className="container mx-auto max-w-6xl">
         {data.items.map((item) => (
           <div key={item.id} className="mb-8">
-        <div className="md:flex md:flex-row md:justify-between pt-5">
-          <div className="flex items-center gap-3">
-            <Image
-                  src={item.companyLogo}
-              height={30}
-              width={30}
-                  alt={`${item.company} logo`}
-                  className="w-[30px] h-[30px]"
-            />
-                <p className="text-gray-300 text-sm md:text-base">
-                  <span className="font-semibold">{item.company} /</span> {item.position}
-            </p>
-          </div>
-              <p className="text-gray-300 md:pt-0 pt-3 text-sm md:text-base">
-                {item.period}
-          </p>
-        </div>
+            {/* Experience Kartı */}
+            <div className="bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 rounded-2xl shadow-lg dark:shadow-xl p-6 md:p-8 transition-all duration-500">
+              {/* Üst Bilgi - Şirket ve Tarih */}
+              <div className="md:flex md:flex-row md:justify-between items-start mb-6 pb-6 border-b border-slate-200 dark:border-white/20">
+                <div className="flex items-center gap-3 mb-3 md:mb-0">
+                  <Image
+                    src={item.companyLogo}
+                    height={40}
+                    width={40}
+                    alt={`${item.company} logo`}
+                    className="w-[40px] h-[40px] object-contain"
+                  />
+                  <div>
+                    <p className="text-slate-900 dark:text-slate-50 text-base md:text-lg font-semibold transition-colors duration-500">
+                      <span>{item.company}</span>
+                    </p>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base transition-colors duration-500">
+                      {item.position}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base transition-colors duration-500">
+                  {item.period}
+                </p>
+              </div>
 
-            <p className="text-gray-300 pt-5 text-sm md:text-base whitespace-pre-line">
-              {item.description}
-            </p>
-            <div className="flex-col flex sm:flex-row flex-wrap gap-2">
-              {item.skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="bg-transparent mt-5 cursor-pointer rounded-3xl text-white py-2 px-5 border border-[#2E2E2E] w-max text-sm md:text-base"
-                >
-                  {skill}
-          </div>
-              ))}
-          </div>
+              {/* Açıklama */}
+              <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed whitespace-pre-line mb-6 transition-colors duration-500">
+                {item.description}
+              </p>
+
+              {/* Skills */}
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+                {item.skills.map((skill, index) => (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-white/5 cursor-pointer rounded-full text-slate-900 dark:text-slate-50 py-2 px-5 border border-slate-200 dark:border-white/20 w-max text-sm md:text-base transition-all duration-300 hover:bg-slate-50 dark:hover:bg-white/10 hover:scale-105 shadow-sm dark:shadow-md"
+                  >
+                    {skill}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         ))}
       </div>

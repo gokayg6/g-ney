@@ -7,9 +7,9 @@ import { getData } from "./data";
 export type SubdomainCategory =
   | "mobile-app"
   | "game"
-  | "website"
   | "ecommerce"
-  | "saas";
+  | "saas"
+  | "social";
 
 export interface SubdomainMetadata {
   metaTitle: string;
@@ -79,6 +79,13 @@ export function getProjectBySubdomain(
     return null;
   }
 }
+
+
+
+
+
+
+
 
 
 

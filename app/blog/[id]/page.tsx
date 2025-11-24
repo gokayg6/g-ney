@@ -57,7 +57,7 @@ export default function BlogPostPage() {
   }, [postId]);
 
   const handleLike = (postId: string) => {
-    setLikedPosts((prev) => {
+    setLikedPosts((prev: Set<string>) => {
       const newSet = new Set(prev);
       const wasLiked = newSet.has(postId);
       
@@ -68,7 +68,7 @@ export default function BlogPostPage() {
       }
       
       // Update like counts
-      setLikeCounts((prevCounts) => {
+      setLikeCounts((prevCounts: Record<string, number>) => {
         const newCounts = { ...prevCounts };
         if (wasLiked) {
           // Decrease count
@@ -95,7 +95,7 @@ export default function BlogPostPage() {
 
   const relatedPosts = useMemo(() => {
     if (!post) return [];
-    return allPosts.filter((item) => item.id !== post.id).slice(0, 3);
+    return allPosts.filter((item: BlogPost) => item.id !== post.id).slice(0, 3);
   }, [allPosts, post]);
 
   if (loading) {

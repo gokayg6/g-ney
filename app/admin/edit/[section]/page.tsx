@@ -520,38 +520,38 @@ export default function EditSection() {
           keywords: ['social', 'discovery', 'community', 'networking']
         }
       },
-      'software': {
-        id: 'template-app',
-        name: 'Biorhythm',
-        subdomain: 'app',
-        category: 'mobile-app',
-        title: 'Biorhythm - Daily Wellness Tracker',
-        description: 'Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.',
-        tagline: 'Understand yourself better every day',
+      'social': {
+        id: 'template-falla',
+        name: 'Falla',
+        subdomain: 'falla',
+        category: 'social',
+        title: 'Falla - Social Discovery Platform',
+        description: 'Connect with like-minded people, discover new communities, and share your passions. Falla brings people together through shared interests.',
+        tagline: 'Find your tribe, share your passion',
         logo: '/loegs.png',
-        coverImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80',
+        coverImage: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80',
         features: [
-          'Daily biorhythm tracking',
-          'Personalized wellness insights',
-          'AI-powered recommendations',
-          'Beautiful visualizations',
-          'Daily affirmations',
-          'Mood tracking & analysis'
+          'Interest-based matching',
+          'Real-time messaging',
+          'Community groups',
+          'Event discovery',
+          'Privacy-first design',
+          'Global reach'
         ],
         screenshots: [
-          'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80',
-          'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80',
-          'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80',
-          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80'
+          'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&q=80',
+          'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80',
+          'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80',
+          'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&q=80'
         ],
         appStoreLink: 'https://apps.apple.com',
         playStoreLink: 'https://play.google.com',
-        techStack: ['React Native', 'TypeScript', 'ML Kit', 'HealthKit'],
+        techStack: ['React Native', 'Firebase', 'GraphQL', 'WebRTC'],
         published: true,
         metadata: {
-          metaTitle: 'Biorhythm - Daily Wellness Tracker',
-          metaDescription: 'Track your biorhythms and get personalized wellness insights',
-          keywords: ['wellness', 'biorhythm', 'health', 'meditation']
+          metaTitle: 'Falla - Social Discovery Platform',
+          metaDescription: 'Connect with people who share your interests and passions',
+          keywords: ['social', 'discovery', 'community', 'networking']
         }
       }
     };
@@ -603,7 +603,7 @@ export default function EditSection() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center">
         <StarsCanvas />
-        <div className="text-white text-xl backdrop-blur-md bg-white/10 px-6 py-3 rounded-xl border border-white/20 animate-pulse">
+        <div className="text-slate-900 dark:text-white text-xl backdrop-blur-md bg-white/90 dark:bg-white/10 px-6 py-3 rounded-xl border border-slate-200 dark:border-white/20 animate-pulse transition-colors duration-500">
           Yükleniyor...
         </div>
       </div>
@@ -621,18 +621,18 @@ export default function EditSection() {
       <StarsCanvas />
       <div className="max-w-4xl mx-auto relative z-[101]">
         {/* Header */}
-        <div className="backdrop-blur-xl bg-white/10 rounded-xl p-4 mb-4 border border-white/20 shadow-2xl animate-fade-in">
+        <div className="backdrop-blur-xl bg-white/90 dark:bg-white/10 rounded-xl p-4 mb-4 border border-slate-200 dark:border-white/20 shadow-2xl animate-fade-in transition-colors duration-500">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div>
-              <h1 className="text-lg md:text-xl font-bold text-white mb-1">
+              <h1 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-1 transition-colors duration-500">
                 {section.charAt(0).toUpperCase() + section.slice(1)} Düzenle
               </h1>
-              <p className="text-white/60 text-xs">İçeriği düzenleyin ve kaydedin</p>
+              <p className="text-slate-600 dark:text-white/60 text-xs transition-colors duration-500">İçeriği düzenleyin ve kaydedin</p>
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => router.push('/admin/dashboard')}
-                className="px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-all duration-200 active:scale-95"
+                className="px-3 py-1.5 bg-slate-100 dark:bg-white/10 backdrop-blur-sm border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-white/20 transition-all duration-200 active:scale-95"
                 style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
               >
                 İptal
@@ -640,7 +640,7 @@ export default function EditSection() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="px-4 py-1.5 bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-lg text-sm font-semibold hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 active:scale-95 shadow-lg"
+                className="px-4 py-1.5 bg-slate-900 dark:bg-white/20 backdrop-blur-md border border-slate-900 dark:border-white/30 text-white dark:text-white rounded-lg text-sm font-semibold hover:bg-slate-800 dark:hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 active:scale-95 shadow-lg"
                 style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
               >
                 {saving ? 'Kaydediliyor...' : 'Kaydet'}
@@ -649,44 +649,44 @@ export default function EditSection() {
           </div>
         </div>
 
-        <div className="backdrop-blur-xl bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl space-y-6 animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
+        <div className="backdrop-blur-xl bg-white dark:bg-white/5 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-white/10 shadow-2xl space-y-6 animate-fade-in transition-colors duration-500" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
           {section === 'hero' && (
             <>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">İsim</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">İsim</label>
                 <input
                   type="text"
                   value={data.name || ''}
                   onChange={(e) => updateField('name', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="İsminizi girin"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Tagline</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Tagline</label>
                 <input
                   type="text"
                   value={data.tagline || ''}
                   onChange={(e) => updateField('tagline', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Tagline'ınızı girin"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Tagline Vurgusu</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Tagline Vurgusu</label>
                 <input
                   type="text"
                   value={data.taglineHighlight || ''}
                   onChange={(e) => updateField('taglineHighlight', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Vurgulanacak kelime"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Açıklama</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Açıklama</label>
                 <textarea
                   value={data.description || ''}
                   onChange={(e) => updateField('description', e.target.value)}
@@ -697,23 +697,23 @@ export default function EditSection() {
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Buton Metni</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Buton Metni</label>
                 <input
                   type="text"
                   value={data.buttonText || ''}
                   onChange={(e) => updateField('buttonText', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Buton metni"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Buton Linki</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Buton Linki</label>
                 <input
                   type="text"
                   value={data.buttonLink || ''}
                   onChange={(e) => updateField('buttonLink', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="https://example.com"
                 />
@@ -724,33 +724,33 @@ export default function EditSection() {
           {section === 'about' && (
             <>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Başlık</label>
+                <label className="block text-slate-900 dark:text-white/90 mb-2 font-semibold transition-colors duration-500">Başlık</label>
                 <input
                   type="text"
                   value={data.title || ''}
                   onChange={(e) => updateField('title', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                   style={inputStyle}
                   placeholder="Başlık girin"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <label className="block text-slate-900 dark:text-white/90 mb-2 font-semibold transition-colors duration-500">Alt Başlık</label>
                 <input
                   type="text"
                   value={data.subtitle || ''}
                   onChange={(e) => updateField('subtitle', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                   style={inputStyle}
                   placeholder="Alt başlık girin"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Açıklama</label>
+                <label className="block text-slate-900 dark:text-white/90 mb-2 font-semibold transition-colors duration-500">Açıklama</label>
                 <textarea
                   value={data.description || ''}
                   onChange={(e) => updateField('description', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 resize-none font-medium"
                   style={inputStyle}
                   rows={6}
                   placeholder="Açıklama girin"
@@ -762,28 +762,28 @@ export default function EditSection() {
           {section === 'experience' && (
             <>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Başlık</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Başlık</label>
                 <input
                   type="text"
                   value={data.title || ''}
                   onChange={(e) => updateField('title', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Başlık girin"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Alt Başlık</label>
                 <input
                   type="text"
                   value={data.subtitle || ''}
                   onChange={(e) => updateField('subtitle', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Alt başlık girin"
                 />
               </div>
-              <div className="border-t border-[#2E2E2E] pt-6">
+              <div className="border-t border-slate-200 dark:border-[#2E2E2E] pt-6 transition-colors duration-500">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-semibold">Experience Items</h3>
                   <button
@@ -802,46 +802,46 @@ export default function EditSection() {
                   </button>
                 </div>
                 {data.items?.map((item: ExperienceItem, index: number) => (
-                  <div key={item.id} className="bg-[#111] p-4 rounded-lg mb-4 border border-[#2E2E2E]">
+                  <div key={item.id} className="bg-white dark:bg-[#111] p-4 rounded-lg mb-4 border border-slate-200 dark:border-[#2E2E2E] shadow-lg dark:shadow-none transition-colors duration-500">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Şirket</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Şirket</label>
                         <input
                           type="text"
                           value={item.company || ''}
                           onChange={(e) => updateItem('items', index, 'company', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                           style={inputStyle}
                           placeholder="Şirket adı"
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Position</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Position</label>
                         <input
                           type="text"
                           value={item.position || ''}
                           onChange={(e) => updateItem('items', index, 'position', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Period</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Period</label>
                         <input
                           type="text"
                           value={item.period || ''}
                           onChange={(e) => updateItem('items', index, 'period', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Company Logo (path)</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Company Logo (path)</label>
                         <input
                           type="text"
                           value={item.companyLogo || ''}
                           onChange={(e) => updateItem('items', index, 'companyLogo', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         />
                       </div>
@@ -851,7 +851,7 @@ export default function EditSection() {
                       <textarea
                         value={item.description || ''}
                         onChange={(e) => updateItem('items', index, 'description', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           rows={4}
                           style={inputStyle}
                       />
@@ -862,7 +862,7 @@ export default function EditSection() {
                         type="text"
                         value={item.skills?.join(', ') || ''}
                         onChange={(e) => updateItem('items', index, 'skills', e.target.value.split(',').map(s => s.trim()).filter(s => s))}
-                        className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm"
+                        className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border-2 border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm font-medium transition-colors duration-500"
                       />
                     </div>
                     <button
@@ -880,28 +880,28 @@ export default function EditSection() {
           {section === 'projects' && (
             <>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Başlık</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Başlık</label>
                 <input
                   type="text"
                   value={data.title || ''}
                   onChange={(e) => updateField('title', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Başlık girin"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Alt Başlık</label>
                 <input
                   type="text"
                   value={data.subtitle || ''}
                   onChange={(e) => updateField('subtitle', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Alt başlık girin"
                 />
               </div>
-              <div className="border-t border-[#2E2E2E] pt-6">
+              <div className="border-t border-slate-200 dark:border-[#2E2E2E] pt-6 transition-colors duration-500">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-semibold">Projects</h3>
                   <button
@@ -920,24 +920,24 @@ export default function EditSection() {
                   </button>
                 </div>
                 {data.items?.map((item: ProjectItem, index: number) => (
-                  <div key={item.id} className="bg-[#111] p-4 rounded-lg mb-4 border border-[#2E2E2E]">
+                  <div key={item.id} className="bg-white dark:bg-[#111] p-4 rounded-lg mb-4 border border-slate-200 dark:border-[#2E2E2E] shadow-lg dark:shadow-none transition-colors duration-500">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Title</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Title</label>
                         <input
                           type="text"
                           value={item.title || ''}
                           onChange={(e) => updateItem('items', index, 'title', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Type</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Type</label>
                         <select
                           value={item.type || 'web'}
                           onChange={(e) => updateItem('items', index, 'type', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         >
                           <option value="web">Web</option>
@@ -1005,12 +1005,12 @@ export default function EditSection() {
                         )}
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Link</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Link</label>
                         <input
                           type="text"
                           value={item.link || ''}
                           onChange={(e) => updateItem('items', index, 'link', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         />
                       </div>
@@ -1020,18 +1020,18 @@ export default function EditSection() {
                       <textarea
                         value={item.description || ''}
                         onChange={(e) => updateItem('items', index, 'description', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           rows={3}
                           style={inputStyle}
                       />
                     </div>
                     {item.type === 'mobile-app-template' && (
                       <div className="mb-4">
-                        <label className="block text-gray-300 mb-2 text-sm">Privacy Policy Text</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Privacy Policy Text</label>
                         <textarea
                           value={item.privacyPolicy || ''}
                           onChange={(e) => updateItem('items', index, 'privacyPolicy', e.target.value)}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                           rows={6}
                           placeholder="Enter privacy policy text here..."
@@ -1053,55 +1053,55 @@ export default function EditSection() {
           {section === 'contact' && (
             <>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Başlık</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Başlık</label>
                 <input
                   type="text"
                   value={data.title || ''}
                   onChange={(e) => updateField('title', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Başlık girin"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Alt Başlık</label>
                 <input
                   type="text"
                   value={data.subtitle || ''}
                   onChange={(e) => updateField('subtitle', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Alt başlık girin"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Email</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Email</label>
                 <input
                   type="email"
                   value={data.email || ''}
                   onChange={(e) => updateField('email', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="email@example.com"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Phone Number</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Phone Number</label>
                 <input
                   type="tel"
                   value={data.phone || ''}
                   onChange={(e) => updateField('phone', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="+90 555 123 45 67"
                 />
               </div>
               <div>
-                <label className="block text-gray-300 mb-2">Description</label>
+                <label className="block text-slate-900 dark:text-gray-300 mb-2 font-semibold transition-colors duration-500">Description</label>
                 <textarea
                   value={data.description || ''}
                   onChange={(e) => updateField('description', e.target.value)}
-                  className="w-full px-4 py-2 bg-[#111] border border-[#2E2E2E] rounded-lg text-white focus:outline-none focus:border-purple-500"
+                  className="w-full px-4 py-2 bg-white dark:bg-[#111] border-2 border-slate-300 dark:border-[#2E2E2E] rounded-lg text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-purple-500 transition-colors duration-500 font-medium"
                   style={inputStyle}
                   rows={4}
                 />
@@ -1111,21 +1111,21 @@ export default function EditSection() {
 
           {section === 'subdomainProjects' && (
             <>
-              <div className="border-t border-white/20 pt-6">
+              <div className="border-t border-slate-200 dark:border-white/20 pt-6 transition-colors duration-500">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-semibold text-white">Subdomain Projeleri</h3>
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white transition-colors duration-500">Subdomain Projeleri</h3>
                   <div className="flex gap-2 items-center">
                     <select
                       id="new-project-category"
                       defaultValue="mobile-app"
-                      className="admin-select px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
-                      style={{ ...inputStyle, backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
+                      className="admin-select px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
+                      style={inputStyle}
                     >
-                      <option value="mobile-app">📱 Mobile App</option>
-                      <option value="ecommerce">🛒 E-commerce</option>
-                      <option value="game">🎮 Game</option>
-                      <option value="saas">💼 SaaS/Software</option>
-                      <option value="website">🌐 Website</option>
+                      <option value="mobile-app">📱 Mobile App (Biorhythm Template)</option>
+                      <option value="ecommerce">🛒 E-commerce (LuxeStyle Template)</option>
+                      <option value="game">🎮 Game (Shadow Quest Template)</option>
+                      <option value="saas">💼 SaaS/Software (Classic Template)</option>
+                      <option value="social">👥 Social (Falla Template)</option>
                     </select>
                     <button
                       onClick={() => {
@@ -1166,7 +1166,7 @@ export default function EditSection() {
                             };
                         addItem('subdomainProjects', newProject);
                       }}
-                      className="px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 text-white text-sm font-medium transition-all duration-200"
+                      className="px-4 py-2 bg-purple-600 dark:bg-purple-600 rounded-lg hover:bg-purple-700 text-white text-sm font-medium transition-all duration-200"
                       style={inputStyle}
                     >
                       Proje Ekle
@@ -1174,92 +1174,92 @@ export default function EditSection() {
                   </div>
                 </div>
                 {Array.isArray(data) && data.map((project: SubdomainProject, index: number) => (
-                  <div key={project.id || index} className="backdrop-blur-md bg-white/5 p-5 rounded-xl mb-4 border border-white/10 hover:border-white/20 transition-all duration-300">
+                  <div key={project.id || index} className="backdrop-blur-md bg-white dark:bg-white/5 p-5 rounded-xl mb-4 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300 shadow-lg dark:shadow-none">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Proje Adı</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Proje Adı</label>
                         <input
                           type="text"
                           value={project.name || ''}
                           onChange={(e) => updateItem('subdomainProjects', index, 'name', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                           style={inputStyle}
                           placeholder="Biorhythm"
                         />
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Subdomain</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Subdomain</label>
                         <input
                           type="text"
                           value={project.subdomain || ''}
                           onChange={(e) => updateItem('subdomainProjects', index, 'subdomain', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                           style={inputStyle}
                           placeholder="app"
                         />
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Kategori</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Kategori</label>
                         <select
                           value={project.category || 'mobile-app'}
                           onChange={(e) => {
                             const newCategory = e.target.value;
                             handleCategoryChange(index, newCategory);
                           }}
-                          className="admin-select w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
-                          style={{ ...inputStyle, backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
+                          className="admin-select w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
+                          style={inputStyle}
                         >
-                          <option value="mobile-app">📱 Mobile App (App template)</option>
-                          <option value="ecommerce">🛒 E-commerce (LuxeStyle template)</option>
-                          <option value="game">🎮 Game (Testgame template)</option>
-                          <option value="saas">💼 SaaS/Software (App template)</option>
-                          <option value="website">🌐 Website (Falla template)</option>
+                          <option value="mobile-app">📱 Mobile App (Biorhythm Template)</option>
+                          <option value="ecommerce">🛒 E-commerce (LuxeStyle Template)</option>
+                          <option value="game">🎮 Game (Shadow Quest Template)</option>
+                          <option value="saas">💼 SaaS/Software (Classic Template)</option>
+                          <option value="social">👥 Social (Falla Template)</option>
                         </select>
-                        <p className="text-white/50 text-xs mt-1">
+                        <p className="text-slate-600 dark:text-white/50 text-xs mt-1 font-medium transition-colors duration-500">
                           Kategori seçildiğinde ilgili template içeriği otomatik kopyalanır
                         </p>
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Başlık</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Başlık</label>
                         <input
                           type="text"
                           value={project.title || ''}
                           onChange={(e) => updateItem('subdomainProjects', index, 'title', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                           style={inputStyle}
                           placeholder="Biorhythm - Daily Wellness Tracker"
                         />
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Tagline</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Tagline</label>
                         <input
                           type="text"
                           value={project.tagline || ''}
                           onChange={(e) => updateItem('subdomainProjects', index, 'tagline', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                           style={inputStyle}
                           placeholder="Understand yourself better every day"
                         />
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Açıklama</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Açıklama</label>
                         <textarea
                           value={project.description || ''}
                           onChange={(e) => updateItem('subdomainProjects', index, 'description', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300 resize-none"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 resize-none font-medium"
                           rows={3}
                           style={inputStyle}
                           placeholder="Track your physical, emotional, and intellectual biorhythms..."
                         />
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Logo</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Logo</label>
                         <div className="flex gap-2">
                           <input
                             type="text"
                             value={project.logo || ''}
                             onChange={(e) => updateItem('subdomainProjects', index, 'logo', e.target.value)}
-                            className="flex-1 px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                            className="flex-1 px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                             style={inputStyle}
                             placeholder="/logo.png"
                           />
@@ -1296,16 +1296,16 @@ export default function EditSection() {
                         {project.logo && (
                           <Image src={project.logo} alt="Logo preview" width={64} height={64} className="mt-2 w-16 h-16 object-cover rounded-lg border border-white/20" />
                         )}
-                        <p className="text-white/50 text-xs mt-1">Önerilen boyut: 512x512px (PNG, şeffaf arka plan)</p>
+                        <p className="text-slate-600 dark:text-white/50 text-xs mt-1 font-medium transition-colors duration-500">Önerilen boyut: 512x512px (PNG, şeffaf arka plan)</p>
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Cover Image</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Cover Image</label>
                         <div className="flex gap-2">
                           <input
                             type="text"
                             value={project.coverImage || ''}
                             onChange={(e) => updateItem('subdomainProjects', index, 'coverImage', e.target.value)}
-                            className="flex-1 px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                            className="flex-1 px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                             style={inputStyle}
                             placeholder="/cover.jpg"
                           />
@@ -1345,51 +1345,51 @@ export default function EditSection() {
                         <p className="text-white/50 text-xs mt-1">Önerilen boyut: 1920x1080px (JPG/PNG, 16:9 oran)</p>
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">App Store Link</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">App Store Link</label>
                         <input
                           type="text"
                           value={project.appStoreLink || ''}
                           onChange={(e) => updateItem('subdomainProjects', index, 'appStoreLink', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                           style={inputStyle}
                           placeholder="https://apps.apple.com/..."
                         />
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">Play Store Link</label>
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Play Store Link</label>
                         <input
                           type="text"
                           value={project.playStoreLink || ''}
                           onChange={(e) => updateItem('subdomainProjects', index, 'playStoreLink', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                           style={inputStyle}
                           placeholder="https://play.google.com/..."
                         />
                       </div>
                       <div>
-                        <label className="block text-white/90 mb-2 text-sm font-medium">
-                          Site Link (Website URL) {project.category === 'ecommerce' && <span className="text-purple-400">*</span>}
+                        <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">
+                          Site Link (Website URL) {project.category === 'ecommerce' && <span className="text-purple-600 dark:text-purple-400">*</span>}
                         </label>
                         <input
                           type="text"
                           value={(project as any).siteLink || ''}
                           onChange={(e) => updateItem('subdomainProjects', index, 'siteLink', e.target.value)}
-                          className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                           style={inputStyle}
                           placeholder="https://example.com"
                         />
                         {project.category === 'ecommerce' && (
-                          <p className="text-white/50 text-xs mt-1">E-ticaret projeleri için site linki gereklidir</p>
+                          <p className="text-slate-600 dark:text-white/50 text-xs mt-1 font-medium transition-colors duration-500">E-ticaret projeleri için site linki gereklidir</p>
                         )}
                       </div>
                     </div>
                     
                     <div className="mb-4">
-                      <label className="block text-white/90 mb-2 text-sm font-medium">Features (her satır bir feature)</label>
+                      <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Features (her satır bir feature)</label>
                       <textarea
                         value={(project.features || []).join('\n')}
                         onChange={(e) => updateItem('subdomainProjects', index, 'features', e.target.value.split('\n').filter(f => f.trim()))}
-                        className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300 resize-none"
+                        className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 resize-none font-medium"
                         rows={4}
                         style={inputStyle}
                         placeholder="Daily biorhythm tracking&#10;Personalized wellness insights"
@@ -1397,19 +1397,19 @@ export default function EditSection() {
                     </div>
 
                     <div className="mb-4">
-                      <label className="block text-white/90 mb-2 text-sm font-medium">Tech Stack (virgülle ayrılmış)</label>
+                      <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Tech Stack (virgülle ayrılmış)</label>
                       <input
                         type="text"
                         value={(project.techStack || []).join(', ')}
                         onChange={(e) => updateItem('subdomainProjects', index, 'techStack', e.target.value.split(',').map(t => t.trim()).filter(t => t))}
-                        className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                        className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                         style={inputStyle}
                         placeholder="React Native, TypeScript, ML Kit"
                       />
                     </div>
 
                     <div className="mb-4">
-                      <label className="block text-white/90 mb-2 text-sm font-medium">Screenshots</label>
+                      <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Screenshots</label>
                       <div className="space-y-2">
                         {(project.screenshots || []).map((screenshot, screenshotIndex) => (
                           <div key={screenshotIndex} className="flex gap-2 items-center">
@@ -1421,7 +1421,7 @@ export default function EditSection() {
                                 screenshots[screenshotIndex] = e.target.value;
                                 updateItem('subdomainProjects', index, 'screenshots', screenshots);
                               }}
-                              className="flex-1 px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                              className="flex-1 px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                               style={inputStyle}
                               placeholder="/screenshot.jpg"
                             />
@@ -1483,7 +1483,7 @@ export default function EditSection() {
                             const screenshots = [...(project.screenshots || []), ''];
                             updateItem('subdomainProjects', index, 'screenshots', screenshots);
                           }}
-                          className="px-3 py-2 bg-white/10 border border-white/20 text-white rounded-lg text-sm hover:bg-white/20 transition-all duration-200"
+                          className="px-3 py-2 bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white rounded-lg text-sm hover:bg-slate-200 dark:hover:bg-white/20 transition-all duration-200 font-medium"
                           style={inputStyle}
                         >
                           + Screenshot Ekle
@@ -1493,34 +1493,34 @@ export default function EditSection() {
                     </div>
 
                     <div className="mb-4">
-                      <label className="block text-white/90 mb-2 text-sm font-medium">Meta Title</label>
+                      <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Meta Title</label>
                       <input
                         type="text"
                         value={project.metadata?.metaTitle || ''}
                         onChange={(e) => updateItem('subdomainProjects', index, 'metadata', { ...project.metadata, metaTitle: e.target.value })}
-                        className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                        className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                         style={inputStyle}
                         placeholder="Biorhythm - Daily Wellness Tracker"
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-white/90 mb-2 text-sm font-medium">Meta Description</label>
+                      <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Meta Description</label>
                       <textarea
                         value={project.metadata?.metaDescription || ''}
                         onChange={(e) => updateItem('subdomainProjects', index, 'metadata', { ...project.metadata, metaDescription: e.target.value })}
-                        className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300 resize-none"
+                        className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 resize-none font-medium"
                         rows={2}
                         style={inputStyle}
                         placeholder="Track your biorhythms and get personalized wellness insights"
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-white/90 mb-2 text-sm font-medium">Keywords (virgülle ayrılmış)</label>
+                      <label className="block text-slate-900 dark:text-white/90 mb-2 text-sm font-semibold transition-colors duration-500">Keywords (virgülle ayrılmış)</label>
                       <input
                         type="text"
                         value={(project.metadata?.keywords || []).join(', ')}
                         onChange={(e) => updateItem('subdomainProjects', index, 'metadata', { ...project.metadata, keywords: e.target.value.split(',').map(k => k.trim()).filter(k => k) })}
-                        className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                        className="w-full px-3 py-2 bg-white dark:bg-white/10 backdrop-blur-sm border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
                         style={inputStyle}
                         placeholder="wellness, biorhythm, health"
                       />
@@ -1532,7 +1532,7 @@ export default function EditSection() {
                           type="checkbox"
                           checked={project.published !== false}
                           onChange={(e) => updateItem('subdomainProjects', index, 'published', e.target.checked)}
-                          className="w-4 h-4 cursor-pointer accent-white/60"
+                          className="w-4 h-4 cursor-pointer accent-slate-900 dark:accent-white/60"
                           style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
                         />
                         <span className="text-white/90 text-sm">Yayınla</span>
@@ -1554,7 +1554,7 @@ export default function EditSection() {
 
           {section === 'social' && (
             <>
-              <div className="border-t border-[#2E2E2E] pt-6">
+              <div className="border-t border-slate-200 dark:border-[#2E2E2E] pt-6 transition-colors duration-500">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-semibold">Social Links</h3>
                   <button
@@ -1573,10 +1573,10 @@ export default function EditSection() {
                   </button>
                 </div>
                 {Array.isArray(data) && data.map((item: SocialIcon, index: number) => (
-                  <div key={index} className="bg-[#111] p-4 rounded-lg mb-4 border border-[#2E2E2E]">
+                  <div key={index} className="bg-white dark:bg-[#111] p-4 rounded-lg mb-4 border border-slate-200 dark:border-[#2E2E2E] shadow-lg dark:shadow-none transition-colors duration-500">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Link</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Link</label>
                         <input
                           type="text"
                           value={item.link || ''}
@@ -1585,12 +1585,12 @@ export default function EditSection() {
                             newData[index] = { ...newData[index], link: e.target.value };
                             setData(newData);
                           }}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Image (path)</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Image (path)</label>
                         <input
                           type="text"
                           value={item.image || ''}
@@ -1599,12 +1599,12 @@ export default function EditSection() {
                             newData[index] = { ...newData[index], image: e.target.value };
                             setData(newData);
                           }}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Alt Text</label>
+                        <label className="block text-slate-700 dark:text-gray-300 mb-2 text-sm transition-colors duration-500">Alt Text</label>
                         <input
                           type="text"
                           value={item.alt || ''}
@@ -1613,7 +1613,7 @@ export default function EditSection() {
                             newData[index] = { ...newData[index], alt: e.target.value };
                             setData(newData);
                           }}
-                          className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#2E2E2E] rounded text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full px-3 py-2 bg-white dark:bg-[#0a0a0a] border border-slate-300 dark:border-[#2E2E2E] rounded text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-500 dark:focus:border-purple-500 transition-colors duration-500"
                           style={inputStyle}
                         />
                       </div>
@@ -1636,40 +1636,40 @@ export default function EditSection() {
           {section === 'blog' && (
             <>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Başlık</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Başlık</label>
                 <input
                   type="text"
                   value={data.title || ''}
                   onChange={(e) => updateField('title', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Blog başlığı"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Alt Başlık</label>
                 <input
                   type="text"
                   value={data.subtitle || ''}
                   onChange={(e) => updateField('subtitle', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Alt başlık"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Giriş Başlığı</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Giriş Başlığı</label>
                 <input
                   type="text"
                   value={data.introTitle || ''}
                   onChange={(e) => updateField('introTitle', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 backdrop-blur-sm border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-slate-500 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300"
                   style={inputStyle}
                   placeholder="Giriş başlığı"
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 font-medium">Giriş Açıklaması</label>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium transition-colors duration-500">Giriş Açıklaması</label>
                 <textarea
                   value={data.introDescription || ''}
                   onChange={(e) => updateField('introDescription', e.target.value)}
@@ -1840,7 +1840,7 @@ export default function EditSection() {
                           type="checkbox"
                           checked={post.published !== false}
                           onChange={(e) => updateItem('posts', index, 'published', e.target.checked)}
-                          className="w-4 h-4 cursor-pointer accent-white/60"
+                          className="w-4 h-4 cursor-pointer accent-slate-900 dark:accent-white/60"
                           style={{ position: 'relative', zIndex: 105, pointerEvents: 'auto' }}
                         />
                         <span className="text-white/90 text-sm">Yayınla</span>
@@ -1872,18 +1872,18 @@ export default function EditSection() {
           style={{ position: 'fixed', zIndex: 9999 }}
         >
           <div 
-            className="bg-[#0a0a0a] border border-white/20 rounded-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white dark:bg-[#0a0a0a] border border-slate-200 dark:border-white/20 rounded-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl dark:shadow-none transition-colors duration-500"
             onClick={(e) => e.stopPropagation()}
             style={{ position: 'relative', zIndex: 10000 }}
           >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-white text-xl font-semibold">Galeri</h2>
+              <h2 className="text-slate-900 dark:text-white text-xl font-semibold transition-colors duration-500">Galeri</h2>
               <button
                 onClick={() => {
                   setShowGallery(false);
                   setGalleryCallback(null);
                 }}
-                className="text-white/60 hover:text-white text-2xl"
+                className="text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white text-2xl transition-colors duration-500"
                 style={{ position: 'relative', zIndex: 10001, pointerEvents: 'auto' }}
               >
                 ×
@@ -1891,7 +1891,7 @@ export default function EditSection() {
             </div>
             
             {galleryImages.length === 0 ? (
-              <div className="text-white/60 text-center py-8">
+              <div className="text-slate-600 dark:text-white/60 text-center py-8 font-medium transition-colors duration-500">
                 Henüz görsel yüklenmemiş. Yeni görsel yüklemek için &quot;Yükle&quot; butonunu kullanın.
               </div>
             ) : (
@@ -1908,7 +1908,7 @@ export default function EditSection() {
                       alt={`Gallery ${idx + 1}`}
                       width={200}
                       height={128}
-                      className="w-full h-32 object-cover rounded-lg border border-white/20 group-hover:border-white/40 transition-all"
+                      className="w-full h-32 object-cover rounded-lg border border-slate-200 dark:border-white/20 group-hover:border-slate-400 dark:group-hover:border-white/40 transition-all"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 rounded-lg transition-all flex items-center justify-center">
                       <span className="text-white opacity-0 group-hover:opacity-100 text-sm">Seç</span>

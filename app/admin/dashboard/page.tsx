@@ -89,7 +89,7 @@ export default function AdminDashboard() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center">
         <StarsCanvas />
-        <div className="text-white text-xl backdrop-blur-md bg-white/10 px-6 py-3 rounded-xl border border-white/20 animate-pulse">
+        <div className="text-slate-900 dark:text-white text-xl backdrop-blur-md bg-white/90 dark:bg-white/10 px-6 py-3 rounded-xl border border-slate-200 dark:border-white/20 animate-pulse transition-colors duration-500">
           Yükleniyor...
         </div>
       </div>
@@ -107,6 +107,7 @@ export default function AdminDashboard() {
     { href: '/admin/edit/projects', title: 'Projeler', desc: 'Projeleri ve şablonları yönet', icon: '🎨' },
     { href: '/admin/edit/subdomainProjects', title: 'Subdomain Projeleri', desc: 'Subdomain projelerini ve görsellerini yönet', icon: '🌐' },
     { href: '/admin/edit/blog', title: 'Blog', desc: 'Blog yazılarını yönet', icon: '📝' },
+    { href: '/admin/blogs', title: 'Blog Editörü', desc: 'Canlı önizleme ile blog yazılarını düzenle', icon: '✏️' },
     { href: '/admin/edit/contact', title: 'İletişim', desc: 'İletişim bilgilerini düzenle', icon: '📧' },
     { href: '/admin/edit/social', title: 'Sosyal Medya', desc: 'Sosyal medya linklerini düzenle', icon: '🔗' },
   ];
@@ -116,24 +117,24 @@ export default function AdminDashboard() {
       <StarsCanvas />
       <div className="max-w-7xl mx-auto relative z-[101]">
         {/* Header */}
-        <div className="backdrop-blur-xl bg-white/10 rounded-xl p-4 mb-6 border border-white/20 shadow-2xl animate-fade-in">
+        <div className="backdrop-blur-xl bg-white/90 dark:bg-white/10 rounded-xl p-4 mb-6 border border-slate-200 dark:border-white/20 shadow-2xl animate-fade-in transition-colors duration-500">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div>
-              <h1 className="text-xl md:text-2xl font-bold text-white mb-1">
+              <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-1 transition-colors duration-500">
                 Admin Dashboard
               </h1>
-              <p className="text-white/60 text-xs">Portfolyo içeriğinizi yönetin</p>
+              <p className="text-slate-600 dark:text-white/60 text-xs transition-colors duration-500">Portfolyo içeriğinizi yönetin</p>
             </div>
             <div className="flex gap-2">
               <Link
                 href="/"
-                className="px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-all duration-200 active:scale-95"
+                className="px-3 py-1.5 bg-slate-100 dark:bg-white/10 backdrop-blur-sm border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-white/20 transition-all duration-200 active:scale-95"
               >
                 Siteyi Görüntüle
               </Link>
               <button
                 onClick={handleLogout}
-                className="px-3 py-1.5 bg-red-500/20 backdrop-blur-sm border border-red-500/30 text-red-300 rounded-lg text-sm font-medium hover:bg-red-500/30 transition-all duration-200 active:scale-95"
+                className="px-3 py-1.5 bg-red-100 dark:bg-red-500/20 backdrop-blur-sm border border-red-300 dark:border-red-500/30 text-red-700 dark:text-red-300 rounded-lg text-sm font-medium hover:bg-red-200 dark:hover:bg-red-500/30 transition-all duration-200 active:scale-95"
               >
                 Çıkış Yap
               </button>
@@ -147,19 +148,19 @@ export default function AdminDashboard() {
             <Link
               key={section.href}
               href={section.href}
-              className="group backdrop-blur-xl bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 animate-fade-in"
+              className="group backdrop-blur-xl bg-white dark:bg-white/5 rounded-xl p-6 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 hover:bg-slate-50 dark:hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 dark:hover:shadow-purple-500/20 animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}
             >
               <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                 {section.icon}
               </div>
-              <h2 className="text-xl font-bold text-white mb-2 group-hover:text-white transition-colors">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-500">
                 {section.title}
               </h2>
-              <p className="text-white/60 text-sm group-hover:text-white/80 transition-colors">
+              <p className="text-slate-600 dark:text-white/60 text-sm group-hover:text-slate-700 dark:group-hover:text-white/80 transition-colors duration-500">
                 {section.desc}
               </p>
-              <div className="mt-4 text-white/40 group-hover:text-white/60 transition-colors text-xs">
+              <div className="mt-4 text-slate-500 dark:text-white/40 group-hover:text-slate-600 dark:group-hover:text-white/60 transition-colors duration-500 text-xs">
                 Düzenlemek için tıklayın →
               </div>
             </Link>

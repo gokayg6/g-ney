@@ -26,6 +26,7 @@ const StarBackground = (props: any) => {
           size={0.002}
           sizeAttenuation={true}
           dethWrite={false}
+          opacity={0.6}
         />
       </Points>
     </group>

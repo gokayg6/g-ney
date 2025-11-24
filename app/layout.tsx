@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import StarsCanvas from "@/components/main/StarsBackground";
 import Navbar from "@/components/Navbar";
 import PageTransition from "@/components/PageTransition";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr">
+    <html lang="tr" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/loegs.png" type="image/png" />
         <link rel="shortcut icon" href="/loegs.png" type="image/png" />
@@ -91,13 +92,20 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} bg-[#111] overflow-y-scroll overflow-x-hidden`}
+        className={`${inter.className} bg-[#f5f5f7] dark:bg-[#111] text-slate-900 dark:text-white transition-colors duration-500 ease-out overflow-y-scroll overflow-x-hidden`}
       >
-        <SpeedInsights />
-        <Analytics />
-        <StarsCanvas />
-        <Navbar />
-        <PageTransition>{children}</PageTransition>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <SpeedInsights />
+          <Analytics />
+          <StarsCanvas />
+          <Navbar />
+          <PageTransition>{children}</PageTransition>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -65,6 +65,9 @@ export default function SubdomainPage({ params }: SubdomainPageProps) {
     case 'saas':
       return <ClassicTemplate project={project} />;
     
+    case 'social':
+      return <FallaTemplate project={project} />;
+    
     default:
       // Fallback: Eğer category yoksa veya tanımlı değilse, subdomain'e göre seç
       // Bu eski projeler için geriye dönük uyumluluk sağlar

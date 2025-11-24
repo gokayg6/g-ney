@@ -63,7 +63,7 @@ const Footer: React.FC<{}> = () => {
           );
         })}
       </div>
-      <p className="text-gray-300 text-center text-sm">
+      <p className="text-slate-600 dark:text-gray-300 text-center text-sm transition-colors duration-500">
         
       </p>
     </div>

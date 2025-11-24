@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { AboutData } from "@/lib/data";
+import PageHero from "./PageHero";
 
 const About: React.FC<{}> = () => {
   const [data, setData] = useState<AboutData | null>(null);
@@ -23,26 +24,21 @@ const About: React.FC<{}> = () => {
   }, []);
 
   if (!data) {
-    return <div className="min-h-screen flex items-center justify-center text-white">Yükleniyor...</div>;
+    return <div className="min-h-screen flex items-center justify-center text-slate-900 dark:text-white transition-colors duration-500">Yükleniyor...</div>;
   }
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden px-4 py-20"
+      className="relative overflow-hidden"
     >
-      <div className="flex flex-col justify-center items-center max-w-[900px] w-full gap-6">
-        <h1 className="text-white font-semibold text-4xl md:text-5xl lg:text-6xl text-center animate-zoom-in">
-          {data.title}
-        </h1>
-        <p className="tracking-[0.5em] text-transparent font-light bg-clip-text bg-gradient-to-r from-purple-700 to-orange-500 text-sm md:text-lg lg:text-xl text-center animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
-          {data.subtitle}
-        </p>
-        <p className="text-gray-300 text-center text-sm md:text-base lg:text-lg whitespace-pre-line animate-slide-up max-w-3xl" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
-          {data.description}
-        </p>
-      </div>
+      <PageHero
+        title={data.title}
+        subtitle={data.subtitle}
+        description={data.description}
+        showLogo={true}
+      />
     </section>
   );
 };

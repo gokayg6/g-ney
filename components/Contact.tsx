@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { ContactData } from "@/lib/data";
+import PageHero from "./PageHero";
+import { motion } from "framer-motion";
 
 const Contact: React.FC<{}> = () => {
   const [data, setData] = useState<ContactData | null>(null);
@@ -32,38 +34,74 @@ const Contact: React.FC<{}> = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden px-4 py-20"
+      className="relative overflow-hidden"
     >
-      <div className="flex flex-col justify-center items-center max-w-[900px] w-full gap-6">
-        <h1 className="text-white font-semibold text-4xl md:text-5xl lg:text-6xl text-center animate-zoom-in">
-          {data.title}
-        </h1>
-        <p className="tracking-[0.5em] text-transparent font-light bg-clip-text bg-gradient-to-r from-purple-700 to-orange-500 text-sm md:text-lg lg:text-xl text-center animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
-          {data.subtitle}
-        </p>
-        <p className="text-gray-300 text-center text-base md:text-lg lg:text-xl max-w-3xl">
-          {data.description}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
+      <PageHero
+        title={data.title}
+        subtitle={data.subtitle}
+        description={data.description}
+        showLogo={true}
+      />
+      
+      {/* Contact Butonları */}
+      <div className="flex flex-col items-center justify-center px-4 pb-20 -mt-20 relative z-10">
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.6,
+            duration: 0.7,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        >
           <a
             href={`mailto:${data.email}`}
-            className="z-[1] hover:bg-white rounded-3xl text-white font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent transition-all duration-150 active:scale-95 inline-block animate-slide-up flex items-center gap-2"
-            style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
+            className="relative overflow-hidden group
+                     bg-slate-50 dark:bg-white/10 backdrop-blur-xl
+                     border-2 border-slate-300 dark:border-white/20
+                     text-slate-900 dark:text-white font-semibold py-4 px-8 
+                     rounded-2xl
+                     shadow-xl dark:shadow-lg hover:shadow-2xl hover:border-slate-400 dark:hover:border-white/30
+                     transition-all duration-300
+                     cursor-pointer
+                     select-none
+                     active:scale-[0.98]
+                     flex items-center gap-2"
+            style={{
+              WebkitBackdropFilter: "blur(24px) saturate(180%)",
+            }}
           >
-            <span>📧</span>
-            <span>{data.email}</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-100/0 dark:from-white/0 via-slate-200/30 dark:via-white/10 to-slate-100/0 dark:to-white/0 
+                          opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <span className="relative z-10">📧</span>
+            <span className="relative z-10">{data.email}</span>
           </a>
           {data.phone && (
             <a
               href={`tel:${data.phone.replace(/\s/g, '')}`}
-              className="z-[1] hover:bg-white rounded-3xl text-white font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent transition-all duration-150 active:scale-95 inline-block animate-slide-up flex items-center gap-2"
-              style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+              className="relative overflow-hidden group
+                       bg-white dark:bg-white/5 backdrop-blur-xl
+                       border-2 border-slate-300 dark:border-white/15
+                       text-slate-900 dark:text-white font-semibold py-4 px-8 
+                       rounded-2xl
+                       shadow-xl dark:shadow-lg hover:shadow-2xl hover:border-slate-400 dark:hover:border-white/25
+                       transition-all duration-300
+                       cursor-pointer
+                       select-none
+                       active:scale-[0.98]
+                       flex items-center gap-2"
+              style={{
+                WebkitBackdropFilter: "blur(24px) saturate(180%)",
+              }}
             >
-              <span>📞</span>
-              <span>{data.phone}</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-50/0 dark:from-white/0 via-slate-100/20 dark:via-white/10 to-slate-50/0 dark:to-white/0 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <span className="relative z-10">📞</span>
+              <span className="relative z-10">{data.phone}</span>
             </a>
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
