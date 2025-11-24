@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { HeroData } from "@/lib/data";
@@ -29,17 +29,19 @@ const HomeHero: React.FC = () => {
       });
   }, []);
   
-  // Glassmorphism blur animasyonu için motion values
+  // Glassmorphism blur animasyonu için state değerleri
+  const [backdropBlur, setBackdropBlur] = useState("blur(20px) saturate(180%)");
+  const [containerOpacity, setContainerOpacity] = useState(0.5);
+  
+  // Motion values - component seviyesinde tanımlanmalı
   const blurProgress = useMotionValue(20);
-  const backdropBlur = useTransform(blurProgress, (value) => `blur(${value}px) saturate(180%)`);
   const opacityProgress = useMotionValue(0.5);
-  const containerOpacity = useTransform(opacityProgress, [0.5, 1], [0.5, 1]);
   
   // Blur ve opacity animasyonunu başlat
   useEffect(() => {
     const blurAnimation = animate(blurProgress, 0, {
       duration: 0.8,
-      ease: [0.16, 1, 0.3, 1], // iOS tarzı ease curve - daha yumuşak
+      ease: [0.16, 1, 0.3, 1],
     });
     
     const opacityAnimation = animate(opacityProgress, 1, {
@@ -47,9 +49,20 @@ const HomeHero: React.FC = () => {
       ease: [0.16, 1, 0.3, 1],
     });
     
+    // Motion value'ları state'e dönüştür
+    const unsubscribeBlur = blurProgress.on("change", (value) => {
+      setBackdropBlur(`blur(${value}px) saturate(180%)`);
+    });
+    
+    const unsubscribeOpacity = opacityProgress.on("change", (value) => {
+      setContainerOpacity(value);
+    });
+    
     return () => {
       blurAnimation.stop();
       opacityAnimation.stop();
+      unsubscribeBlur();
+      unsubscribeOpacity();
     };
   }, [blurProgress, opacityProgress]);
 
