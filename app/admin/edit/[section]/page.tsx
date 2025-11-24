@@ -490,7 +490,7 @@ export default function EditSection() {
         id: 'template-falla',
         name: 'Falla',
         subdomain: 'falla',
-        category: 'website',
+        category: 'social',
         title: 'Falla - Social Discovery Platform',
         description: 'Connect with like-minded people, discover new communities, and share your passions. Falla brings people together through shared interests.',
         tagline: 'Discover connections, share passions',

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import type { BlogPost } from "@/lib/data";
 import EditableBlogPreview from "@/components/admin/EditableBlogPreview";
@@ -60,28 +60,29 @@ export default function AdminBlogEditor() {
         }
       })
       .finally(() => setLoading(false));
-  }, [router]);
+  }, [router, loadBlogs]);
 
-  // Load blogs list
-  const loadBlogs = async () => {
+  // Load single blog
+  const loadBlog = useCallback(async (id: string) => {
     try {
       const res = await fetch("/api/content/blog");
       const data = await res.json();
       if (data && data.posts) {
-        setBlogs(data.posts);
-        // İlk blogu seç
-        if (data.posts.length > 0 && !selectedBlogId) {
-          setSelectedBlogId(data.posts[0].id);
-          loadBlog(data.posts[0].id);
+        const blog = data.posts.find((b: BlogPost) => b.id === id);
+        if (blog) {
+          setForm({
+            ...blog,
+            tags: blog.tags || "",
+          });
         }
       }
     } catch (error) {
-      console.error("Error loading blogs:", error);
+      console.error("Error loading blog:", error);
     }
-  };
+  }, []);
 
   // Load single blog
-  const loadBlog = async (id: string) => {
+  const loadBlog = useCallback(async (id: string) => {
     try {
       const res = await fetch("/api/content/blog");
       const data = await res.json();
@@ -103,14 +104,32 @@ export default function AdminBlogEditor() {
             category: blog.category || "NEWS",
             readTime: blog.readTime || "5 dk",
             published: blog.published !== false,
-            tags: "", // Tags şu an BlogPost'ta yok, eklenebilir
+            tags: blog.tags || "",
           });
         }
       }
     } catch (error) {
       console.error("Error loading blog:", error);
     }
-  };
+  }, []);
+
+  // Load blogs list
+  const loadBlogs = useCallback(async () => {
+    try {
+      const res = await fetch("/api/content/blog");
+      const data = await res.json();
+      if (data && data.posts) {
+        setBlogs(data.posts);
+        // İlk blogu seç
+        if (data.posts.length > 0 && !selectedBlogId) {
+          setSelectedBlogId(data.posts[0].id);
+          loadBlog(data.posts[0].id);
+        }
+      }
+    } catch (error) {
+      console.error("Error loading blogs:", error);
+    }
+  }, [selectedBlogId, loadBlog]);
 
   // Handle blog selection
   const handleBlogSelect = (id: string) => {
