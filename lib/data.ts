@@ -80,6 +80,7 @@ export interface BlogPost {
   category: string;
   readTime: string;
   published: boolean;
+  tags?: string;
 }
 
 export interface BlogData {
