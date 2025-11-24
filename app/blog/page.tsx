@@ -190,7 +190,7 @@ export default function BlogPage() {
           {posts.map((post, index) => (
             <article
               key={post.id}
-              className="group relative flex flex-col bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] shadow-lg dark:shadow-xl overflow-hidden animate-fade-in h-full transition-all duration-500"
+              className="group relative flex flex-col bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] shadow-lg dark:shadow-xl overflow-hidden animate-fade-in h-full transition-all duration-500"
               style={{ animationDelay: `${index * 0.05}s`, position: 'relative', zIndex: 1 }}
             >
               {/* üst glow */}
@@ -385,7 +385,7 @@ export default function BlogPage() {
                      id={`post-details-${post.id}`}
                      className="mt-4 pt-4 border-t border-slate-300 dark:border-white/20 animate-fade-in transition-colors duration-500"
                    >
-                    <div className="bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl transition-colors duration-500">
+                    <div className="bg-white/90 dark:bg-transparent backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl transition-colors duration-500">
                       <h4 className="text-slate-900 dark:text-slate-50 text-base sm:text-lg md:text-xl font-bold mb-3 transition-colors duration-500">
                         {post.title}
                       </h4>

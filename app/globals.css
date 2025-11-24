@@ -636,3 +636,27 @@ select.admin-select option:checked {
   background-color: rgba(255, 255, 255, 0.2) !important;
   color: white !important;
 }
+
+/* HomeHero Buttons - Force clickable */
+.home-hero-buttons a,
+.home-hero-buttons button {
+  position: relative !important;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  isolation: isolate !important;
+}
+
+.home-hero-buttons a *,
+.home-hero-buttons button * {
+  pointer-events: none !important;
+}
+
+/* Ensure container doesn't block */
+.home-hero-buttons {
+  position: relative !important;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+  isolation: isolate !important;
+}

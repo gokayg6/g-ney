@@ -2,12 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import { HeroData } from "@/lib/data";
 
 const HomeHero: React.FC = () => {
-  const router = useRouter();
   const [data, setData] = useState<HeroData | null>(null);
   
   // API'den veri çek
@@ -66,18 +65,6 @@ const HomeHero: React.FC = () => {
     };
   }, [blurProgress, opacityProgress]);
 
-  // Buton tıklama handler'ları
-  const handleProjectsClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    router.push("/projects");
-  };
-
-  const handleContactClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    router.push("/contact");
-  };
 
   if (!data) {
     return <div className="min-h-screen flex items-center justify-center text-white">Yükleniyor...</div>;
@@ -103,6 +90,7 @@ const HomeHero: React.FC = () => {
           mass: 1.5,
           duration: 0.8,
         }}
+        style={{ position: 'relative', zIndex: 1 }}
       >
         {/* Hero Kartı - iOS Glassmorphism efekti */}
         <div 
@@ -192,7 +180,7 @@ const HomeHero: React.FC = () => {
 
             {/* Butonlar Container - Glassmorphism butonlar */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 md:gap-5 relative z-50"
+              className="home-hero-buttons flex flex-col sm:flex-row gap-4 md:gap-5 relative"
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -202,9 +190,8 @@ const HomeHero: React.FC = () => {
               }}
             >
               {/* Primary Button - Glassmorphism efekti */}
-              <button
-                type="button"
-                onClick={handleProjectsClick}
+              <Link
+                href="/projects"
                 className="flex-1 relative overflow-hidden group
                          bg-slate-50 dark:bg-white/10 backdrop-blur-xl
                          border-2 border-slate-300 dark:border-white/20
@@ -214,23 +201,25 @@ const HomeHero: React.FC = () => {
                          transition-all duration-300
                          cursor-pointer
                          select-none
-                         active:scale-[0.98]"
+                         active:scale-[0.98]
+                         touch-action: manipulation
+                         inline-flex items-center justify-center
+                         no-underline"
                 style={{
                   WebkitBackdropFilter: "blur(24px) saturate(180%)",
                   position: "relative",
-                  zIndex: 50,
+                  isolation: "isolate",
                 }}
               >
                 {/* Hover efekti için gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-100/0 dark:from-white/0 via-slate-200/30 dark:via-white/10 to-slate-100/0 dark:to-white/0 
                               opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 <span className="relative z-10 block">Projelerimi Gör</span>
-              </button>
+              </Link>
 
               {/* Secondary Button - Glassmorphism efekti */}
-              <button
-                type="button"
-                onClick={handleContactClick}
+              <Link
+                href="/contact"
                 className="flex-1 relative overflow-hidden group
                          bg-white dark:bg-white/5 backdrop-blur-xl
                          border-2 border-slate-300 dark:border-white/15
@@ -240,18 +229,21 @@ const HomeHero: React.FC = () => {
                          transition-all duration-300
                          cursor-pointer
                          select-none
-                         active:scale-[0.98]"
+                         active:scale-[0.98]
+                         touch-action: manipulation
+                         inline-flex items-center justify-center
+                         no-underline"
                 style={{
                   WebkitBackdropFilter: "blur(24px) saturate(180%)",
                   position: "relative",
-                  zIndex: 50,
+                  isolation: "isolate",
                 }}
               >
                 {/* Hover efekti için gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-50/0 dark:from-white/0 via-slate-100/20 dark:via-white/10 to-slate-50/0 dark:to-white/0 
                               opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 <span className="relative z-10 block">{data.buttonText || "İletişime Geç"}</span>
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>

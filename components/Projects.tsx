@@ -248,7 +248,7 @@ const Projects: React.FC = () => {
               return (
                 <div
                   key={project.id || index}
-                  className="group relative overflow-hidden rounded-3xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-500 hover:scale-[1.03] shadow-lg dark:shadow-xl hover:shadow-2xl hover:shadow-purple-500/30 dark:hover:shadow-purple-500/20 animate-fade-in min-h-[420px]"
+                  className="group relative overflow-hidden rounded-3xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 hover:border-slate-300 dark:hover:border-white/30 transition-all duration-500 hover:scale-[1.03] shadow-lg dark:shadow-xl hover:shadow-2xl hover:shadow-purple-500/30 dark:hover:shadow-purple-500/20 animate-fade-in min-h-[420px]"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     animationFillMode: "both",
@@ -391,25 +391,25 @@ const Projects: React.FC = () => {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto animate-fade-in"
           style={{ animationDelay: "0.4s", animationFillMode: "both" }}
         >
-          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl">
+          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl">
             <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {allProjects.length}
             </div>
             <div className="text-slate-600 dark:text-white/60 text-sm">Toplam Proje</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl">
+          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl">
             <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {data.items.length}
             </div>
             <div className="text-slate-600 dark:text-white/60 text-sm">Standart Proje</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl">
+          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl">
             <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {subdomainProjects.length}
             </div>
             <div className="text-slate-600 dark:text-white/60 text-sm">Subdomain</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg dark:shadow-xl">
+          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl">
             <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {
                 new Set(
