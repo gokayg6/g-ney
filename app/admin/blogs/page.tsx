@@ -71,25 +71,6 @@ export default function AdminBlogEditor() {
         const blog = data.posts.find((b: BlogPost) => b.id === id);
         if (blog) {
           setForm({
-            ...blog,
-            tags: blog.tags || "",
-          });
-        }
-      }
-    } catch (error) {
-      console.error("Error loading blog:", error);
-    }
-  }, []);
-
-  // Load single blog
-  const loadBlog = useCallback(async (id: string) => {
-    try {
-      const res = await fetch("/api/content/blog");
-      const data = await res.json();
-      if (data && data.posts) {
-        const blog = data.posts.find((b: BlogPost) => b.id === id);
-        if (blog) {
-          setForm({
             id: blog.id,
             title: blog.title || "",
             excerpt: blog.excerpt || "",
