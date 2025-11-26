@@ -725,6 +725,51 @@
           "networking"
         ]
       }
+    },
+    {
+      "id": "1764167776622",
+      "name": "",
+      "subdomain": "yes",
+      "category": "ecommerce",
+      "title": "LuxeStyle - Premium Fashion Marketplace",
+      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
+      "tagline": "Elevate your style, discover luxury",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
+      "features": [
+        "Curated premium collections",
+        "AR virtual try-on",
+        "One-tap checkout",
+        "Personalized recommendations",
+        "Exclusive member deals",
+        "Fast & free shipping"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
+        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
+        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
+      ],
+      "appStoreLink": "",
+      "playStoreLink": "",
+      "techStack": [
+        "React Native",
+        "Shopify",
+        "Stripe",
+        "AR Kit"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "LuxeStyle - Premium Fashion App",
+        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
+        "keywords": [
+          "fashion",
+          "shopping",
+          "ecommerce",
+          "luxury"
+        ]
+      },
+      "siteLink": ""
     }
   ]
 }

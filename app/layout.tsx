@@ -92,12 +92,13 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} bg-[#f5f5f7] dark:bg-[#111] text-slate-900 dark:text-white transition-colors duration-500 ease-out overflow-y-scroll overflow-x-hidden`}
+        className={`${inter.className} bg-[#111] text-white transition-colors duration-500 ease-out overflow-y-scroll overflow-x-hidden`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          forcedTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange={false}
         >
           <SpeedInsights />
