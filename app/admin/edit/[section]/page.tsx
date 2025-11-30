@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { PortfolioData, HeroData, AboutData, ExperienceData, ProjectsData, ContactData, SocialIcon, ExperienceItem, ProjectItem, BlogPost } from '@/lib/data';
 import { SubdomainProject } from '@/lib/subdomain-data';
 import StarsCanvas from '@/components/main/StarsBackground';
-import { FiTrash2, FiImage, FiCamera, FiMail, FiPhone, FiSmartphone, FiShoppingCart, FiGamepad2, FiBriefcase, FiUsers, FiRocket } from 'react-icons/fi';
+import { FiTrash2, FiImage, FiCamera, FiMail, FiPhone, FiSmartphone, FiShoppingCart, FiPackage, FiBriefcase, FiUsers, FiZap } from 'react-icons/fi';
 
 export default function EditSection() {
   const router = useRouter();

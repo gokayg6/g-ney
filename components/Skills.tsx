@@ -12,8 +12,7 @@ import {
   SiNodedotjs,
   SiFirebase,
   SiGit,
-  SiFigma,
-  SiAws
+  SiFigma
 } from "react-icons/si";
 
 const iconMap: { [key: string]: any } = {
@@ -26,7 +25,6 @@ const iconMap: { [key: string]: any } = {
   "Firebase": SiFirebase,
   "Git": SiGit,
   "Figma": SiFigma,
-  "AWS": SiAws,
 };
 
 export default function Skills() {
