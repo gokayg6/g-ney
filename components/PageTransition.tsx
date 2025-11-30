@@ -26,7 +26,6 @@ export default function PageTransition({ children }: { children: React.ReactNode
           scale: 1,
           filter: "blur(0px)"
         }}
-        exit={false}
         transition={{
           duration: 0.5,
           ease: [0.23, 1, 0.32, 1], // iOS-style easing
