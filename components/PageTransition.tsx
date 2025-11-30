@@ -17,31 +17,26 @@ export default function PageTransition({ children }: { children: React.ReactNode
       <motion.div
         key={pathname}
         initial={{ 
-          opacity: 0, 
-          scale: 1.02, 
-          filter: "blur(4px)" 
+          opacity: 0,
+          scale: 1.08,
+          filter: "blur(12px)"
         }}
         animate={{ 
-          opacity: 1, 
-          scale: 1, 
-          filter: "blur(0px)" 
+          opacity: 1,
+          scale: 1,
+          filter: "blur(0px)"
         }}
-        exit={{ 
-          opacity: 0,
-          scale: 0.98,
-          filter: "blur(4px)",
-          transition: { duration: 0.15 }
-        }}
+        exit={false}
         transition={{
-          duration: 0.4,
-          ease: [0.23, 1, 0.32, 1], // iOS easing
+          duration: 0.5,
+          ease: [0.23, 1, 0.32, 1], // iOS-style easing
         }}
         style={{
           minHeight: '100vh',
           pointerEvents: 'auto',
           position: 'relative',
           zIndex: 1,
-          backgroundColor: 'transparent',
+          transformOrigin: 'center center',
         }}
       >
         {children}

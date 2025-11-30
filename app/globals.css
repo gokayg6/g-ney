@@ -399,7 +399,7 @@ img, video {
 }
 
 /* Blur card content on hover - STRONG BLUR */
-.blog-card:hover > *:not(.view-details-btn):not(button):not([class*="absolute"]) {
+.blog-card:hover > *:not(.view-details-btn):not(button):not([class*="absolute"]):not([class*="z-"]):not([class*="z-"]) {
   filter: blur(6px) !important;
   transition: filter 0.5s ease-out !important;
 }
@@ -412,6 +412,21 @@ img, video {
 .blog-card:hover .view-details-btn {
   filter: none !important;
   z-index: 1000000 !important;
+}
+
+/* Hide text content on hover when button is visible */
+article.group:hover .blog-card-text-content {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease-out !important;
+}
+
+/* Ensure view-details-btn is always on top and visible on hover */
+article.group:hover .view-details-btn {
+  z-index: 1000000 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  pointer-events: auto !important;
 }
 
 .blog-card img,
@@ -671,10 +686,33 @@ article.group > div.relative > div.absolute.inset-0.flex.items-center.justify-ce
   position: relative !important;
 }
 
+.view-details-btn {
+  transform-origin: center center !important;
+  will-change: transform, box-shadow;
+}
+
 .view-details-btn:hover {
-  transform: scale(1.15) !important;
-  box-shadow: 0 25px 50px rgba(255, 255, 255, 0.5) !important;
-  background-color: rgba(255, 255, 255, 0.4) !important;
+  transform: translate(-50%, -50%) scale(1.08) !important;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 
+              0 0 60px rgba(255, 255, 255, 0.3),
+              0 8px 24px rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform-origin: center center !important;
+}
+
+.view-details-btn:active {
+  transform: translate(-50%, -50%) scale(1.02) !important;
+  transform-origin: center center !important;
+  transition-duration: 0.1s !important;
+}
+
+/* Smooth scale animation on hover */
+.view-details-btn {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.3s ease,
+              border-color 0.3s ease !important;
 }
 
 .view-details-btn:active {

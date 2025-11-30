@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import type { BlogPost, BlogData } from "@/lib/data";
@@ -211,26 +210,17 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen relative z-10">
       {/* HERO / INTRO */}
-      <motion.div
-        initial={{ opacity: 0, y: 30, rotateX: -10 }}
-        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      >
+      <div>
         <PageHero
           title={meta.title}
           subtitle={meta.subtitle}
           description={`${meta.introTitle}\n\n${meta.introDescription}`}
           showLogo={true}
         />
-      </motion.div>
+      </div>
 
       {/* BLOG GRID */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="px-3 sm:px-4 md:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24"
-      >
+      <section className="px-3 sm:px-4 md:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
           {posts.map((post, index) => (
             <article
@@ -257,7 +247,7 @@ export default function BlogPage() {
                   <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/90 opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   {/* image içi content */}
-                  <div className="absolute inset-0 flex flex-col justify-end sm:justify-center items-center p-3 sm:p-4 md:p-5 lg:p-6 pointer-events-none z-30">
+                  <div className="blog-card-text-content absolute inset-0 flex flex-col justify-end sm:justify-center items-center p-3 sm:p-4 md:p-5 lg:p-6 pointer-events-none z-10 sm:group-hover:opacity-0 sm:group-hover:pointer-events-none transition-opacity duration-300">
                     <div className="w-full sm:w-auto text-center transform translate-y-3 sm:translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
                       <h4 className="text-white text-sm sm:text-base md:text-lg font-semibold mb-2 line-clamp-2 drop-shadow-xl">
                         {post.title}
@@ -268,7 +258,7 @@ export default function BlogPage() {
                     </div>
                   </div>
 
-                  {/* DETAYLARI GÖR BUTONU - Ayrı container, en üstte */}
+                  {/* DETAYLARI GÖR BUTONU - Modern tasarım */}
                   <button
                     type="button"
                     onClick={(e) => {
@@ -303,7 +293,7 @@ export default function BlogPage() {
                       e.stopPropagation();
                       console.log('Button touch for post:', post.id);
                     }}
-                    className="absolute inset-0 flex items-center justify-center z-[100000] opacity-100 sm:opacity-30 sm:group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-3.5 rounded-full text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-slate-900 dark:text-white bg-white/90 dark:bg-white/40 border-2 border-slate-300 dark:border-white/80 hover:bg-white dark:hover:bg-white/50 active:bg-slate-100 dark:active:bg-white/60 hover:scale-110 active:scale-95 transition-all duration-200 shadow-[0_15px_40px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_40px_rgba(255,255,255,0.4)] min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[170px]"
+                    className="view-details-btn absolute z-[100000] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-4.5 md:py-2 rounded-full text-[10px] sm:text-[11px] md:text-xs font-bold uppercase tracking-wider text-white bg-white/10 dark:bg-white/8 backdrop-blur-md border border-white/30 dark:border-white/35 shadow-[0_8px_32px_rgba(255,255,255,0.15)] dark:shadow-[0_8px_32px_rgba(255,255,255,0.2)] min-w-[110px] sm:min-w-[125px] md:min-w-[135px] transition-all duration-300 ease-out"
                     style={{
                       zIndex: 100000,
                       position: "absolute",
@@ -314,17 +304,18 @@ export default function BlogPage() {
                       top: "50%",
                       left: "50%",
                       transform: "translate(-50%, -50%)",
+                      transformOrigin: "center center",
                     }}
                   >
-                    <span className="whitespace-nowrap font-extrabold">DETAYLARI GÖR</span>
+                    <span className="whitespace-nowrap font-extrabold drop-shadow-sm">Detayları Gör</span>
                     <svg
-                      className={`w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-4.5 md:h-4.5 flex-shrink-0 transition-transform duration-300 ${
+                      className={`w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-3.5 md:h-3.5 flex-shrink-0 transition-transform duration-300 drop-shadow-sm ${
                         expandedPostId === post.id ? "rotate-90" : ""
                       }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      strokeWidth={3}
+                      strokeWidth={2.5}
                     >
                       <path
                         strokeLinecap="round"
@@ -541,15 +532,11 @@ export default function BlogPage() {
             </article>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      >
+      <div>
         <Footer />
-      </motion.div>
+      </div>
     </main>
   );
 }
