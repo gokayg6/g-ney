@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import type { ProjectsData, ProjectItem } from "@/lib/data";
 import type { SubdomainProject } from "@/lib/subdomain-data";
 
 const fallbackProjects: ProjectsData = {
-  title: "PROJECTS",
-  subtitle: "EXPLORE NOW",
+  title: "PROJELER",
+  subtitle: "KEŞFET",
   items: [],
 };
 
@@ -52,11 +54,20 @@ type CombinedProject =
   | (ProjectItem & { isSubdomain: false })
   | (SubdomainProject & { isSubdomain: true });
 
-const Projects: React.FC = () => {
-  const [data, setData] = useState<ProjectsData | null>(null);
+interface ProjectsProps {
+  showHeader?: boolean;
+}
+
+const Projects: React.FC<ProjectsProps> = ({ showHeader = true }) => {
+  const [data, setData] = useState<ProjectsData>(fallbackProjects);
   const [subdomainProjects, setSubdomainProjects] = useState<SubdomainProject[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const sectionRef = useRef<HTMLElement>(null);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.05,
+    rootMargin: '-50px 0px',
+  });
 
   useEffect(() => {
     async function loadData() {
@@ -100,13 +111,6 @@ const Projects: React.FC = () => {
     loadData();
   }, []);
 
-  if (!data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white">
-        Yükleniyor...
-      </div>
-    );
-  }
 
   // Tüm projeleri tek listede birleştir
   const allProjects: CombinedProject[] = [
@@ -163,18 +167,47 @@ const Projects: React.FC = () => {
 
   return (
     <section
-      ref={sectionRef}
+      ref={ref}
       id="projects"
-      className="px-4 sm:px-6 lg:px-8 py-20 min-h-screen relative"
-      style={{ position: "relative", zIndex: 1 }}
+      className={`px-2 sm:px-4 md:px-6 lg:px-8 relative ${showHeader ? 'py-16 min-h-screen' : 'py-8 md:py-12'} pb-20 md:pb-8`}
+      style={{ position: "relative", zIndex: 10 }}
     >
+      {showHeader ? (
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ 
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1]
+          }}
+          className="text-center mb-12"
+        >
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-3xl md:text-4xl font-bold text-white mb-2"
+          >
+            {data.title}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-lg md:text-xl text-gray-300"
+          >
+            {data.subtitle}
+          </motion.p>
+        </motion.div>
+      ) : null}
 
       {/* Filters */}
-      <div
-        className="flex flex-wrap justify-center gap-3 mb-12 px-4 animate-fade-in relative"
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="flex flex-wrap justify-center gap-3 mb-12 px-4 relative"
         style={{
-          animationDelay: "0.2s",
-          animationFillMode: "both",
           zIndex: 1000,
           position: "relative",
         }}
@@ -201,17 +234,18 @@ const Projects: React.FC = () => {
               position: "relative",
               zIndex: 1000,
               cursor: "pointer",
+              pointerEvents: 'auto',
             }}
           >
             {filter.label}
           </button>
         ))}
-      </div>
+      </motion.div>
 
       {/* Projects Grid */}
       <div
-        className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-        style={{ position: "relative", zIndex: 1 }}
+        className="w-full max-w-7xl mx-auto"
+        style={{ position: "relative", zIndex: 10 }}
       >
         {filteredProjects.length === 0 ? (
           <div className="text-center py-20">
@@ -220,7 +254,7 @@ const Projects: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {filteredProjects.map((project, index) => {
               const subdomainProject = project.isSubdomain
                 ? (project as SubdomainProject)
@@ -246,13 +280,12 @@ const Projects: React.FC = () => {
                   : null;
 
               return (
-                <div
+                <motion.div
                   key={project.id || index}
-                  className="group relative overflow-hidden rounded-3xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 hover:border-slate-300 dark:hover:border-white/30 transition-all duration-500 hover:scale-[1.03] shadow-lg dark:shadow-xl hover:shadow-2xl hover:shadow-purple-500/30 dark:hover:shadow-purple-500/20 animate-fade-in min-h-[420px]"
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                    animationFillMode: "both",
-                  }}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-transparent border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all duration-500 hover:scale-[1.03] shadow-lg dark:shadow-xl hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] min-h-[380px] sm:min-h-[420px]"
                 >
                   {/* Image Container */}
                   <div className="relative h-64 overflow-hidden pointer-events-none">
@@ -296,9 +329,9 @@ const Projects: React.FC = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 space-y-4 relative z-10 flex flex-col justify-between h-[calc(100%-16rem)]">
+                  <div className="p-3 sm:p-4 md:p-5 space-y-2 sm:space-y-3 relative z-10 flex flex-col justify-between" style={{ minHeight: 'calc(100% - 16rem)' }}>
                     <div>
-                      <h3 className="text-slate-900 dark:text-slate-50 text-xl font-bold mb-2 line-clamp-2 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
+                      <h3 className="text-slate-900 dark:text-slate-50 text-lg sm:text-xl font-bold mb-2 line-clamp-2 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
                         {project.title}
                       </h3>
 
@@ -345,7 +378,8 @@ const Projects: React.FC = () => {
                             e.preventDefault();
                             e.stopPropagation();
                           }}
-                          className="w-full px-6 py-3 rounded-xl font-semibold text-sm bg-white/80 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                          style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
+                          className="w-full px-4 py-2.5 rounded-xl font-semibold text-sm bg-white/80 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <span>Keşfet</span>
                           <span className="text-lg">→</span>
@@ -358,7 +392,8 @@ const Projects: React.FC = () => {
                           onClick={(e) => {
                             e.stopPropagation();
                           }}
-                          className="block w-full px-6 py-3 rounded-xl font-semibold text-sm bg-white/80 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                          style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
+                          className="block w-full px-4 py-2.5 rounded-xl font-semibold text-sm bg-white/80 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <span>Ziyaret Et</span>
                           <span className="text-lg">↗</span>
@@ -378,7 +413,7 @@ const Projects: React.FC = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-orange-500/10" />
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -391,25 +426,33 @@ const Projects: React.FC = () => {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto animate-fade-in"
           style={{ animationDelay: "0.4s", animationFillMode: "both" }}
         >
-          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl">
-            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+          <div 
+            className="text-center p-4 md:p-5 rounded-2xl bg-transparent border border-white/10 shadow-lg dark:shadow-xl"
+          >
+            <div className="text-3xl font-bold text-white mb-2">
               {allProjects.length}
             </div>
-            <div className="text-slate-600 dark:text-white/60 text-sm">Toplam Proje</div>
+            <div className="text-white/60 text-sm">Toplam Proje</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl">
-            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+          <div 
+            className="text-center p-4 md:p-5 rounded-2xl bg-transparent border border-white/10 shadow-lg dark:shadow-xl"
+          >
+            <div className="text-3xl font-bold text-white mb-2">
               {data.items.length}
             </div>
-            <div className="text-slate-600 dark:text-white/60 text-sm">Standart Proje</div>
+            <div className="text-white/60 text-sm">Standart Proje</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl">
-            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+          <div 
+            className="text-center p-4 md:p-5 rounded-2xl bg-transparent border border-white/10 shadow-lg dark:shadow-xl"
+          >
+            <div className="text-3xl font-bold text-white mb-2">
               {subdomainProjects.length}
             </div>
-            <div className="text-slate-600 dark:text-white/60 text-sm">Subdomain</div>
+            <div className="text-white/60 text-sm">Subdomain</div>
           </div>
-          <div className="text-center p-6 rounded-2xl bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl">
+          <div 
+            className="text-center p-4 md:p-5 rounded-2xl bg-transparent border border-white/10 shadow-lg dark:shadow-xl"
+          >
             <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {
                 new Set(

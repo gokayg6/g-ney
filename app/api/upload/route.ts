@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, chmod } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { verifyToken } from '@/lib/auth';
@@ -38,6 +38,12 @@ export async function POST(request: NextRequest) {
     const uploadsDir = join(process.cwd(), 'public', folder);
     if (!existsSync(uploadsDir)) {
       await mkdir(uploadsDir, { recursive: true });
+      // Set proper permissions (read/write/execute for owner, read/execute for group)
+      try {
+        await chmod(uploadsDir, 0o755);
+      } catch (chmodError) {
+        console.warn("Could not set directory permissions:", chmodError);
+      }
     }
 
     // Generate unique filename

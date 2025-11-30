@@ -13,7 +13,10 @@ export default function AdminLogin() {
 
   useEffect(() => {
     // Check if already authenticated
-    fetch('/api/auth/verify')
+    fetch('/api/auth/verify', {
+      credentials: 'include',
+      cache: 'no-store',
+    })
       .then(res => res.json())
       .then(data => {
         if (data.authenticated) {

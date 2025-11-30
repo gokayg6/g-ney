@@ -100,7 +100,7 @@ export default function BlogPostPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center flex items-center justify-center">
+      <main className="min-h-screen relative z-10 flex items-center justify-center">
         <div className="text-white/80 tracking-[0.3em] uppercase text-sm animate-pulse">
           Yükleniyor...
         </div>
@@ -110,8 +110,8 @@ export default function BlogPostPage() {
 
   if (!post) {
     return (
-      <main className="min-h-screen bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center flex items-center justify-center px-4">
-        <div className="max-w-md w-full bg-black/40 backdrop-blur-xl rounded-3xl border border-white/20 p-6 sm:p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+      <main className="min-h-screen relative z-10 flex items-center justify-center px-4">
+        <div className="max-w-md w-full bg-black/40 rounded-3xl border border-white/20 p-6 sm:p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
           <h1 className="text-white text-2xl sm:text-3xl font-serif mb-3">
             Yazı bulunamadı
           </h1>
@@ -143,7 +143,7 @@ export default function BlogPostPage() {
   }
 
   return (
-    <main className="bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center min-h-screen">
+    <main className="relative z-10 min-h-screen">
       {/* HERO GÖRSEL */}
       <div className="relative h-[260px] sm:h-[360px] md:h-[460px] lg:h-[520px]">
         {post.image && (
@@ -171,7 +171,7 @@ export default function BlogPostPage() {
 
       {/* ANA İÇERİK KARTI */}
       <article className="relative max-w-4xl mx-auto -mt-14 sm:-mt-18 md:-mt-24 mb-10 sm:mb-14 md:mb-20 px-3 sm:px-4" style={{ zIndex: 10 }}>
-        <div className="relative bg-black/40 md:bg-black/35 backdrop-blur-2xl rounded-[22px] sm:rounded-[28px] md:rounded-[36px] shadow-[0_26px_80px_rgba(0,0,0,0.6)] p-4 sm:p-6 md:p-8 lg:p-10 border border-white/20" style={{ position: 'relative', zIndex: 10 }}>
+        <div className="relative bg-black/40 md:bg-black/35 rounded-[22px] sm:rounded-[28px] md:rounded-[36px] shadow-[0_26px_80px_rgba(0,0,0,0.6)] p-4 sm:p-6 md:p-8 lg:p-10 border border-white/20" style={{ position: 'relative', zIndex: 10 }}>
           {/* geri linki */}
           <div className="flex items-center justify-between gap-3 mb-5 sm:mb-6">
             <Link
@@ -340,7 +340,7 @@ export default function BlogPostPage() {
                 <Link
                   key={rp.id}
                   href={`/blog/${rp.id}`}
-                  className="group flex gap-3 sm:gap-4 bg-black/35 backdrop-blur-xl rounded-2xl border border-white/15 overflow-hidden hover:border-white/30 hover:bg-black/45 transition-all duration-200"
+                  className="group flex gap-3 sm:gap-4 bg-black/35 rounded-2xl border border-white/15 overflow-hidden hover:border-white/30 hover:bg-black/45 transition-all duration-200"
                 >
                   {rp.image && (
                     <div className="relative w-24 sm:w-28 md:w-32 aspect-[4/5] flex-shrink-0 overflow-hidden">

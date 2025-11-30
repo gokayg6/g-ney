@@ -5,6 +5,7 @@
 
 import type { ReactNode } from "react";
 import { Inter } from "next/font/google";
+import StarsCanvas from "@/components/main/StarsBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,9 +16,12 @@ interface SubdomainLayoutProps {
 export default function SubdomainLayout({ children }: SubdomainLayoutProps) {
   return (
     <div
-      className={`${inter.className} bg-[#0a0a0a] min-h-screen overflow-y-scroll overflow-x-hidden`}
+      className={`${inter.className} bg-[#0a0a0a] min-h-screen overflow-y-scroll overflow-x-hidden relative`}
     >
-      {children}
+      <StarsCanvas />
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {children}
+      </div>
     </div>
   );
 }

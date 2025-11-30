@@ -1,57 +1,48 @@
 "use client";
 
-import { useEffect, useState, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const prevPathnameRef = useRef(pathname);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Clear any existing timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    if (pathname !== prevPathnameRef.current) {
-      // Start exit animation (blur and scale down)
-      setIsTransitioning(true);
-      
-      // After exit animation completes, allow new page to render
-      timeoutRef.current = setTimeout(() => {
-        prevPathnameRef.current = pathname;
-        
-        // Small delay then remove transition class for enter animation
-        setTimeout(() => {
-          setIsTransitioning(false);
-        }, 50);
-      }, 300);
-    } else {
-      // Same pathname, no transition needed
-      setIsTransitioning(false);
-    }
-
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
+    // Instant scroll to top on route change
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
 
   return (
-    <div 
-      className={isTransitioning ? 'transitioning' : ''}
-      style={{
-        willChange: isTransitioning ? 'transform, filter, opacity' : 'auto',
-        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        minHeight: '100vh',
-        opacity: isTransitioning ? 0.8 : 1,
-      }}
-    >
-      {children}
-    </div>
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={pathname}
+        initial={{ 
+          opacity: 0, 
+          scale: 1.05, 
+          filter: "blur(8px)" 
+        }}
+        animate={{ 
+          opacity: 1, 
+          scale: 1, 
+          filter: "blur(0px)" 
+        }}
+        exit={{ 
+          opacity: 0,
+          transition: { duration: 0.1 }
+        }}
+        transition={{
+          duration: 0.6,
+          ease: [0.23, 1, 0.32, 1], // iOS easing
+        }}
+        style={{
+          minHeight: '100vh',
+          pointerEvents: 'auto',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 }
-

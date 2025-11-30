@@ -4,45 +4,37 @@ import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { useEffect, useState } from "react";
-import type { ProjectsData } from "@/lib/data";
+import { ProjectsData } from "@/lib/data";
 
 export default function ProjectsPage() {
-  const [data, setData] = useState<ProjectsData | null>(null);
+  const [meta] = useState<{ title: string; subtitle: string }>({
+    title: "PROJELER",
+    subtitle: "KEŞFET",
+  });
 
   useEffect(() => {
+    // Fetch in background without blocking render
     fetch("/api/content/projects")
       .then((res) => res.json())
-      .then((data) => {
-        if (data && data.title) {
-          setData(data);
-        } else {
-          setData({
-            title: "PROJECTS",
-            subtitle: "EXPLORE NOW",
-            items: [],
-          });
+      .then((data: ProjectsData) => {
+        if (data.title || data.subtitle) {
+          // Optionally update if needed, but don't block initial render
         }
       })
       .catch(() => {
-        setData({
-          title: "PROJECTS",
-          subtitle: "EXPLORE NOW",
-          items: [],
-        });
+        // Silent fail
       });
   }, []);
 
   return (
-    <main className="h-full w-full bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center min-h-screen">
-      {data && (
+    <main className="h-full w-full bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center min-h-screen relative z-10">
+      <div className="flex flex-col pt-16 md:pt-20 pb-8">
         <PageHero
-          title={data.title}
-          subtitle={data.subtitle}
-          showLogo={true}
+          title={meta.title}
+          subtitle={meta.subtitle}
+          showLogo={false}
         />
-      )}
-      <div className="flex flex-col gap-20 pb-8">
-        <Projects />
+        <Projects showHeader={false} />
         <Footer />
       </div>
     </main>

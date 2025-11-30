@@ -69,22 +69,37 @@ export async function PUT(
   { params }: { params: { section: string } }
 ) {
   try {
+    const hostname = request.headers.get('host') || '';
+    const isProduction = process.env.NODE_ENV === 'production';
+    const isLoegsDomain = hostname.includes('loegs.com') || hostname === 'loegs.com';
+    
+    console.log('PUT request received:', { 
+      section: params.section, 
+      hostname, 
+      isProduction, 
+      isLoegsDomain 
+    });
+
     // Verify authentication
     const token = request.cookies.get('admin-token')?.value;
     if (!token) {
+      console.log('No token found in cookies');
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: 'Unauthorized - No authentication token' },
         { status: 401 }
       );
     }
 
     const decoded = verifyToken(token);
     if (!decoded) {
+      console.log('Token verification failed');
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: 'Unauthorized - Invalid token' },
         { status: 401 }
       );
     }
+
+    console.log('Authentication successful:', { email: decoded.email });
 
     const data = getData();
     const section = params.section as keyof PortfolioData;
@@ -110,12 +125,13 @@ export async function PUT(
     }
 
     saveData(data);
+    console.log('Data saved successfully for section:', section);
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error saving section:', error);
     return NextResponse.json(
-      { error: 'Failed to save section' },
+      { error: `Failed to save section: ${error instanceof Error ? error.message : 'Unknown error'}` },
       { status: 500 }
     );
   }

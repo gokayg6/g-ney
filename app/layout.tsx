@@ -4,9 +4,11 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import StarsCanvas from "@/components/main/StarsBackground";
-import Navbar from "@/components/Navbar";
 import PageTransition from "@/components/PageTransition";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import DarkVeil from "@/components/DarkVeil";
+import Threads from "@/components/Threads";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -92,7 +94,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} bg-[#111] text-white transition-colors duration-500 ease-out overflow-y-scroll overflow-x-hidden`}
+        className={`${inter.className} text-white overflow-y-scroll overflow-x-hidden`}
+        style={{
+          backgroundColor: "transparent",
+        }}
       >
         <ThemeProvider
           attribute="class"
@@ -103,9 +108,25 @@ export default function RootLayout({
         >
           <SpeedInsights />
           <Analytics />
+          {/* StarsCanvas */}
           <StarsCanvas />
+          {/* DarkVeil - Mor arka plan (en altta) */}
+          <div style={{ width: '100%', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: -2, pointerEvents: 'none' }}>
+            <DarkVeil />
+          </div>
+          {/* Threads - Mor arka planın üstünde ama içeriklerin altında */}
+          <div style={{ width: '100%', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: -1, pointerEvents: 'none' }}>
+            <Threads
+              amplitude={1}
+              distance={0}
+              enableMouseInteraction={true}
+              color={[1, 1, 1]}
+            />
+          </div>
           <Navbar />
-          <PageTransition>{children}</PageTransition>
+          <div style={{ position: 'relative', zIndex: 100 }}>
+            <PageTransition>{children}</PageTransition>
+          </div>
         </ThemeProvider>
       </body>
     </html>

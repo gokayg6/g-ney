@@ -50,7 +50,10 @@ export default function AdminBlogEditor() {
   // Load single blog
   const loadBlog = useCallback(async (id: string) => {
     try {
-      const res = await fetch("/api/content/blog");
+      const res = await fetch("/api/content/blog", {
+        credentials: "include",
+        cache: "no-store",
+      });
       const data = await res.json();
       if (data && data.posts) {
         const blog = data.posts.find((b: BlogPost) => b.id === id);
@@ -82,7 +85,10 @@ export default function AdminBlogEditor() {
   // Load blogs list
   const loadBlogs = useCallback(async () => {
     try {
-      const res = await fetch("/api/content/blog");
+      const res = await fetch("/api/content/blog", {
+        credentials: "include",
+        cache: "no-store",
+      });
       const data = await res.json();
       if (data && data.posts) {
         setBlogs(data.posts);
@@ -99,7 +105,10 @@ export default function AdminBlogEditor() {
 
   // Authentication check
   useEffect(() => {
-    fetch("/api/auth/verify")
+    fetch("/api/auth/verify", {
+      credentials: "include",
+      cache: "no-store",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (!data.authenticated) {
@@ -234,6 +243,7 @@ export default function AdminBlogEditor() {
           posts: updatedPosts,
         }),
         credentials: "include",
+        cache: "no-store",
       });
 
       if (!saveRes.ok) {

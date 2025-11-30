@@ -7,7 +7,15 @@ import Image from "next/image";
 import { HeroData } from "@/lib/data";
 
 const HomeHero: React.FC = () => {
-  const [data, setData] = useState<HeroData | null>(null);
+  const [data, setData] = useState<HeroData>({
+    name: "Loegs.com",
+    tagline: "kodlama &",
+    taglineHighlight: "Programlama",
+    description: "React Native geliştirme odaklı tutkulu bir yazılım mühendisi, zarif ve kullanıcı dostu mobil uygulamalar yaratmaya adanmış.",
+    buttonText: "İletişime Geç",
+    buttonLink: "mail:exapmle@exapmle.com",
+    image: "/loegs.png",
+  });
   
   // API'den veri çek
   useEffect(() => {
@@ -20,7 +28,7 @@ const HomeHero: React.FC = () => {
           name: "Loegs.com",
           tagline: "kodlama &",
           taglineHighlight: "Programlama",
-          description: "Passionate Software Engineer with a focus on React Native development, dedicated to crafting elegant and user-friendly mobile applications.",
+          description: "React Native geliştirme odaklı tutkulu bir yazılım mühendisi, zarif ve kullanıcı dostu mobil uygulamalar yaratmaya adanmış.",
           buttonText: "İletişime Geç",
           buttonLink: "mail:exapmle@exapmle.com",
           image: "/loegs.png",
@@ -66,12 +74,9 @@ const HomeHero: React.FC = () => {
   }, [blurProgress, opacityProgress]);
 
 
-  if (!data) {
-    return <div className="min-h-screen flex items-center justify-center text-white">Yükleniyor...</div>;
-  }
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 py-20 relative">
+    <div className="flex items-center justify-center min-h-screen px-4 py-20 relative mt-16 md:mt-20">
       {/* Hero Container - iOS tarzı glassmorphism kart */}
       <motion.div
         className="relative w-full max-w-5xl mx-auto"
@@ -104,8 +109,8 @@ const HomeHero: React.FC = () => {
           {/* Glassmorphism arka plan katmanı - Light/Dark */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/90 dark:from-white/5 via-white/85 dark:via-white/5 to-white/80 dark:to-white/5 rounded-[2rem] border border-slate-200 dark:border-white/20 shadow-2xl dark:shadow-xl pointer-events-none transition-colors duration-500" />
           
-          {/* İçerik container */}
-          <div className="relative p-10 md:p-16 lg:p-20 z-10">
+           {/* İçerik container */}
+           <div className="relative p-8 md:p-12 lg:p-16 z-10">
             {/* Logo - Daha zarif animasyon */}
             <motion.div
               className="flex justify-center mb-10"
@@ -188,6 +193,7 @@ const HomeHero: React.FC = () => {
                 duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
+              style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}
             >
               {/* Primary Button - Glassmorphism efekti */}
               <Link
@@ -209,6 +215,8 @@ const HomeHero: React.FC = () => {
                   WebkitBackdropFilter: "blur(24px) saturate(180%)",
                   position: "relative",
                   isolation: "isolate",
+                  pointerEvents: 'auto',
+                  zIndex: 10,
                 }}
               >
                 {/* Hover efekti için gradient overlay */}
@@ -237,6 +245,8 @@ const HomeHero: React.FC = () => {
                   WebkitBackdropFilter: "blur(24px) saturate(180%)",
                   position: "relative",
                   isolation: "isolate",
+                  pointerEvents: 'auto',
+                  zIndex: 10,
                 }}
               >
                 {/* Hover efekti için gradient overlay */}

@@ -10,8 +10,15 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'plus.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+      },
     ],
   },
+  // Production optimizations
+  compress: true,
+  poweredByHeader: false,
   // Exclude liquid-glass-studio-main from build
   webpack: (config) => {
     config.module.rules.push({

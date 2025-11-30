@@ -6,7 +6,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { HeroData } from "@/lib/data";
 
 const Banner: React.FC<{}> = () => {
-  const [data, setData] = useState<HeroData | null>(null);
+  const [data, setData] = useState<HeroData>({
+    name: "Loegs.com",
+    tagline: "kodlama &",
+    taglineHighlight: "Programlama",
+    description: "Passionate Software Engineer with a focus on React Native development, dedicated to crafting elegant and user-friendly mobile applications.",
+    buttonText: "İletişime Geç",
+    buttonLink: "mail:exapmle@exapmle.com",
+    image: "/loegs.png",
+  });
   const pathname = usePathname();
   const router = useRouter();
 
@@ -54,9 +62,6 @@ const Banner: React.FC<{}> = () => {
     }
   };
 
-  if (!data) {
-    return <div className="min-h-screen flex items-center justify-center text-white">Yükleniyor...</div>;
-  }
 
   return (
     <div className="flex flex-row items-center justify-center px-4 md:px-20 mt-[100px] z-[20]">

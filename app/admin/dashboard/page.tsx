@@ -22,6 +22,7 @@ export default function AdminDashboard() {
       const res = await fetch(url, {
         cache: 'no-store',
         next: { revalidate: 0 },
+        credentials: 'include',
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate, proxy-revalidate, max-age=0',
           'Pragma': 'no-cache',
@@ -44,7 +45,10 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     // Verify authentication
-    fetch('/api/auth/verify')
+    fetch('/api/auth/verify', {
+      credentials: 'include',
+      cache: 'no-store',
+    })
       .then(res => res.json())
       .then(authData => {
         if (!authData.authenticated) {
@@ -110,6 +114,11 @@ export default function AdminDashboard() {
     { href: '/admin/blogs', title: 'Blog Editörü', desc: 'Canlı önizleme ile blog yazılarını düzenle', icon: '✏️' },
     { href: '/admin/edit/contact', title: 'İletişim', desc: 'İletişim bilgilerini düzenle', icon: '📧' },
     { href: '/admin/edit/social', title: 'Sosyal Medya', desc: 'Sosyal medya linklerini düzenle', icon: '🔗' },
+    { href: '/admin/media', title: 'Medya Kütüphanesi', desc: 'Dosyaları yönet, yükle ve organize et', icon: '📁' },
+    { href: '/admin/edit/skills', title: 'Yetenekler', desc: 'Teknoloji stack ve yetenekleri yönet', icon: '⚡' },
+    { href: '/admin/edit/statistics', title: 'İstatistikler', desc: 'Başarı metriklerini düzenle', icon: '📊' },
+    { href: '/admin/edit/services', title: 'Hizmetler', desc: 'Sunulan hizmetleri yönet', icon: '🛠️' },
+    { href: '/admin/edit/faq', title: 'SSS', desc: 'Sık sorulan soruları yönet', icon: '❓' },
   ];
 
   return (

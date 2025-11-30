@@ -1,44 +1,63 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { AboutData } from "@/lib/data";
 import PageHero from "./PageHero";
 
 const About: React.FC<{}> = () => {
-  const [data, setData] = useState<AboutData | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
+  const [data, setData] = useState<AboutData>({
+    title: "HAKKIMDA",
+    subtitle: "KEŞFET",
+    description: "Tutkulu bir yazılım mühendisi olarak, mantık ve yaratıcılık arasındaki karmaşık dansın keyfini çıkarıyorum. Şu anda WebHR'nin dinamik dünyasında, teknolojiyi yenilikle sorunsuz bir şekilde harmanladığım React Native konusunda uzmanlaşmış durumdayım.\n\nZarif çözümler üretme tutkusuyla, sürekli gelişen yazılım geliştirme ortamında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve sürekli olarak mümkün olanın sınırlarını zorlamayı içeriyor.",
+  });
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   useEffect(() => {
     fetch("/api/content/about")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch(() => {
-        // Fallback data
         setData({
-          title: "ABOUT ME",
-          subtitle: "EXPLORE NOW",
-          description: "As a passionate software engineer, I thrive on the intricate dance between logic and creativity. Currently immersed in the dynamic world of WebHR, my expertise centers around React Native, where I seamlessly blend technology with innovation.\n\nWith a fervor for crafting elegant solutions, I navigate the ever-evolving landscape of software development. My journey involves translating concepts into code, creating seamless user experiences, and constantly pushing the boundaries of what's possible",
+          title: "HAKKIMDA",
+          subtitle: "KEŞFET",
+          description: "Tutkulu bir yazılım mühendisi olarak, mantık ve yaratıcılık arasındaki karmaşık dansın keyfini çıkarıyorum. Şu anda WebHR'nin dinamik dünyasında, teknolojiyi yenilikle sorunsuz bir şekilde harmanladığım React Native konusunda uzmanlaşmış durumdayım.\n\nZarif çözümler üretme tutkusuyla, sürekli gelişen yazılım geliştirme ortamında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve sürekli olarak mümkün olanın sınırlarını zorlamayı içeriyor.",
         });
       });
-
   }, []);
 
   if (!data) {
-    return <div className="min-h-screen flex items-center justify-center text-slate-900 dark:text-white transition-colors duration-500">Yükleniyor...</div>;
+    return null;
   }
 
   return (
     <section
-      ref={sectionRef}
+      ref={ref}
       id="about"
       className="relative overflow-hidden"
     >
-      <PageHero
-        title={data.title}
-        subtitle={data.subtitle}
-        description={data.description}
-        showLogo={true}
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 50, rotateX: 10 }}
+        animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+        transition={{ 
+          duration: 0.8,
+          ease: [0.16, 1, 0.3, 1],
+          type: "spring",
+          stiffness: 100,
+          damping: 15
+        }}
+      >
+        <PageHero
+          title={data.title}
+          subtitle={data.subtitle}
+          description={data.description}
+          showLogo={false}
+        />
+      </motion.div>
     </section>
   );
 };

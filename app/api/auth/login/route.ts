@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { authenticateAdmin, generateToken } from '@/lib/auth';
+import { authenticateAdmin, generateToken, getCookieOptions } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,16 +33,28 @@ export async function POST(request: NextRequest) {
 
     const token = generateToken(trimmedEmail);
 
-    const response = NextResponse.json({ success: true, token });
-    response.cookies.set('admin-token', token, {
+    // Get hostname from request to determine domain
+    const hostname = request.headers.get('host') || '';
+    const isProduction = process.env.NODE_ENV === 'production';
+    const isLoegsDomain = hostname.includes('loegs.com') || hostname === 'loegs.com';
+
+    const cookieOptions: any = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      secure: isProduction,
+      sameSite: 'lax' as const,
       maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
-    });
+    };
 
-    console.log('Login successful, token set');
+    // Set domain for production on loegs.com
+    if (isProduction && isLoegsDomain) {
+      cookieOptions.domain = '.loegs.com'; // Use .loegs.com for subdomain support
+    }
+
+    const response = NextResponse.json({ success: true, token });
+    response.cookies.set('admin-token', token, cookieOptions);
+
+    console.log('Login successful, token set', { domain: cookieOptions.domain, secure: cookieOptions.secure });
     return response;
   } catch (error) {
     console.error('Login error:', error);

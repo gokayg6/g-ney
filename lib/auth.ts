@@ -4,6 +4,24 @@ import jwt from 'jsonwebtoken';
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const DOMAIN = process.env.DOMAIN || 'loegs.com';
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Helper function to get cookie options for production
+export function getCookieOptions() {
+  const isProduction = NODE_ENV === 'production';
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const isLoegsDomain = hostname.includes('loegs.com') || hostname === 'loegs.com';
+  
+  return {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: 'lax' as const,
+    maxAge: 60 * 60 * 24 * 7, // 7 days
+    path: '/',
+    ...(isProduction && isLoegsDomain && { domain: '.loegs.com' }), // Use .loegs.com for subdomain support
+  };
+}
 
 export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
   return bcrypt.compare(password, hashedPassword);

@@ -31,6 +31,7 @@ export default function EditSection() {
       const res = await fetch(url, {
         cache: 'no-store',
         next: { revalidate: 0 },
+        credentials: 'include',
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate, proxy-revalidate, max-age=0',
           'Pragma': 'no-cache',
@@ -72,7 +73,10 @@ export default function EditSection() {
   }, [section]);
 
   useEffect(() => {
-    fetch('/api/auth/verify')
+    fetch('/api/auth/verify', {
+      credentials: 'include',
+      cache: 'no-store',
+    })
       .then(res => res.json())
       .then(authData => {
         if (!authData.authenticated) {
@@ -120,9 +124,12 @@ export default function EditSection() {
     try {
       const res = await fetch(`/api/content/${section}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(data),
         credentials: 'include',
+        cache: 'no-store',
       });
 
       const result = await res.json();
@@ -143,11 +150,13 @@ export default function EditSection() {
         await new Promise(resolve => setTimeout(resolve, 100));
         router.push('/admin/dashboard');
       } else {
-        alert(`Failed to save: ${result.error || 'Unknown error'}`);
-        console.error('Save error:', result);
+        const errorMsg = result.error || 'Unknown error';
+        alert(`Failed to save: ${errorMsg}`);
+        console.error('Save error:', { status: res.status, error: errorMsg, result });
       }
     } catch (error) {
-      alert(`Error saving: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Error saving: ${errorMsg}`);
       console.error('Save error:', error);
     } finally {
       setSaving(false);
@@ -1626,6 +1635,408 @@ export default function EditSection() {
                       className="mt-4 px-3 py-1 bg-red-600 rounded text-sm hover:bg-red-700"
                     >
                       Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+
+          {section === 'skills' && (
+            <>
+              <div>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium">Başlık</label>
+                <input
+                  type="text"
+                  value={data.title || ''}
+                  onChange={(e) => updateField('title', e.target.value)}
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white"
+                  style={inputStyle}
+                />
+              </div>
+              <div>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <input
+                  type="text"
+                  value={data.subtitle || ''}
+                  onChange={(e) => updateField('subtitle', e.target.value)}
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white"
+                  style={inputStyle}
+                />
+              </div>
+              <div className="border-t border-slate-200 dark:border-white/10 pt-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Yetenekler</h3>
+                  <button
+                    onClick={() => addItem('items', {
+                      id: Date.now().toString(),
+                      name: '',
+                      icon: '',
+                      level: 50,
+                      category: 'frontend'
+                    })}
+                    className="px-4 py-2 bg-slate-900 dark:bg-white/20 text-white rounded-lg hover:bg-slate-800 dark:hover:bg-white/30"
+                    style={inputStyle}
+                  >
+                    + Yeni Yetenek
+                  </button>
+                </div>
+                {(data.items || []).map((skill: any, index: number) => (
+                  <div key={skill.id || index} className="mb-4 p-4 border border-slate-200 dark:border-white/10 rounded-xl">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">İsim</label>
+                        <input
+                          type="text"
+                          value={skill.name || ''}
+                          onChange={(e) => updateItem('items', index, 'name', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Kategori</label>
+                        <select
+                          value={skill.category || 'frontend'}
+                          onChange={(e) => updateItem('items', index, 'category', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                        >
+                          <option value="frontend">Frontend</option>
+                          <option value="backend">Backend</option>
+                          <option value="mobile">Mobile</option>
+                          <option value="tools">Tools</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Seviye (1-100)</label>
+                        <input
+                          type="number"
+                          min="1"
+                          max="100"
+                          value={skill.level || 50}
+                          onChange={(e) => updateItem('items', index, 'level', parseInt(e.target.value))}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Icon (emoji)</label>
+                        <input
+                          type="text"
+                          value={skill.icon || ''}
+                          onChange={(e) => updateItem('items', index, 'icon', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                          placeholder="📱"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => removeItem('items', index)}
+                      className="mt-2 px-3 py-1.5 bg-red-500/20 border border-red-500/30 text-red-300 rounded-lg text-sm hover:bg-red-500/30"
+                      style={inputStyle}
+                    >
+                      Sil
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {section === 'statistics' && (
+            <>
+              <div>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium">Başlık</label>
+                <input
+                  type="text"
+                  value={data.title || ''}
+                  onChange={(e) => updateField('title', e.target.value)}
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white"
+                  style={inputStyle}
+                />
+              </div>
+              <div>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <input
+                  type="text"
+                  value={data.subtitle || ''}
+                  onChange={(e) => updateField('subtitle', e.target.value)}
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white"
+                  style={inputStyle}
+                />
+              </div>
+              <div className="border-t border-slate-200 dark:border-white/10 pt-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">İstatistikler</h3>
+                  <button
+                    onClick={() => addItem('items', {
+                      id: Date.now().toString(),
+                      label: '',
+                      value: '',
+                      icon: '🚀',
+                      suffix: ''
+                    })}
+                    className="px-4 py-2 bg-slate-900 dark:bg-white/20 text-white rounded-lg hover:bg-slate-800 dark:hover:bg-white/30"
+                    style={inputStyle}
+                  >
+                    + Yeni İstatistik
+                  </button>
+                </div>
+                {(data.items || []).map((stat: any, index: number) => (
+                  <div key={stat.id || index} className="mb-4 p-4 border border-slate-200 dark:border-white/10 rounded-xl">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Etiket</label>
+                        <input
+                          type="text"
+                          value={stat.label || ''}
+                          onChange={(e) => updateItem('items', index, 'label', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Değer</label>
+                        <input
+                          type="text"
+                          value={stat.value || ''}
+                          onChange={(e) => updateItem('items', index, 'value', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Suffix</label>
+                        <input
+                          type="text"
+                          value={stat.suffix || ''}
+                          onChange={(e) => updateItem('items', index, 'suffix', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                          placeholder="+"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Icon</label>
+                        <input
+                          type="text"
+                          value={stat.icon || ''}
+                          onChange={(e) => updateItem('items', index, 'icon', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                          placeholder="🚀"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => removeItem('items', index)}
+                      className="mt-2 px-3 py-1.5 bg-red-500/20 border border-red-500/30 text-red-300 rounded-lg text-sm hover:bg-red-500/30"
+                      style={inputStyle}
+                    >
+                      Sil
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {section === 'services' && (
+            <>
+              <div>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium">Başlık</label>
+                <input
+                  type="text"
+                  value={data.title || ''}
+                  onChange={(e) => updateField('title', e.target.value)}
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white"
+                  style={inputStyle}
+                />
+              </div>
+              <div>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <input
+                  type="text"
+                  value={data.subtitle || ''}
+                  onChange={(e) => updateField('subtitle', e.target.value)}
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white"
+                  style={inputStyle}
+                />
+              </div>
+              <div className="border-t border-slate-200 dark:border-white/10 pt-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Hizmetler</h3>
+                  <button
+                    onClick={() => addItem('items', {
+                      id: Date.now().toString(),
+                      title: '',
+                      description: '',
+                      icon: '📱',
+                      features: [],
+                      price: ''
+                    })}
+                    className="px-4 py-2 bg-slate-900 dark:bg-white/20 text-white rounded-lg hover:bg-slate-800 dark:hover:bg-white/30"
+                    style={inputStyle}
+                  >
+                    + Yeni Hizmet
+                  </button>
+                </div>
+                {(data.items || []).map((service: any, index: number) => (
+                  <div key={service.id || index} className="mb-6 p-4 border border-slate-200 dark:border-white/10 rounded-xl">
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Başlık</label>
+                          <input
+                            type="text"
+                            value={service.title || ''}
+                            onChange={(e) => updateItem('items', index, 'title', e.target.value)}
+                            className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                            style={inputStyle}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Icon</label>
+                          <input
+                            type="text"
+                            value={service.icon || ''}
+                            onChange={(e) => updateItem('items', index, 'icon', e.target.value)}
+                            className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                            style={inputStyle}
+                            placeholder="📱"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Açıklama</label>
+                        <textarea
+                          value={service.description || ''}
+                          onChange={(e) => updateItem('items', index, 'description', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm resize-none"
+                          rows={3}
+                          style={inputStyle}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Özellikler (virgülle ayırın)</label>
+                        <input
+                          type="text"
+                          value={Array.isArray(service.features) ? service.features.join(', ') : ''}
+                          onChange={(e) => updateItem('items', index, 'features', e.target.value.split(',').map(f => f.trim()).filter(Boolean))}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                          placeholder="Özellik 1, Özellik 2, Özellik 3"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Fiyat (opsiyonel)</label>
+                        <input
+                          type="text"
+                          value={service.price || ''}
+                          onChange={(e) => updateItem('items', index, 'price', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => removeItem('items', index)}
+                      className="mt-4 px-3 py-1.5 bg-red-500/20 border border-red-500/30 text-red-300 rounded-lg text-sm hover:bg-red-500/30"
+                      style={inputStyle}
+                    >
+                      Sil
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {section === 'faq' && (
+            <>
+              <div>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium">Başlık</label>
+                <input
+                  type="text"
+                  value={data.title || ''}
+                  onChange={(e) => updateField('title', e.target.value)}
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white"
+                  style={inputStyle}
+                />
+              </div>
+              <div>
+                <label className="block text-slate-700 dark:text-white/90 mb-2 font-medium">Alt Başlık</label>
+                <input
+                  type="text"
+                  value={data.subtitle || ''}
+                  onChange={(e) => updateField('subtitle', e.target.value)}
+                  className="w-full px-4 py-3 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-xl text-slate-900 dark:text-white"
+                  style={inputStyle}
+                />
+              </div>
+              <div className="border-t border-slate-200 dark:border-white/10 pt-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Sorular</h3>
+                  <button
+                    onClick={() => addItem('items', {
+                      id: Date.now().toString(),
+                      question: '',
+                      answer: '',
+                      category: 'genel'
+                    })}
+                    className="px-4 py-2 bg-slate-900 dark:bg-white/20 text-white rounded-lg hover:bg-slate-800 dark:hover:bg-white/30"
+                    style={inputStyle}
+                  >
+                    + Yeni Soru
+                  </button>
+                </div>
+                {(data.items || []).map((faq: any, index: number) => (
+                  <div key={faq.id || index} className="mb-4 p-4 border border-slate-200 dark:border-white/10 rounded-xl">
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Kategori</label>
+                        <select
+                          value={faq.category || 'genel'}
+                          onChange={(e) => updateItem('items', index, 'category', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                        >
+                          <option value="genel">Genel</option>
+                          <option value="teknik">Teknik</option>
+                          <option value="destek">Destek</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Soru</label>
+                        <input
+                          type="text"
+                          value={faq.question || ''}
+                          onChange={(e) => updateItem('items', index, 'question', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm"
+                          style={inputStyle}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-700 dark:text-white/90 mb-2 text-sm">Cevap</label>
+                        <textarea
+                          value={faq.answer || ''}
+                          onChange={(e) => updateItem('items', index, 'answer', e.target.value)}
+                          className="w-full px-3 py-2 bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm resize-none"
+                          rows={4}
+                          style={inputStyle}
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => removeItem('items', index)}
+                      className="mt-2 px-3 py-1.5 bg-red-500/20 border border-red-500/30 text-red-300 rounded-lg text-sm hover:bg-red-500/30"
+                      style={inputStyle}
+                    >
+                      Sil
                     </button>
                   </div>
                 ))}

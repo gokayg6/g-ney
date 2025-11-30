@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import type { BlogPost, BlogData } from "@/lib/data";
@@ -67,8 +68,8 @@ const fallbackPosts: BlogPost[] = [
 ];
 
 const defaultMeta = {
-  title: "Günlük Blog",
-  subtitle: "WE ARE HERE",
+  title: "Blog",
+  subtitle: "BURADAYIZ",
   introTitle: "Atölyeden Günlük Notlar",
   introDescription:
     "Stüdyodan günlük notlar, üretim masamızdan kesitler, yeni kokular ve biraz da bambu çubukların sesleri. Her yazı günün sonunda tuttuğumuz küçük bir günlük gibi.",
@@ -76,7 +77,6 @@ const defaultMeta = {
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>(fallbackPosts);
-  const [loading, setLoading] = useState<boolean>(true);
   const [meta, setMeta] = useState(defaultMeta);
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
@@ -102,6 +102,7 @@ export default function BlogPage() {
   }, []);
 
   useEffect(() => {
+    // Fetch in background without blocking render
     fetch("/api/content/blog")
       .then((res: Response) => res.json())
       .then((data: BlogData) => {
@@ -110,21 +111,23 @@ export default function BlogPage() {
             (post: BlogPost) => post.published !== false
           );
 
-          setPosts(publishedPosts.length ? publishedPosts : fallbackPosts);
-          setMeta({
-            title: data.title || defaultMeta.title,
-            subtitle: (data.subtitle || defaultMeta.subtitle).toUpperCase(),
-            introTitle: data.introTitle || defaultMeta.introTitle,
-            introDescription:
-              data.introDescription || defaultMeta.introDescription,
-          });
+          if (publishedPosts.length > 0) {
+            setPosts(publishedPosts);
+          }
+          if (data.subtitle || data.introTitle || data.introDescription) {
+            setMeta((prevMeta) => ({
+              title: "Blog", // Always keep as "Blog"
+              subtitle: (data.subtitle || defaultMeta.subtitle).toUpperCase(),
+              introTitle: data.introTitle || defaultMeta.introTitle,
+              introDescription:
+                data.introDescription || defaultMeta.introDescription,
+            }));
+          }
         }
       })
       .catch(() => {
-        setPosts(fallbackPosts);
-        setMeta(defaultMeta);
-      })
-      .finally(() => setLoading(false));
+        // Silent fail, keep fallback
+      });
   }, []);
 
   const handleLike = (postId: string) => {
@@ -164,41 +167,42 @@ export default function BlogPage() {
     });
   };
 
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center flex items-center justify-center">
-        <div className="text-slate-600 dark:text-white/80 text-sm tracking-[0.4em] uppercase animate-pulse transition-colors duration-500">
-          Yükleniyor
-        </div>
-      </main>
-    );
-  }
-
   return (
-    <main className="min-h-screen bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center">
+    <main className="min-h-screen relative z-10">
       {/* HERO / INTRO */}
-      <PageHero
-        title={meta.title}
-        subtitle={meta.subtitle}
-        description={`${meta.introTitle}\n\n${meta.introDescription}`}
-        showLogo={true}
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 30, rotateX: -10 }}
+        animate={{ opacity: 1, y: 0, rotateX: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <PageHero
+          title={meta.title}
+          subtitle={meta.subtitle}
+          description={`${meta.introTitle}\n\n${meta.introDescription}`}
+          showLogo={true}
+        />
+      </motion.div>
 
       {/* BLOG GRID */}
-      <section className="px-3 sm:px-4 md:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24">
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="px-3 sm:px-4 md:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24"
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
           {posts.map((post, index) => (
             <article
               key={post.id}
-              className="group relative flex flex-col bg-white/90 dark:bg-transparent backdrop-blur-sm border border-slate-200 dark:border-white/20 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] shadow-lg dark:shadow-xl overflow-hidden animate-fade-in h-full transition-all duration-500"
+              className="group relative flex flex-col bg-white/90 dark:bg-transparent border border-slate-200 dark:border-white/20 rounded-xl sm:rounded-2xl shadow-lg dark:shadow-xl overflow-hidden animate-fade-in h-full transition-all duration-500"
               style={{ animationDelay: `${index * 0.05}s`, position: 'relative', zIndex: 1 }}
             >
               {/* üst glow */}
-              <div className="pointer-events-none absolute -inset-1 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] bg-gradient-to-br from-white/0 via-white/0 to-white/0 group-hover:from-white/20 group-hover:via-white/10 group-hover:to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out blur-sm" />
+              <div className="pointer-events-none absolute -inset-1 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/0 via-white/0 to-white/0 group-hover:from-white/20 group-hover:via-white/10 group-hover:to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out blur-sm" />
 
               {/* IMAGE */}
               {post.image && (
-                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-t-[20px] sm:rounded-t-[24px] md:rounded-t-[28px]">
+                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-t-xl sm:rounded-t-2xl">
                   <Image
                     src={post.image}
                     fill
@@ -258,7 +262,7 @@ export default function BlogPage() {
                       e.stopPropagation();
                       console.log('Button touch for post:', post.id);
                     }}
-                    className="absolute inset-0 flex items-center justify-center z-[100000] opacity-100 sm:opacity-30 sm:group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-3.5 rounded-full text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-slate-900 dark:text-white bg-white/90 dark:bg-white/40 backdrop-blur-xl border-2 border-slate-300 dark:border-white/80 hover:bg-white dark:hover:bg-white/50 active:bg-slate-100 dark:active:bg-white/60 hover:scale-110 active:scale-95 transition-all duration-200 shadow-[0_15px_40px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_40px_rgba(255,255,255,0.4)] min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[170px]"
+                    className="absolute inset-0 flex items-center justify-center z-[100000] opacity-100 sm:opacity-30 sm:group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-3.5 rounded-full text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-slate-900 dark:text-white bg-white/90 dark:bg-white/40 border-2 border-slate-300 dark:border-white/80 hover:bg-white dark:hover:bg-white/50 active:bg-slate-100 dark:active:bg-white/60 hover:scale-110 active:scale-95 transition-all duration-200 shadow-[0_15px_40px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_40px_rgba(255,255,255,0.4)] min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[170px]"
                     style={{
                       zIndex: 100000,
                       position: "absolute",
@@ -292,7 +296,7 @@ export default function BlogPage() {
               )}
 
               {/* CARD CONTENT */}
-              <div className="relative z-10 flex flex-col flex-1 p-3 sm:p-4 md:p-5 lg:p-6 bg-transparent group-hover:bg-transparent transition-colors duration-500">
+              <div className="relative z-10 flex flex-col flex-1 p-3 sm:p-4 md:p-4 bg-transparent group-hover:bg-transparent transition-colors duration-500">
                 {/* üst meta */}
                 <div className="flex items-center justify-between text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-slate-500 dark:text-white/50 mb-3 transition-colors duration-500">
                   <span className="truncate">
@@ -385,7 +389,7 @@ export default function BlogPage() {
                      id={`post-details-${post.id}`}
                      className="mt-4 pt-4 border-t border-slate-300 dark:border-white/20 animate-fade-in transition-colors duration-500"
                    >
-                    <div className="bg-white/90 dark:bg-transparent backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl transition-colors duration-500">
+                    <div className="bg-white/90 dark:bg-transparent rounded-2xl p-4 sm:p-4 md:p-5 border border-slate-200 dark:border-white/20 shadow-lg dark:shadow-xl transition-colors duration-500">
                       <h4 className="text-slate-900 dark:text-slate-50 text-base sm:text-lg md:text-xl font-bold mb-3 transition-colors duration-500">
                         {post.title}
                       </h4>
@@ -496,9 +500,15 @@ export default function BlogPage() {
             </article>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      <Footer />
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <Footer />
+      </motion.div>
     </main>
   );
 }

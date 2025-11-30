@@ -9,9 +9,9 @@
     "image": "/loegs.png"
   },
   "about": {
-    "title": "BİZİM HAKKIMIZDA",
-    "subtitle": "KEŞFET",
-    "description": "mustafabeymustafamustafamustafagokaywwwwwwwwww\nZarif çözümler üretme tutkusuyla, yazılım geliştirmenin sürekli evrim geçiren manzarasında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve mümkün olanın sınırlarını sürekli zorlamayı içeriyor"
+    "title": "HAKKIMDA",
+    "subtitle": "KEŞFETdgdggdg",
+    "description": "mustafabeymustafamustafamustafagokaywwwwwwwwww\nZarif çözümler üretme tutkusuyla, yazılım geliştirmenin sürekli evrim geçiren manzarasında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve mümkün olanın sınırlarını sürekli zorlamaLHKHKHKHKyı içeriyor"
   },
   "experience": {
     "title": "DENEYİM",
@@ -240,8 +240,8 @@
       "subdomain": "mustafa",
       "category": "mobile-app",
       "title": "mustafahocam",
-      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
-      "tagline": "Understand yourself better every day",
+      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.xgccggcgcg",
+      "tagline": "Understand yourself better every dayccgdgdrg",
       "logo": "/loegs.png",
       "coverImage": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80",
       "features": [
@@ -770,6 +770,293 @@
         ]
       },
       "siteLink": ""
+    },
+    {
+      "id": "1764435320458",
+      "name": "akdo",
+      "subdomain": "aakdo",
+      "category": "ecommerce",
+      "title": "LuxeStyle - Premium Fashion Marketplace",
+      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
+      "tagline": "Elevate your style, discover luxury",
+      "logo": "/loegs.png",
+      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
+      "features": [
+        "Curated premium collections",
+        "AR virtual try-on",
+        "One-tap checkout",
+        "Personalized recommendations",
+        "Exclusive member deals",
+        "Fast & free shipping"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
+        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
+        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
+      ],
+      "appStoreLink": "",
+      "playStoreLink": "",
+      "techStack": [
+        "React Native",
+        "Shopify",
+        "Stripe",
+        "AR Kit"
+      ],
+      "published": true,
+      "metadata": {
+        "metaTitle": "LuxeStyle - Premium Fashion App",
+        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
+        "keywords": [
+          "fashion",
+          "shopping",
+          "ecommerce",
+          "luxury"
+        ]
+      },
+      "siteLink": ""
     }
-  ]
+  ],
+  "testimonials": {
+    "title": "REFERANSLAR",
+    "subtitle": "MÜŞTERİ YORUMLARI",
+    "items": [
+      {
+        "id": "1",
+        "name": "Ahmet Yılmaz",
+        "position": "CTO",
+        "company": "TechStart Inc.",
+        "avatar": "https://ui-avatars.com/api/?name=Ahmet+Yılmaz&background=6366f1&color=fff&size=128",
+        "content": "Mustafa ile çalışmak harika bir deneyimdi. React Native projemizde gösterdiği profesyonellik ve teknik bilgi gerçekten etkileyici. Projeyi zamanında ve kaliteli bir şekilde teslim etti.",
+        "rating": 5,
+        "date": "2024-01-15"
+      },
+      {
+        "id": "2",
+        "name": "Zeynep Kaya",
+        "position": "Product Manager",
+        "company": "Digital Solutions",
+        "avatar": "https://ui-avatars.com/api/?name=Zeynep+Kaya&background=ec4899&color=fff&size=128",
+        "content": "Mobil uygulama geliştirme sürecinde çok yardımcı oldu. Kullanıcı deneyimine verdiği önem ve detaylara gösterdiği dikkat projenin başarısında büyük rol oynadı.",
+        "rating": 5,
+        "date": "2024-01-10"
+      },
+      {
+        "id": "3",
+        "name": "Mehmet Demir",
+        "position": "Founder",
+        "company": "StartupHub",
+        "avatar": "https://ui-avatars.com/api/?name=Mehmet+Demir&background=8b5cf6&color=fff&size=128",
+        "content": "Next.js ile geliştirdiğimiz web projesinde harika işler çıkardı. Modern teknolojileri kullanması ve performans optimizasyonları sayesinde sitemiz çok hızlı yüklendi.",
+        "rating": 5,
+        "date": "2024-01-05"
+      }
+    ]
+  },
+  "skills": {
+    "title": "YETENEKLER",
+    "subtitle": "TEKNOLOJİ STACK",
+    "items": [
+      {
+        "id": "1",
+        "name": "React Native",
+        "icon": "📱",
+        "level": 95,
+        "category": "mobile"
+      },
+      {
+        "id": "2",
+        "name": "React",
+        "icon": "⚛️",
+        "level": 90,
+        "category": "frontend"
+      },
+      {
+        "id": "3",
+        "name": "Next.js",
+        "icon": "▲",
+        "level": 88,
+        "category": "frontend"
+      },
+      {
+        "id": "4",
+        "name": "TypeScript",
+        "icon": "📘",
+        "level": 85,
+        "category": "frontend"
+      },
+      {
+        "id": "5",
+        "name": "JavaScript",
+        "icon": "🟨",
+        "level": 92,
+        "category": "frontend"
+      },
+      {
+        "id": "6",
+        "name": "Node.js",
+        "icon": "🟢",
+        "level": 80,
+        "category": "backend"
+      },
+      {
+        "id": "7",
+        "name": "Firebase",
+        "icon": "🔥",
+        "level": 85,
+        "category": "backend"
+      },
+      {
+        "id": "8",
+        "name": "Git",
+        "icon": "🔀",
+        "level": 90,
+        "category": "tools"
+      },
+      {
+        "id": "9",
+        "name": "Figma",
+        "icon": "🎨",
+        "level": 75,
+        "category": "tools"
+      },
+      {
+        "id": "10",
+        "name": "AWS",
+        "icon": "☁️",
+        "level": 70,
+        "category": "tools"
+      }
+    ]
+  },
+  "statistics": {
+    "title": "İSTATİSTİKLER",
+    "subtitle": "BAŞARI METRİKLERİ",
+    "items": [
+      {
+        "id": "1",
+        "label": "Tamamlanan Proje",
+        "value": "50",
+        "icon": "🚀",
+        "suffix": "+"
+      },
+      {
+        "id": "2",
+        "label": "Mutlu Müşteri",
+        "value": "45",
+        "icon": "😊",
+        "suffix": "+"
+      },
+      {
+        "id": "3",
+        "label": "Yıllık Deneyim",
+        "value": "5",
+        "icon": "⭐",
+        "suffix": "+"
+      },
+      {
+        "id": "4",
+        "label": "Kod Satırı",
+        "value": "100",
+        "icon": "💻",
+        "suffix": "K+"
+      }
+    ]
+  },
+  "services": {
+    "title": "HİZMETLER",
+    "subtitle": "SUNULAN HİZMETLER",
+    "items": [
+      {
+        "id": "1",
+        "title": "Mobil Uygulama Geliştirme",
+        "description": "iOS ve Android platformları için React Native ile cross-platform mobil uygulama geliştirme.",
+        "icon": "📱",
+        "features": [
+          "React Native geliştirme",
+          "iOS & Android uyumluluğu",
+          "Native modül entegrasyonu",
+          "App Store & Play Store yayınlama"
+        ]
+      },
+      {
+        "id": "2",
+        "title": "Web Geliştirme",
+        "description": "Next.js ve React ile modern, hızlı ve SEO uyumlu web siteleri ve web uygulamaları.",
+        "icon": "🌐",
+        "features": [
+          "Next.js & React geliştirme",
+          "SEO optimizasyonu",
+          "Responsive tasarım",
+          "Performance optimizasyonu"
+        ]
+      },
+      {
+        "id": "3",
+        "title": "UI/UX Tasarım",
+        "description": "Kullanıcı odaklı, modern ve estetik arayüz tasarımları ile kullanıcı deneyimi optimizasyonu.",
+        "icon": "🎨",
+        "features": [
+          "Figma tasarım",
+          "Prototipleme",
+          "Kullanıcı testleri",
+          "Design system oluşturma"
+        ]
+      },
+      {
+        "id": "4",
+        "title": "Backend Geliştirme",
+        "description": "Node.js ve modern backend teknolojileri ile ölçeklenebilir API ve servis geliştirme.",
+        "icon": "⚙️",
+        "features": [
+          "RESTful API geliştirme",
+          "Database tasarımı",
+          "Authentication & Authorization",
+          "Cloud deployment"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "title": "SORULAR",
+    "subtitle": "SIK SORULAN SORULAR",
+    "items": [
+      {
+        "id": "1",
+        "question": "Proje süresi ne kadar sürer?",
+        "answer": "Proje süresi, projenin kapsamına ve karmaşıklığına bağlı olarak değişir. Basit bir web sitesi 1-2 hafta, kompleks bir mobil uygulama 2-3 ay sürebilir. Detaylı bir zaman çizelgesi için iletişime geçebilirsiniz.",
+        "category": "genel"
+      },
+      {
+        "id": "2",
+        "question": "Hangi teknolojileri kullanıyorsunuz?",
+        "answer": "Mobil uygulamalar için React Native, web projeleri için Next.js ve React kullanıyorum. Backend için Node.js, veritabanı için Firebase veya PostgreSQL tercih ediyorum.",
+        "category": "teknik"
+      },
+      {
+        "id": "3",
+        "question": "Proje maliyeti nasıl belirlenir?",
+        "answer": "Proje maliyeti, işlevsellik, tasarım karmaşıklığı, entegrasyonlar ve süreye göre belirlenir. Her proje için özel teklif hazırlıyorum. Detaylı bilgi için iletişime geçebilirsiniz.",
+        "category": "genel"
+      },
+      {
+        "id": "4",
+        "question": "Proje sonrası destek sağlıyor musunuz?",
+        "answer": "Evet, tüm projelerim için proje sonrası destek ve bakım hizmeti sunuyorum. Hata düzeltmeleri, güncellemeler ve teknik destek için farklı paketler mevcuttur.",
+        "category": "destek"
+      },
+      {
+        "id": "5",
+        "question": "Kodları teslim ediyor musunuz?",
+        "answer": "Evet, proje tamamlandığında tüm kaynak kodları ve dokümantasyonu teslim ediyorum. Proje sahibi kodların tam sahibi olur.",
+        "category": "genel"
+      },
+      {
+        "id": "6",
+        "question": "Uzaktan çalışma yapıyor musunuz?",
+        "answer": "Evet, dünya çapında uzaktan çalışma yapıyorum. İletişim için Slack, Zoom, Teams gibi platformları kullanıyoruz. Düzenli güncellemeler ve toplantılarla proje sürecini yönetiyoruz.",
+        "category": "genel"
+      }
+    ]
+  }
 }
