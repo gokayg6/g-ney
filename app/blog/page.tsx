@@ -8,15 +8,15 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import type { BlogPost, BlogData } from "@/lib/data";
 
+// Backend'deki posts ile TAMAMEN AYNI - hiçbir değişiklik yok
+// Backend'den gelen posts direkt burada kullanılıyor
 const fallbackPosts: BlogPost[] = [
   {
-    id: "placeholder-1",
-    title: "Günlük Notlar: Camomile Tea & Lavanta Atölyesi",
-    excerpt:
-      "Bugün üretim masasını yeni kokumuz Camomile Tea & French Lavender için hazırladım. Lavanta demetleri stüdyoyu sakinleştiriyor.",
-    content: "",
-    image:
-      "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=2400&q=80",
+    id: "1",
+    title: "mustafa hocam",
+    excerpt: "Bugün üretim masasını yeni kokumuz Camomile Tea & French Lavender için hazırladım. Lavanta demetleri stüdyoyu sakinleştiriyor.",
+    content: "06:30 — Atölyeye girdiğimde lavanta demetleri hâlâ gece lambalarının altında parlıyordu. Camomile yapraklarını öğütürken çıkan ses, sabah sessizliğine eşlik etti.\n\n12:10 — İlk deneme partisini hazırladım. Renk tam istediğim gibi pastel krem oldu. Ekibin geri bildirimi \"şifa gibi\" oldu.\n\n19:45 — Etiket taslağını güncelledim. Camomile illüstrasyonunu bir tık yumuşattım. Yarın fotoğraf çekimi var, enerjimiz yüksek.",
+    image: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=2400&q=80",
     date: "20 Ocak 2024",
     author: "Loegs",
     category: "journal",
@@ -24,13 +24,11 @@ const fallbackPosts: BlogPost[] = [
     published: true,
   },
   {
-    id: "placeholder-2",
+    id: "2",
     title: "Stüdyodan Günlük: %25 İndirim Hazırlığı",
-    excerpt:
-      "Black Friday için etiketleri bastık, paketleri katladık, kahvelerimizi tazeledik. Bu yıl 100.000 ağaç hedefine herkes hazır.",
-    content: "",
-    image:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=2400&q=80",
+    excerpt: "Black Friday için etiketleri bastık, paketleri katladık, kahvelerimizi tazeledik. Bu yıl 100.000 ağaç hedefine herkes hazır.",
+    content: "09:00 — Kampanya planını son kez gözden geçirdik. Her sipariş için ağaç dikim kartlarını paketlere ekleyeceğiz.\n\n13:30 — Depoda hummalı bir hazırlık vardı. Yeni kutularımızı test ettik, bantları güçlendirdik.\n\n21:15 — Kampanya sayfasını yeniden yazdım. Bir arkadaşına anlatır gibi... çünkü gerçekten öyle.",
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=2400&q=80",
     date: "18 Ocak 2024",
     author: "Loegs",
     category: "campaign",
@@ -38,13 +36,11 @@ const fallbackPosts: BlogPost[] = [
     published: true,
   },
   {
-    id: "placeholder-3",
+    id: "3",
     title: "Retro Swirl Kutusu ve İlham Panosu",
-    excerpt:
-      "70'ler posterleri, neon renkler ve eski dergilerle dolu bir masa kurdum.",
-    content: "",
-    image:
-      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=2400&q=80",
+    excerpt: "Bugün Retro Swirl için 70'ler posterleri, neon renkler ve eski dergilerle dolu bir masa kurdum.",
+    content: "09:15 — Eski plaklarımızı dinleyerek işe başladım. Mor ve turuncu tonların bir arada ne kadar sıcak durduğunu tekrar hatırladım.\n\n14:00 — Fotoğraf çekimi yaptık. Kutunun üzerine sinen ışık, ekibin moralini yükseltti.\n\n17:30 — Blog yazısını bitirdim; Retro Swirl'ün hikâyesini yazarken çocukluğumdan kalan defterleri bile karıştırdım.",
+    image: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=2400&q=80",
     date: "15 Ocak 2024",
     author: "Loegs",
     category: "design",
@@ -52,17 +48,87 @@ const fallbackPosts: BlogPost[] = [
     published: true,
   },
   {
-    id: "placeholder-4",
+    id: "4",
     title: "Atölyede Genç Misafir: Çocuklar ve Doğal Formüller",
-    excerpt:
-      "Küçük kuzenim Ada bugün atölyeye geldi; doğal formüller hakkında konuşup notlar aldık.",
-    content: "",
-    image:
-      "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=2400&q=80",
+    excerpt: "Küçük kuzenim Ada bugün atölyeye geldi, deodorant yapımını adım adım anlattım. Çocuklar için doğal seçimlerin notlarını aldım.",
+    content: "10:05 — Ada ile birlikte laboratuvar önlüğü giydik. Malzemeleri tek tek kokladı, en çok shea yağını sevdi.\n\n14:20 — Çocuklar için neden alüminyum içermeyen formül kullandığımızı anlattım. Ada, \"Bu çok mantıklı\" deyip defterine not aldı.\n\n18:40 — Blog yazısını Ada'nın sorularıyla şekillendirdim. Çocukların merakı gerçekten bize yön veriyor.",
+    image: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=2400&q=80",
     date: "12 Ocak 2024",
     author: "Loegs",
     category: "lifestyle",
     readTime: "4 dk",
+    published: true,
+  },
+  {
+    id: "5",
+    title: "Sabah Raporu: Espresso, Playlist ve Tedarik Listesi",
+    excerpt: "Haftanın ilk siparişlerini hazırlarken kahve lekeli tedarik listeleri ve lo-fi çalma listesi masamdaydı.",
+    content: "07:20 — Espresso makinesi sesine karışan kesme tahtası vuruşları. Yeni kavanoz kapakları için tedarik listesini güncelledim.\n\n11:50 — Lo-fi çalma listemiz, paketleme temposunu koruyor. Çıkışa hazır 84 sipariş var.\n\n16:10 — Depo listelerini Notion'a aktardım. Eksik kalan yalnızca pamuk kurdele.",
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2400&q=80",
+    date: "9 Ocak 2024",
+    author: "Loegs",
+    category: "studio",
+    readTime: "3 dk",
+    published: true,
+  },
+  {
+    id: "6",
+    title: "Kutu Tasarımında Dokulu Kağıt Denemeleri",
+    excerpt: "Yeni koleksiyon için pamuk dokulu kağıtları kalın vernikle buluşturduk. Test masasında güzel sürprizler oldu.",
+    content: "08:45 — Pamuk dokulu kağıtları keserken makas sesi bile terapi oldu.\n\n13:05 — Kalın vernik ilk katında hafif kabarcık yaptı; sıcak hava tabancasıyla düzelttim.\n\n20:00 — Nihai kutu numunesini raflara yerleştirdim. Işığa göre renk değiştirmesi tam istediğimiz gibi.",
+    image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=2400&q=80",
+    date: "7 Ocak 2024",
+    author: "Loegs",
+    category: "design",
+    readTime: "4 dk",
+    published: true,
+  },
+  {
+    id: "7",
+    title: "Küçük Paketleme Ritüeli",
+    excerpt: "Her paket çıkmadan önce kurdelelerin eşit olduğuna üç kez bakıyorum. Bugün taktığım krem kurdeleler tam iOS butonları gibi pürüzsüz.",
+    content: "09:40 — Kurdele uzunluklarını lazer kesiciyle eşitledik. Artık milim sapma yok.\n\n15:25 — Paketlerin üzerine isim yazarken Apple Pencil kullanıyorum; yazı daha akıcı.\n\n22:10 — Yola çıkacak son paket için çalma listemizin en sakin parçasını seçtim.",
+    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2400&q=80",
+    date: "5 Ocak 2024",
+    author: "Loegs",
+    category: "studio",
+    readTime: "3 dk",
+    published: true,
+  },
+  {
+    id: "8",
+    title: "Kod ve Koku: Ürün Sayfası Güncellemesi",
+    excerpt: "Ürün sayfasına yeni animasyonlar ekledim. Kod yazarken arka planda yeni mum koleksiyonumuz yanıyordu.",
+    content: "10:00 — Hero bölümüne iOS tarzı scale animasyonu ekledim.\n\n14:40 — Yeni fotoğrafları optimize ederken sandalwood mum masamda yandı. Tarayıcı testleri mis gibi kokuyor.\n\n18:30 — Deploy öncesi QA turunu tamamladım. Artık ürün sayfası daha akışkan.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2400&q=80",
+    date: "3 Ocak 2024",
+    author: "Loegs",
+    category: "development",
+    readTime: "4 dk",
+    published: true,
+  },
+  {
+    id: "9",
+    title: "Hafta Sonu Pop-up Güncesi",
+    excerpt: "Cumartesi pop-up standımızda 48 kişiyle sohbet ettik. Not defterim ilham dolu cümlelerle kaplandı.",
+    content: "07:50 — Stand kurulumunu tamamladık, tüm ürünler hizalandı.\n\n12:30 — Ziyaretçilerin soruları not defterimi doldurdu: \"Bu kokuyu hangi şehirden ilham aldınız?\"\n\n21:00 — Defteri karıştırırken yeni koleksiyon fikri çıktı. Pop-up'lar her seferinde sürpriz getiriyor.",
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=2400&q=80",
+    date: "30 Aralık 2023",
+    author: "Loegs",
+    category: "journal",
+    readTime: "4 dk",
+    published: true,
+  },
+  {
+    id: "10",
+    title: "Gece Vardiyası ve Mumlar",
+    excerpt: "Stüdyoda gece vardiyası yaparken playlist ve mumlar eşlik etti. Kod satırlarıyla kokular aynı ritimde ilerledi.",
+    content: "23:15 — Gece vardiyasına açık gri hoodie ile başladım. Lo-fi beats yumuşak gidiyor.\n\n01:40 — Mobil optimizasyonu bitirdim, kartlardaki animasyonlar iOS hissi veriyor.\n\n03:05 — Mum tamamen eridiğinde build tamamlandı. Gece vardiyası hedefi: başarı.",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=2400&q=80",
+    date: "28 Aralık 2023",
+    author: "Loegs",
+    category: "nightshift",
+    readTime: "5 dk",
     published: true,
   },
 ];
@@ -72,12 +138,14 @@ const defaultMeta = {
   subtitle: "BURADAYIZ",
   introTitle: "Atölyeden Günlük Notlar",
   introDescription:
-    "Stüdyodan günlük notlar, üretim masamızdan kesitler, yeni kokular ve biraz da bambu çubukların sesleri. Her yazı günün sonunda tuttuğumuz küçük bir günlük gibi.",
+    "Her sabahın kokusunu, öğle arasında karalanan fikirleri ve gecenin sessizliğinde biten işleri burada topluyorum. Bu sayfa; üretim masasından sesler, yeni kokular, küçük aksaklıklar ve beklenmedik ilhamların günlük gibi kaydedildiği bir yer.",
 };
 
 export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>(fallbackPosts);
-  const [meta, setMeta] = useState(defaultMeta);
+  // State'leri kaldırdık, direkt sabit değerler kullanılıyor
+  const posts = fallbackPosts;
+  const meta = defaultMeta;
+  
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
@@ -101,34 +169,7 @@ export default function BlogPage() {
     }
   }, []);
 
-  useEffect(() => {
-    // Fetch in background without blocking render
-    fetch("/api/content/blog")
-      .then((res: Response) => res.json())
-      .then((data: BlogData) => {
-        if (data) {
-          const publishedPosts = (data.posts || []).filter(
-            (post: BlogPost) => post.published !== false
-          );
-
-          if (publishedPosts.length > 0) {
-            setPosts(publishedPosts);
-          }
-          if (data.subtitle || data.introTitle || data.introDescription) {
-            setMeta((prevMeta) => ({
-              title: "Blog", // Always keep as "Blog"
-              subtitle: (data.subtitle || defaultMeta.subtitle).toUpperCase(),
-              introTitle: data.introTitle || defaultMeta.introTitle,
-              introDescription:
-                data.introDescription || defaultMeta.introDescription,
-            }));
-          }
-        }
-      })
-      .catch(() => {
-        // Silent fail, keep fallback
-      });
-  }, []);
+  // API çağrısı TAMAMEN KALDIRILDI - hiçbir veri güncellenmiyor
 
   const handleLike = (postId: string) => {
     setLikedPosts((prev) => {

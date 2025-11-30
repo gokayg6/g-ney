@@ -59,8 +59,10 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ showHeader = true }) => {
-  const [data, setData] = useState<ProjectsData>(fallbackProjects);
-  const [subdomainProjects, setSubdomainProjects] = useState<SubdomainProject[]>([]);
+  // State'leri kaldırdık, direkt sabit değerler kullanılıyor
+  const data = fallbackProjects;
+  const subdomainProjects: SubdomainProject[] = [];
+  
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const sectionRef = useRef<HTMLElement>(null);
   const [ref, inView] = useInView({
@@ -69,47 +71,14 @@ const Projects: React.FC<ProjectsProps> = ({ showHeader = true }) => {
     rootMargin: '-50px 0px',
   });
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        // Normal projeler
-        const res = await fetch("/api/content/projects");
-        if (res.ok) {
-          const json: ProjectsData = await res.json();
-          if (json && Array.isArray(json.items)) {
-            setData(json);
-          } else {
-            setData(fallbackProjects);
-          }
-        } else {
-          setData(fallbackProjects);
-        }
-
-        // Subdomain projeleri
-        try {
-          const contentRes = await fetch("/api/content/subdomainProjects");
-          if (contentRes.ok) {
-            const subdomainProjs = await contentRes.json();
-            const published = Array.isArray(subdomainProjs)
-              ? subdomainProjs.filter(
-                  (p: SubdomainProject) => p.published !== false
-                )
-              : [];
-            setSubdomainProjects(published);
-          } else {
-            setSubdomainProjects([]);
-          }
-        } catch {
-          setSubdomainProjects([]);
-        }
-      } catch {
-        setData(fallbackProjects);
-        setSubdomainProjects([]);
-      }
-    }
-
-    loadData();
-  }, []);
+  // API çağrıları TAMAMEN KALDIRILDI - başlangıç değerleri kalıcı
+  // Hiçbir veri API'den çekilmiyor, flash sorunu çözüldü
+  // useEffect(() => {
+  //   async function loadData() {
+  //     // API çağrıları kaldırıldı
+  //   }
+  //   loadData();
+  // }, []);
 
 
   // Tüm projeleri tek listede birleştir

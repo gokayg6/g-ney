@@ -17,18 +17,8 @@ const About: React.FC<{}> = () => {
     threshold: 0.1,
   });
 
-  useEffect(() => {
-    fetch("/api/content/about")
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch(() => {
-        setData({
-          title: "HAKKIMDA",
-          subtitle: "KEŞFET",
-          description: "Tutkulu bir yazılım mühendisi olarak, mantık ve yaratıcılık arasındaki karmaşık dansın keyfini çıkarıyorum. Şu anda WebHR'nin dinamik dünyasında, teknolojiyi yenilikle sorunsuz bir şekilde harmanladığım React Native konusunda uzmanlaşmış durumdayım.\n\nZarif çözümler üretme tutkusuyla, sürekli gelişen yazılım geliştirme ortamında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve sürekli olarak mümkün olanın sınırlarını zorlamayı içeriyor.",
-        });
-      });
-  }, []);
+  // API çağrısı kaldırıldı - başlangıç değerleri kalıcı
+  // Backend'deki title/subtitle değerleri görünmeyecek
 
   if (!data) {
     return null;

@@ -18,18 +18,20 @@ const Contact: React.FC<{}> = () => {
   useEffect(() => {
     fetch("/api/content/contact")
       .then((res) => res.json())
-      .then((data) => setData(data))
+      .then((data) => {
+        if (data) {
+          // Sadece email, phone ve description'ı güncelle, title ve subtitle'ı koru
+          setData((prevData) => ({
+            ...prevData,
+            email: data.email || prevData.email,
+            phone: data.phone || prevData.phone,
+            description: data.description || prevData.description,
+          }));
+        }
+      })
       .catch(() => {
-        // Fallback data
-        setData({
-          title: "İLETİŞİM",
-          subtitle: "İLETİŞİME GEÇ",
-          email: "mustafakarakus@gmail.com",
-          phone: "+90 555 123 45 67",
-          description: "İşbirlikleri, fırsatlar veya sadece merhaba demek için çekinmeden iletişime geçin!",
-        });
+        // Silent fail - başlangıç değerlerini koru
       });
-
   }, []);
 
   if (!data) {

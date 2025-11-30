@@ -31,26 +31,18 @@ const Experience: React.FC<{}> = () => {
   useEffect(() => {
     fetch("/api/content/experience")
       .then((res) => res.json())
-      .then((data) => setData(data))
+      .then((data) => {
+        if (data) {
+          // Sadece items'ı güncelle, title ve subtitle'ı koru
+          setData((prevData) => ({
+            ...prevData,
+            items: data.items || prevData.items,
+          }));
+        }
+      })
       .catch(() => {
-        // Fallback data
-        setData({
-          title: "EXPERIENCE",
-          subtitle: "EXPLORE NOW",
-          items: [
-            {
-              id: "1",
-              company: "WebHR",
-              companyLogo: "/WebHR.svg",
-              position: "Software Engineer",
-              period: "May 2022 - Present, United States",
-              description: "Currently, I am working on WebHR Mobile Application, WebHR is a Cloud based Social HR Software for SMEs by Verge Systems Inc. WebHR is currently used in over 160 countries world wide by thousands of organizations to manage HR, As a React.js developer with 2.5 year of experience, I have a strong foundation in creating dynamic and responsive mobile and web applications.\n\nMy experience with React Native has allowed me to develop cross-platform mobile applications that run seamlessly on both iOS and Android platforms. Additionally, my proficiency in React.js has equipped me with the skills to create fast, scalable, and dynamic web pages with excellent user experiences. I have a deep understanding of component-based architecture and state management, and I am well-versed in the latest web development trends and technologies.",
-              skills: ["React Native", "React", "JavaScript", "Typescript"],
-            },
-          ],
-        });
+        // Silent fail - başlangıç değerlerini koru
       });
-
   }, []);
 
 

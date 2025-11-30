@@ -21,18 +21,20 @@ const HomeHero: React.FC = () => {
   useEffect(() => {
     fetch("/api/content/hero")
       .then((res) => res.json())
-      .then((data) => setData(data))
+      .then((data) => {
+        if (data) {
+          // Sadece description ve diğer içerik alanlarını güncelle, başlıkları koru
+          setData((prevData) => ({
+            ...prevData,
+            description: data.description || prevData.description,
+            buttonText: data.buttonText || prevData.buttonText,
+            buttonLink: data.buttonLink || prevData.buttonLink,
+            image: data.image || prevData.image,
+          }));
+        }
+      })
       .catch(() => {
-        // Fallback data
-        setData({
-          name: "Loegs.com",
-          tagline: "kodlama &",
-          taglineHighlight: "Programlama",
-          description: "React Native geliştirme odaklı tutkulu bir yazılım mühendisi, zarif ve kullanıcı dostu mobil uygulamalar yaratmaya adanmış.",
-          buttonText: "İletişime Geç",
-          buttonLink: "mail:exapmle@exapmle.com",
-          image: "/loegs.png",
-        });
+        // Silent fail - başlangıç değerlerini koru
       });
   }, []);
   

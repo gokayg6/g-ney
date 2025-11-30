@@ -12,19 +12,7 @@ export default function ProjectsPage() {
     subtitle: "KEŞFET",
   });
 
-  useEffect(() => {
-    // Fetch in background without blocking render
-    fetch("/api/content/projects")
-      .then((res) => res.json())
-      .then((data: ProjectsData) => {
-        if (data.title || data.subtitle) {
-          // Optionally update if needed, but don't block initial render
-        }
-      })
-      .catch(() => {
-        // Silent fail
-      });
-  }, []);
+  // API çağrısı kaldırıldı - başlangıç değerleri kalıcı
 
   return (
     <main className="h-full w-full bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center min-h-screen relative z-10">
