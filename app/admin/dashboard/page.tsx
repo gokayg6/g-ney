@@ -108,7 +108,7 @@ export default function AdminDashboard() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[url('/LooperGroup2.png')] bg-no-repeat bg-cover bg-center">
         <StarsCanvas />
-        <div className="text-slate-900 dark:text-white text-xl backdrop-blur-md bg-white/90 dark:bg-white/10 px-6 py-3 rounded-xl border border-slate-200 dark:border-white/20 animate-pulse transition-colors duration-500">
+        <div className="text-slate-900 dark:text-white text-xl backdrop-blur-[2px] bg-white/10 dark:bg-white/3 px-6 py-3 rounded-xl border border-slate-200/30 dark:border-white/5 animate-pulse transition-colors duration-500">
           Yükleniyor...
         </div>
       </div>
@@ -141,13 +141,13 @@ export default function AdminDashboard() {
       <StarsCanvas />
       <div className="max-w-7xl mx-auto relative z-[101]">
         {/* Header */}
-        <div className="backdrop-blur-xl bg-white/90 dark:bg-white/10 rounded-xl p-4 mb-6 border border-slate-200 dark:border-white/20 shadow-2xl animate-fade-in transition-colors duration-500">
+        <div className="backdrop-blur-[2px] bg-white/15 dark:bg-white/5 rounded-xl p-4 mb-6 border-2 border-slate-300/50 dark:border-white/15 shadow-xl shadow-black/10 dark:shadow-black/30 animate-fade-in transition-colors duration-500">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div>
               <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-1 transition-colors duration-500">
                 Admin Dashboard
               </h1>
-              <p className="text-slate-600 dark:text-white/60 text-xs transition-colors duration-500">Portfolyo içeriğinizi yönetin</p>
+              <p className="text-slate-700 dark:text-white/70 text-xs transition-colors duration-500">Portfolyo içeriğinizi yönetin</p>
             </div>
             <div className="flex gap-2">
               <Link
@@ -172,19 +172,19 @@ export default function AdminDashboard() {
             <Link
               key={section.href}
               href={section.href}
-              className="group backdrop-blur-xl bg-white dark:bg-white/5 rounded-xl p-6 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 hover:bg-slate-50 dark:hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 dark:hover:shadow-purple-500/20 animate-fade-in"
+              className="group backdrop-blur-[2px] bg-white/15 dark:bg-white/5 rounded-xl p-6 border-2 border-slate-300/50 dark:border-white/15 hover:border-slate-400/60 dark:hover:border-white/25 hover:bg-white/20 dark:hover:bg-white/8 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30 dark:hover:shadow-purple-500/30 animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}
             >
               <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
                 {section.icon && <section.icon className="w-10 h-10 text-slate-900 dark:text-white" />}
               </div>
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-500">
+              <h2 className="text-xl font-bold text-slate-800 dark:text-white mb-2 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-500">
                 {section.title}
               </h2>
-              <p className="text-slate-600 dark:text-white/60 text-sm group-hover:text-slate-700 dark:group-hover:text-white/80 transition-colors duration-500">
+              <p className="text-slate-700 dark:text-white/70 text-sm group-hover:text-slate-800 dark:group-hover:text-white/90 transition-colors duration-500">
                 {section.desc}
               </p>
-              <div className="mt-4 text-slate-500 dark:text-white/40 group-hover:text-slate-600 dark:group-hover:text-white/60 transition-colors duration-500 text-xs">
+              <div className="mt-4 text-slate-600 dark:text-white/50 group-hover:text-slate-700 dark:group-hover:text-white/70 transition-colors duration-500 text-xs font-medium">
                 Düzenlemek için tıklayın →
               </div>
             </Link>

@@ -96,7 +96,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} text-white overflow-y-scroll overflow-x-hidden`}
         style={{
-          backgroundColor: "#0a0a0a",
+          backgroundColor: "transparent",
         }}
       >
         <ThemeProvider

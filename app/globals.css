@@ -9,9 +9,27 @@
 }
 
 /* iOS Liquid Glass Background System */
-html, body {
+html {
   background: #0a0a0a;
   background-color: #0a0a0a;
+}
+
+body {
+  background: transparent;
+  background-color: transparent;
+}
+
+/* Fallback dark background layer - behind DarkVeil to prevent white flash */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0a0a0a;
+  z-index: -3;
+  pointer-events: none;
 }
 
 /* iOS Light Bloom Overlays */
@@ -183,13 +201,13 @@ body::before {
   animation: zoom-out 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Prevent white flash during page transitions */
+/* Prevent white flash during page transitions - use fallback instead of forcing color */
 html {
-  background-color: #0a0a0a !important;
+  background-color: transparent !important;
 }
 
 body {
-  background-color: #0a0a0a !important;
+  background-color: transparent !important;
 }
 
 /* Ensure background is always visible during transitions */
@@ -786,24 +804,30 @@ select.admin-select option:checked {
 }
 
 /* Admin Panel - Blog Select Styling - Fix white text issue */
-select {
-  color: rgb(15, 23, 42) !important; /* slate-900 */
+.blog-select-dropdown {
+  color: rgb(15, 23, 42) !important; /* slate-900 for light mode */
 }
 
-select option {
+.blog-select-dropdown option {
   color: rgb(15, 23, 42) !important; /* slate-900 */
   background-color: white !important;
+  padding: 8px 12px !important;
 }
 
 /* Dark mode select styling */
-.dark select,
-.dark select option {
+.dark .blog-select-dropdown {
   color: rgb(255, 255, 255) !important;
   background-color: rgb(30, 41, 59) !important; /* slate-800 */
 }
 
-.dark select option:hover,
-.dark select option:checked {
+.dark .blog-select-dropdown option {
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(30, 41, 59) !important; /* slate-800 */
+  padding: 8px 12px !important;
+}
+
+.dark .blog-select-dropdown option:hover,
+.dark .blog-select-dropdown option:checked {
   background-color: rgb(51, 65, 85) !important; /* slate-700 */
   color: rgb(255, 255, 255) !important;
 }
