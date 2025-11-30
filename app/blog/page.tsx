@@ -258,42 +258,16 @@ export default function BlogPage() {
                     </div>
                   </div>
 
-                  {/* DETAYLARI GÖR BUTONU - Modern tasarım */}
+                  {/* DETAYLARI GÖR BUTONU */}
                   <button
                     type="button"
                     onClick={(e) => {
-                      e.preventDefault();
                       e.stopPropagation();
-                      console.log('Button clicked for post:', post.id);
-                      const willBeOpen = expandedPostId !== post.id;
                       setExpandedPostId((prev) =>
                         prev === post.id ? null : post.id
                       );
-                      if (willBeOpen) {
-                        setTimeout(() => {
-                          const detailsSection = document.getElementById(
-                            `post-details-${post.id}`
-                          );
-                          if (detailsSection) {
-                            detailsSection.scrollIntoView({
-                              behavior: "smooth",
-                              block: "nearest",
-                            });
-                          }
-                        }, 200);
-                      }
                     }}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      console.log('Button mousedown for post:', post.id);
-                    }}
-                    onTouchStart={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      console.log('Button touch for post:', post.id);
-                    }}
-                    className="view-details-btn absolute z-[100000] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-4.5 md:py-2 rounded-full text-[10px] sm:text-[11px] md:text-xs font-bold uppercase tracking-wider text-white bg-white/10 dark:bg-white/8 backdrop-blur-md border border-white/30 dark:border-white/35 shadow-[0_8px_32px_rgba(255,255,255,0.15)] dark:shadow-[0_8px_32px_rgba(255,255,255,0.2)] min-w-[110px] sm:min-w-[125px] md:min-w-[135px] transition-all duration-300 ease-out"
+                    className="view-details-btn absolute z-[100000] opacity-100 sm:opacity-30 sm:group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-1.5 md:px-3.5 md:py-2 rounded-full text-[10px] xs:text-[11px] sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-white bg-white/10 dark:bg-white/8 backdrop-blur-sm border border-white/30 dark:border-white/35 shadow-[0_8px_32px_rgba(255,255,255,0.15)] dark:shadow-[0_8px_32px_rgba(255,255,255,0.2)] min-w-[105px] sm:min-w-[120px] md:min-w-[130px]"
                     style={{
                       zIndex: 100000,
                       position: "absolute",
@@ -315,7 +289,7 @@ export default function BlogPage() {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      strokeWidth={2.5}
+                      strokeWidth={3}
                     >
                       <path
                         strokeLinecap="round"
@@ -395,7 +369,6 @@ export default function BlogPage() {
                   <button
                     type="button"
                     onClick={(e) => {
-                      e.preventDefault();
                       e.stopPropagation();
                       setExpandedPostId((prev) =>
                         prev === post.id ? null : post.id
@@ -403,6 +376,9 @@ export default function BlogPage() {
                     }}
                     className="flex items-center justify-center min-w-[38px] sm:min-w-[42px] md:min-w-[46px] min-h-[38px] sm:min-h-[42px] md:min-h-[46px] rounded-full bg-white dark:bg-white/10 hover:bg-slate-100 dark:hover:bg-white/25 text-slate-900 dark:text-white text-lg sm:text-xl font-bold transition-all duration-200"
                     aria-expanded={expandedPostId === post.id}
+                    style={{
+                      WebkitTapHighlightColor: "transparent",
+                    }}
                   >
                     <span
                       className={`block transform transition-transform duration-300 ${
