@@ -3,15 +3,15 @@
     "name": "Loegs.com",
     "tagline": "Kodlama &",
     "taglineHighlight": "Programlama",
-    "description": "React Native geliştirme odaklı tutkulu bir Yazılım Mühendisi, zarif ve kullanıcı dostu mobil uygulamalar oluşturmaya adanmış.",
+    "description": "Kullanıcı deneyimi odaklı modern dijital ürünler geliştiriyorum. Mobil uygulamalardan web platformlarına, oyunlardan özel yazılım projelerine kadar tüm süreçlerde; tasarım, performans ve güvenilirlik önceliğimdir.",
     "buttonText": "İletişime Geç",
     "buttonLink": "mail:mustafakarakus@gmail.com",
     "image": "/loegs.png"
   },
   "about": {
-    "title": "HAKKIMDA",
-    "subtitle": "KEŞFETdgdggdg",
-    "description": "mustafabeymustafamustafamustafagokaywwwwwwwwww\nZarif çözümler üretme tutkusuyla, yazılım geliştirmenin sürekli evrim geçiren manzarasında ilerliyorum. Yolculuğum, kavramları koda çevirmeyi, sorunsuz kullanıcı deneyimleri yaratmayı ve mümkün olanın sınırlarını sürekli zorlamaLHKHKHKHKyı içeriyor"
+    "title": "HAKKIMIZDA",
+    "subtitle": "KEŞFET",
+    "description": "Loegs Studio, modern teknolojiyi estetik bir vizyonla birleştiren bağımsız bir dijital üretim markasıdır. Kendi ekosistemimiz içinde geliştirdiğimiz uygulamalar ve platformlar; zarafet, performans ve yenilik prensipleriyle şekillenir.\n\nTeknolojiyi yalnızca bir araç değil, tasarımın bütünsel bir parçası olarak görüyoruz. Bu yaklaşım, her ürünümüze özgün bir karakter ve zamansız bir kimlik kazandırır.\nLoegs, sınırları zorlayan fikirlerin hayata geçtiği bir üretim alanıdır. Burada her proje, markamızın vizyonunu taşıyan kusursuz bir deneyim yaratma amacıyla doğar."
   },
   "experience": {
     "title": "DENEYİM",
@@ -19,16 +19,17 @@
     "items": [
       {
         "id": "1",
-        "company": "WebHR",
-        "companyLogo": "/WebHR.svg",
-        "position": "Yazılım Mühendisi",
-        "period": "Mayıs 2022 - Şimdi, Amerika Birleşik Devletleri",
-        "description": "Şu anda WebHR Mobil Uygulaması üzerinde çalışıyorum. WebHR, Verge Systems Inc. tarafından KOBİ'ler için bulut tabanlı bir Sosyal İK Yazılımıdır. WebHR şu anda dünya çapında 160'tan fazla ülkede binlerce organizasyon tarafından İK yönetimi için kullanılmaktadır. 2.5 yıllık deneyime sahip bir React.js geliştiricisi olarak, dinamik ve duyarlı mobil ve web uygulamaları oluşturmada güçlü bir temele sahibim.\n\nReact Native deneyimim, hem iOS hem de Android platformlarında sorunsuz çalışan platformlar arası mobil uygulamalar geliştirmeme olanak sağladı. Ayrıca, React.js konusundaki yeterliliğim, mükemmel kullanıcı deneyimleriyle hızlı, ölçeklenebilir ve dinamik web sayfaları oluşturma becerileriyle donattı. Bileşen tabanlı mimari ve durum yönetimi konusunda derin bir anlayışa sahibim ve en son web geliştirme trendleri ve teknolojileri konusunda bilgiliyim.",
+        "company": "Mustafa Karakuş",
+        "companyLogo": "/loegs.png",
+        "position": "Founder",
+        "period": "2021 – Şimdi, Global",
+        "description": "Loegs Studio altında modern mobil uygulamalar, global otomasyon sistemleri ve yenilikçi dijital platformlar geliştiriyorum. React Native, React ve modern JavaScript ekosistemi üzerine kurulu projelerim; yüksek performans, ölçeklenebilirlik ve minimal tasarım prensipleriyle şekillenir.\nÜretim sürecim; kullanıcı deneyimi, hız ve marka vizyonunu merkeze alan premium bir mühendislik yaklaşımıyla ilerler.",
         "skills": [
           "React Native",
-          "React",
+          "Next.js",
           "JavaScript",
-          "Typescript"
+          "Python",
+          "Dart"
         ]
       }
     ]
@@ -74,8 +75,8 @@
   "contact": {
     "title": "İLETİŞİM",
     "subtitle": "BANA ULAŞIN",
-    "email": "mustafakarakus@gmail.com",
-    "phone": "+90 555 123 45 67",
+    "email": "iletisim@loegs.com",
+    "phone": "+90 552 088 2412",
     "description": "İşbirlikleri, fırsatlar veya sadece merhaba demek için çekinmeden iletişime geçin!"
   },
   "social": [
@@ -116,12 +117,13 @@
         "title": "mustafa hocam",
         "excerpt": "Bugün üretim masasını yeni kokumuz Camomile Tea & French Lavender için hazırladım. Lavanta demetleri stüdyoyu sakinleştiriyor.",
         "content": "06:30 — Atölyeye girdiğimde lavanta demetleri hâlâ gece lambalarının altında parlıyordu. Camomile yapraklarını öğütürken çıkan ses, sabah sessizliğine eşlik etti.\n\n12:10 — İlk deneme partisini hazırladım. Renk tam istediğim gibi pastel krem oldu. Ekibin geri bildirimi \"şifa gibi\" oldu.\n\n19:45 — Etiket taslağını güncelledim. Camomile illüstrasyonunu bir tık yumuşattım. Yarın fotoğraf çekimi var, enerjimiz yüksek.",
-        "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=2400&q=80",
+        "image": "/blog/1764519924969_photo-1608667508764-33cf0726b13a.jpeg",
         "date": "20 Ocak 2024",
         "author": "Loegs",
         "category": "journal",
         "readTime": "4 dk",
-        "published": true
+        "published": true,
+        "tags": ""
       },
       {
         "id": "2",
@@ -235,13 +237,13 @@
   },
   "subdomainProjects": [
     {
-      "id": "biorhythm-app",
-      "name": "mustafahocam",
-      "subdomain": "mustafa",
+      "id": "1764520806891",
+      "name": "bio",
+      "subdomain": "bio",
       "category": "mobile-app",
-      "title": "mustafahocam",
-      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.xgccggcgcg",
-      "tagline": "Understand yourself better every dayccgdgdrg",
+      "title": "Biorhythm - Daily Wellness Tracker",
+      "description": "Track your physical, emotional, and intellectual biorhythms. Get personalized insights, daily affirmations, and wellness recommendations.",
+      "tagline": "Understand yourself better every day",
       "logo": "/loegs.png",
       "coverImage": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80",
       "features": [
@@ -279,234 +281,11 @@
       }
     },
     {
-      "id": "shadow-quest-game",
-      "name": "Shadow Quest",
-      "subdomain": "testgame",
-      "category": "game",
-      "title": "Shadow Quest - Epic Adventure RPG",
-      "description": "Embark on an epic journey through mystical realms. Battle fierce enemies, discover ancient secrets, and become the ultimate hero.",
-      "tagline": "Your destiny awaits in the shadows",
-      "logo": "/loegs.png",
-      "coverImage": "/uploads/1763335134838_premium_photo-1669349127520-fa1e30b02055.jpeg",
-      "features": [
-        "Stunning 3D graphics",
-        "Immersive storyline",
-        "Real-time multiplayer battles",
-        "100+ unique heroes",
-        "Epic boss raids",
-        "Guild system & events"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80",
-        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&q=80",
-        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80",
-        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
-      ],
-      "appStoreLink": "https://apps.apple.com",
-      "playStoreLink": "https://play.google.com",
-      "techStack": [
-        "Unity",
-        "C#",
-        "Photon",
-        "Firebase",
-        "PlayFab"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "Shadow Quest - Epic Mobile RPG",
-        "metaDescription": "Battle through mystical realms in this epic RPG adventure",
-        "keywords": [
-          "rpg",
-          "game",
-          "mobile game",
-          "multiplayer"
-        ]
-      }
-    },
-    {
-      "id": "luxestyle-shop",
-      "name": "LuxeStyle",
-      "subdomain": "shop",
+      "id": "1764520817843",
+      "name": "ryt",
+      "subdomain": "ryt",
       "category": "ecommerce",
       "title": "LuxeStyle - Premium Fashion Marketplace",
-      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
-      "tagline": "Elevate your style, discover luxury",
-      "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
-      "features": [
-        "Curated premium collections",
-        "AR virtual try-on",
-        "One-tap checkout",
-        "Personalized recommendations",
-        "Exclusive member deals",
-        "Fast & free shipping"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
-        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
-      ],
-      "appStoreLink": "https://apps.apple.com",
-      "playStoreLink": "https://play.google.com",
-      "techStack": [
-        "React Native",
-        "Shopify",
-        "Stripe",
-        "AR Kit"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "LuxeStyle - Premium Fashion App",
-        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
-        "keywords": [
-          "fashion",
-          "shopping",
-          "ecommerce",
-          "luxury"
-        ]
-      }
-    },
-    {
-      "id": "luxestyle-luxestyle",
-      "name": "LuxeStyle",
-      "subdomain": "luxestyle",
-      "category": "ecommerce",
-      "title": "LuxeStyle - Premium Fashion Marketplace",
-      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
-      "tagline": "Elevate your style, discover luxury",
-      "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
-      "features": [
-        "Curated premium collections",
-        "AR virtual try-on",
-        "One-tap checkout",
-        "Personalized recommendations",
-        "Exclusive member deals",
-        "Fast & free shipping"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
-        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
-      ],
-      "appStoreLink": "https://apps.apple.com",
-      "playStoreLink": "https://play.google.com",
-      "techStack": [
-        "React Native",
-        "Shopify",
-        "Stripe",
-        "AR Kit"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "LuxeStyle - Premium Fashion App",
-        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
-        "keywords": [
-          "fashion",
-          "shopping",
-          "ecommerce",
-          "luxury"
-        ]
-      }
-    },
-    {
-      "id": "falla-social",
-      "name": "Falla",
-      "subdomain": "falla",
-      "category": "website",
-      "title": "Falla - Social Discovery Platform",
-      "description": "Connect with like-minded people, discover new communities, and share your passions. Falla brings people together through shared interests.",
-      "tagline": "Discover connections, share passions",
-      "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80",
-      "features": [
-        "Interest-based matching",
-        "Real-time messaging",
-        "Community groups",
-        "Event discovery",
-        "Privacy-first design",
-        "Global reach"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&q=80",
-        "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80",
-        "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80",
-        "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&q=80"
-      ],
-      "appStoreLink": "https://apps.apple.com",
-      "playStoreLink": "https://play.google.com",
-      "techStack": [
-        "React Native",
-        "Firebase",
-        "GraphQL",
-        "WebRTC"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "Falla - Social Discovery Platform",
-        "metaDescription": "Connect with people who share your interests and passions",
-        "keywords": [
-          "social",
-          "discovery",
-          "community",
-          "networking"
-        ]
-      }
-    },
-    {
-      "id": "1763331294737",
-      "name": "Mustafa  Hoca",
-      "subdomain": "mustafa",
-      "category": "mobile-app",
-      "title": "Mustafa Hoca",
-      "description": "",
-      "tagline": "",
-      "logo": "/uploads/1763331351891_loegs.png",
-      "coverImage": "/uploads/1763331363561_premium_photo-1669349127520-fa1e30b02055.jpeg",
-      "features": [],
-      "screenshots": [
-        "/uploads/1763331376874_photo-1566895291281-ea63efd4bdbc.jpeg"
-      ],
-      "appStoreLink": "",
-      "playStoreLink": "",
-      "techStack": [],
-      "published": true,
-      "metadata": {
-        "metaTitle": "",
-        "metaDescription": "",
-        "keywords": []
-      }
-    },
-    {
-      "id": "1763334018213",
-      "name": "thdgd",
-      "subdomain": "gdg",
-      "category": "ecommerce",
-      "title": "gdgdg",
-      "description": "gdgdg",
-      "tagline": "dgd",
-      "logo": "",
-      "coverImage": "",
-      "features": [],
-      "screenshots": [],
-      "appStoreLink": "",
-      "playStoreLink": "",
-      "techStack": [],
-      "published": true,
-      "metadata": {
-        "metaTitle": "",
-        "metaDescription": "",
-        "keywords": []
-      }
-    },
-    {
-      "id": "1763334641366",
-      "name": "aaa",
-      "subdomain": "aaa",
-      "category": "ecommerce",
-      "title": "aaaaaaaaaaa",
       "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
       "tagline": "Elevate your style, discover luxury",
       "logo": "/loegs.png",
@@ -544,12 +323,12 @@
           "luxury"
         ]
       },
-      "siteLink": ""
+      "siteLink": "https://www.webtekno.com/pc-sicaklik-olcme-programlari-h99859.html"
     },
     {
-      "id": "1764001040066",
-      "name": "",
-      "subdomain": "",
+      "id": "1764520844499",
+      "name": "game",
+      "subdomain": "game",
       "category": "game",
       "title": "Shadow Quest - Epic Adventure RPG",
       "description": "Embark on an epic journey through mystical realms. Battle fierce enemies, discover ancient secrets, and become the ultimate hero.",
@@ -590,231 +369,6 @@
           "multiplayer"
         ]
       }
-    },
-    {
-      "id": "1764001041690",
-      "name": "",
-      "subdomain": "",
-      "category": "ecommerce",
-      "title": "LuxeStyle - Premium Fashion Marketplace",
-      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
-      "tagline": "Elevate your style, discover luxury",
-      "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
-      "features": [
-        "Curated premium collections",
-        "AR virtual try-on",
-        "One-tap checkout",
-        "Personalized recommendations",
-        "Exclusive member deals",
-        "Fast & free shipping"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
-        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
-      ],
-      "appStoreLink": "",
-      "playStoreLink": "",
-      "techStack": [
-        "React Native",
-        "Shopify",
-        "Stripe",
-        "AR Kit"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "LuxeStyle - Premium Fashion App",
-        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
-        "keywords": [
-          "fashion",
-          "shopping",
-          "ecommerce",
-          "luxury"
-        ]
-      },
-      "siteLink": ""
-    },
-    {
-      "id": "1764001043250",
-      "name": "",
-      "subdomain": "",
-      "category": "saas",
-      "title": "SaaS Platform - Business Solutions",
-      "description": "Powerful SaaS platform designed to streamline your business operations. Manage projects, collaborate with teams, and scale your business with enterprise-grade features.",
-      "tagline": "Scale your business with powerful tools",
-      "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
-      "features": [
-        "Cloud-based infrastructure",
-        "Real-time collaboration",
-        "Advanced analytics & reporting",
-        "API integrations",
-        "Enterprise security",
-        "Scalable architecture"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80",
-        "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=80",
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80"
-      ],
-      "appStoreLink": "",
-      "playStoreLink": "",
-      "techStack": [
-        "React",
-        "Node.js",
-        "PostgreSQL",
-        "AWS",
-        "Docker"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "SaaS Platform - Business Solutions",
-        "metaDescription": "Streamline your business operations with our powerful SaaS platform",
-        "keywords": [
-          "saas",
-          "business",
-          "software",
-          "enterprise"
-        ]
-      },
-      "siteLink": ""
-    },
-    {
-      "id": "1764001044698",
-      "name": "",
-      "subdomain": "akdo",
-      "category": "website",
-      "title": "Falla - Social Discovery Platform",
-      "description": "Connect with like-minded people, discover new communities, and share your passions. Falla brings people together through shared interests.",
-      "tagline": "Discover connections, share passions",
-      "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80",
-      "features": [
-        "Interest-based matching",
-        "Real-time messaging",
-        "Community groups",
-        "Event discovery",
-        "Privacy-first design",
-        "Global reach"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&q=80",
-        "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80",
-        "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80",
-        "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&q=80"
-      ],
-      "appStoreLink": "https://apps.apple.com",
-      "playStoreLink": "https://play.google.com",
-      "techStack": [
-        "React Native",
-        "Firebase",
-        "GraphQL",
-        "WebRTC"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "Falla - Social Discovery Platform",
-        "metaDescription": "Connect with people who share your interests and passions",
-        "keywords": [
-          "social",
-          "discovery",
-          "community",
-          "networking"
-        ]
-      }
-    },
-    {
-      "id": "1764167776622",
-      "name": "",
-      "subdomain": "yes",
-      "category": "ecommerce",
-      "title": "LuxeStyle - Premium Fashion Marketplace",
-      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
-      "tagline": "Elevate your style, discover luxury",
-      "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
-      "features": [
-        "Curated premium collections",
-        "AR virtual try-on",
-        "One-tap checkout",
-        "Personalized recommendations",
-        "Exclusive member deals",
-        "Fast & free shipping"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
-        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
-      ],
-      "appStoreLink": "",
-      "playStoreLink": "",
-      "techStack": [
-        "React Native",
-        "Shopify",
-        "Stripe",
-        "AR Kit"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "LuxeStyle - Premium Fashion App",
-        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
-        "keywords": [
-          "fashion",
-          "shopping",
-          "ecommerce",
-          "luxury"
-        ]
-      },
-      "siteLink": ""
-    },
-    {
-      "id": "1764435320458",
-      "name": "akdo",
-      "subdomain": "aakdo",
-      "category": "ecommerce",
-      "title": "LuxeStyle - Premium Fashion Marketplace",
-      "description": "Discover and shop the latest premium fashion trends. Curated collections, exclusive deals, and seamless shopping experience.",
-      "tagline": "Elevate your style, discover luxury",
-      "logo": "/loegs.png",
-      "coverImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80",
-      "features": [
-        "Curated premium collections",
-        "AR virtual try-on",
-        "One-tap checkout",
-        "Personalized recommendations",
-        "Exclusive member deals",
-        "Fast & free shipping"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80",
-        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&q=80",
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
-      ],
-      "appStoreLink": "",
-      "playStoreLink": "",
-      "techStack": [
-        "React Native",
-        "Shopify",
-        "Stripe",
-        "AR Kit"
-      ],
-      "published": true,
-      "metadata": {
-        "metaTitle": "LuxeStyle - Premium Fashion App",
-        "metaDescription": "Shop premium fashion with AR try-on and exclusive deals",
-        "keywords": [
-          "fashion",
-          "shopping",
-          "ecommerce",
-          "luxury"
-        ]
-      },
-      "siteLink": ""
     }
   ],
   "testimonials": {

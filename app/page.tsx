@@ -43,31 +43,31 @@ export default function Home() {
       <div className="flex flex-col gap-8 md:gap-12 pb-8 px-2 sm:px-4">
         <HomeHero />
         <FadeUpWrapper>
-          <About />
+        <About />
         </FadeUpWrapper>
         <FadeUpWrapper delay={0.1}>
-          <Statistics />
+        <Statistics />
         </FadeUpWrapper>
         <FadeUpWrapper delay={0.2}>
-          <Skills />
+        <Skills />
         </FadeUpWrapper>
         <FadeUpWrapper delay={0.1}>
-          <Experience />
+        <Experience />
         </FadeUpWrapper>
         <FadeUpWrapper delay={0.2}>
-          <Services />
+        <Services />
         </FadeUpWrapper>
         <FadeUpWrapper delay={0.1}>
-          <Projects />
+        <Projects />
         </FadeUpWrapper>
         <FadeUpWrapper delay={0.2}>
-          <Contact />
+        <Contact />
         </FadeUpWrapper>
         <FadeUpWrapper delay={0.1}>
-          <FAQ />
+        <FAQ />
         </FadeUpWrapper>
         <FadeUpWrapper delay={0.2}>
-          <Footer />
+        <Footer />
         </FadeUpWrapper>
       </div>
     </main>

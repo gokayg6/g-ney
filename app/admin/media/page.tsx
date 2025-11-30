@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import StarsCanvas from "@/components/main/StarsBackground";
+import { FiFolder, FiCamera, FiFile, FiUpload, FiTrash2, FiCopy } from "react-icons/fi";
 
 interface MediaFile {
   url: string;
@@ -181,8 +182,15 @@ export default function MediaLibrary() {
               </p>
             </div>
             <div className="flex gap-2">
-              <label className="px-4 py-2 bg-slate-900 dark:bg-white/10 text-white rounded-xl cursor-pointer hover:bg-slate-800 dark:hover:bg-white/20 transition-colors">
-                {uploading ? "Yükleniyor..." : "📁 Dosya Yükle"}
+              <label className="px-4 py-2 bg-slate-900 dark:bg-white/10 text-white rounded-xl cursor-pointer hover:bg-slate-800 dark:hover:bg-white/20 transition-colors flex items-center gap-2">
+                {uploading ? (
+                  <>Yükleniyor...</>
+                ) : (
+                  <>
+                    <FiUpload className="w-4 h-4" />
+                    Dosya Yükle
+                  </>
+                )}
                 <input
                   type="file"
                   multiple
@@ -192,8 +200,9 @@ export default function MediaLibrary() {
                   disabled={uploading}
                 />
               </label>
-              <label className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-xl cursor-pointer hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">
-                📷 Cihazdan Seç
+              <label className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-xl cursor-pointer hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors flex items-center gap-2">
+                <FiCamera className="w-4 h-4" />
+                Cihazdan Seç
                 <input
                   type="file"
                   multiple
@@ -207,8 +216,9 @@ export default function MediaLibrary() {
               {selectedFiles.size > 0 && (
                 <button
                   onClick={handleBulkDelete}
-                  className="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors"
+                  className="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors flex items-center gap-2"
                 >
+                  <FiTrash2 className="w-4 h-4" />
                   Seçilenleri Sil ({selectedFiles.size})
                 </button>
               )}
@@ -330,7 +340,7 @@ export default function MediaLibrary() {
                       </div>
                     ) : (
                       <div className={`${viewMode === "list" ? "w-24 h-24 flex-shrink-0" : "aspect-square"} flex items-center justify-center bg-slate-100 dark:bg-white/5`}>
-                        <span className="text-4xl">📄</span>
+                        <FiFile className="w-12 h-12 text-slate-400 dark:text-white/30" />
                       </div>
                     )}
                     <div className={`${viewMode === "list" ? "flex-1" : "absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 p-2"}`}>
@@ -340,14 +350,16 @@ export default function MediaLibrary() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => copyToClipboard(file.url)}
-                          className="px-3 py-1 bg-blue-600 text-white text-xs rounded-lg hover:bg-blue-700 transition-colors"
+                          className="px-3 py-1 bg-blue-600 text-white text-xs rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1"
                         >
+                          <FiCopy className="w-3 h-3" />
                           Kopyala
                         </button>
                         <button
                           onClick={() => handleDelete(file.url)}
-                          className="px-3 py-1 bg-red-600 text-white text-xs rounded-lg hover:bg-red-700 transition-colors"
+                          className="px-3 py-1 bg-red-600 text-white text-xs rounded-lg hover:bg-red-700 transition-colors flex items-center gap-1"
                         >
+                          <FiTrash2 className="w-3 h-3" />
                           Sil
                         </button>
                       </div>

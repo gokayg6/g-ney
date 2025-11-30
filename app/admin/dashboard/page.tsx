@@ -5,6 +5,22 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { PortfolioData } from '@/lib/data';
 import StarsCanvas from '@/components/main/StarsBackground';
+import { 
+  FiRocket, 
+  FiUser, 
+  FiBriefcase, 
+  FiPalette, 
+  FiGlobe, 
+  FiFileText, 
+  FiEdit, 
+  FiMail, 
+  FiLink, 
+  FiFolder, 
+  FiZap, 
+  FiBarChart, 
+  FiSettings, 
+  FiHelpCircle 
+} from 'react-icons/fi';
 
 export default function AdminDashboard() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -105,20 +121,20 @@ export default function AdminDashboard() {
   }
 
   const sections = [
-    { href: '/admin/edit/hero', title: 'Hero Section', desc: 'Ana sayfa hero içeriğini düzenle', icon: '🚀' },
-    { href: '/admin/edit/about', title: 'Hakkımda', desc: 'Hakkımda bölümünü düzenle', icon: '👤' },
-    { href: '/admin/edit/experience', title: 'Deneyim', desc: 'İş deneyimlerini yönet', icon: '💼' },
-    { href: '/admin/edit/projects', title: 'Projeler', desc: 'Projeleri ve şablonları yönet', icon: '🎨' },
-    { href: '/admin/edit/subdomainProjects', title: 'Subdomain Projeleri', desc: 'Subdomain projelerini ve görsellerini yönet', icon: '🌐' },
-    { href: '/admin/edit/blog', title: 'Blog', desc: 'Blog yazılarını yönet', icon: '📝' },
-    { href: '/admin/blogs', title: 'Blog Editörü', desc: 'Canlı önizleme ile blog yazılarını düzenle', icon: '✏️' },
-    { href: '/admin/edit/contact', title: 'İletişim', desc: 'İletişim bilgilerini düzenle', icon: '📧' },
-    { href: '/admin/edit/social', title: 'Sosyal Medya', desc: 'Sosyal medya linklerini düzenle', icon: '🔗' },
-    { href: '/admin/media', title: 'Medya Kütüphanesi', desc: 'Dosyaları yönet, yükle ve organize et', icon: '📁' },
-    { href: '/admin/edit/skills', title: 'Yetenekler', desc: 'Teknoloji stack ve yetenekleri yönet', icon: '⚡' },
-    { href: '/admin/edit/statistics', title: 'İstatistikler', desc: 'Başarı metriklerini düzenle', icon: '📊' },
-    { href: '/admin/edit/services', title: 'Hizmetler', desc: 'Sunulan hizmetleri yönet', icon: '🛠️' },
-    { href: '/admin/edit/faq', title: 'SSS', desc: 'Sık sorulan soruları yönet', icon: '❓' },
+    { href: '/admin/edit/hero', title: 'Hero Section', desc: 'Ana sayfa hero içeriğini düzenle', icon: FiRocket },
+    { href: '/admin/edit/about', title: 'Hakkımda', desc: 'Hakkımda bölümünü düzenle', icon: FiUser },
+    { href: '/admin/edit/experience', title: 'Deneyim', desc: 'İş deneyimlerini yönet', icon: FiBriefcase },
+    { href: '/admin/edit/projects', title: 'Projeler', desc: 'Projeleri ve şablonları yönet', icon: FiPalette },
+    { href: '/admin/edit/subdomainProjects', title: 'Subdomain Projeleri', desc: 'Subdomain projelerini ve görsellerini yönet', icon: FiGlobe },
+    { href: '/admin/edit/blog', title: 'Blog', desc: 'Blog yazılarını yönet', icon: FiFileText },
+    { href: '/admin/blogs', title: 'Blog Editörü', desc: 'Canlı önizleme ile blog yazılarını düzenle', icon: FiEdit },
+    { href: '/admin/edit/contact', title: 'İletişim', desc: 'İletişim bilgilerini düzenle', icon: FiMail },
+    { href: '/admin/edit/social', title: 'Sosyal Medya', desc: 'Sosyal medya linklerini düzenle', icon: FiLink },
+    { href: '/admin/media', title: 'Medya Kütüphanesi', desc: 'Dosyaları yönet, yükle ve organize et', icon: FiFolder },
+    { href: '/admin/edit/skills', title: 'Yetenekler', desc: 'Teknoloji stack ve yetenekleri yönet', icon: FiZap },
+    { href: '/admin/edit/statistics', title: 'İstatistikler', desc: 'Başarı metriklerini düzenle', icon: FiBarChart },
+    { href: '/admin/edit/services', title: 'Hizmetler', desc: 'Sunulan hizmetleri yönet', icon: FiSettings },
+    { href: '/admin/edit/faq', title: 'SSS', desc: 'Sık sorulan soruları yönet', icon: FiHelpCircle },
   ];
 
   return (
@@ -160,8 +176,8 @@ export default function AdminDashboard() {
               className="group backdrop-blur-xl bg-white dark:bg-white/5 rounded-xl p-6 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 hover:bg-slate-50 dark:hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 dark:hover:shadow-purple-500/20 animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}
             >
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                {section.icon}
+              <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
+                {section.icon && <section.icon className="w-10 h-10 text-slate-900 dark:text-white" />}
               </div>
               <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-500">
                 {section.title}

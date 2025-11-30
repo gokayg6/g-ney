@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import type { BlogPost } from "@/lib/data";
 import EditableBlogPreview from "@/components/admin/EditableBlogPreview";
 import StarsCanvas from "@/components/main/StarsBackground";
+import { FiCamera, FiClock, FiSave, FiBookOpen, FiPlus } from "react-icons/fi";
 
 interface BlogFormState {
   id: string;
@@ -278,6 +280,128 @@ export default function AdminBlogEditor() {
     );
   }
 
+  // Blog Thumbnail Card Component
+  const BlogThumbnailCard = ({
+    blog,
+    isSelected,
+    onSelect,
+    onImageChange,
+  }: {
+    blog: BlogPost;
+    isSelected: boolean;
+    onSelect: () => void;
+    onImageChange: (file: File) => Promise<void>;
+  }) => {
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [imageUploading, setImageUploading] = useState(false);
+
+    const handleImageClick = () => {
+      fileInputRef.current?.click();
+    };
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        alert("Lütfen bir resim dosyası seçin!");
+        return;
+      }
+
+      setImageUploading(true);
+      try {
+        await onImageChange(file);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      } finally {
+        setImageUploading(false);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+      }
+    };
+
+    return (
+      <div
+        className={`relative group cursor-pointer rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+          isSelected
+            ? "border-slate-900 dark:border-white shadow-lg scale-105"
+            : "border-slate-200 dark:border-white/20 hover:border-slate-300 dark:hover:border-white/40"
+        }`}
+        onClick={onSelect}
+      >
+        {/* Kapak Fotoğrafı */}
+        <div className="relative aspect-[3/4] bg-slate-100 dark:bg-white/5 overflow-hidden">
+          {blog.image ? (
+            <Image
+              src={blog.image}
+              alt={blog.title || "Blog kapak"}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-white/30">
+              <FiCamera className="w-12 h-12" />
+            </div>
+          )}
+          
+          {/* Fotoğraf Değiştirme Overlay */}
+          <div
+            className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleImageClick();
+            }}
+          >
+            <button
+              className="px-4 py-2 bg-white dark:bg-white/20 text-slate-900 dark:text-white rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-white/30 transition-all duration-200 flex items-center gap-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleImageClick();
+              }}
+              disabled={imageUploading}
+            >
+              {imageUploading ? (
+                <><FiClock className="inline w-4 h-4 mr-2 animate-spin" /> Yükleniyor...</>
+              ) : (
+                <><FiCamera className="inline w-4 h-4 mr-2" /> Fotoğraf Değiştir</>
+              )}
+            </button>
+          </div>
+
+          {/* Gizli File Input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+        </div>
+
+        {/* Blog Bilgileri */}
+        <div className="p-2 bg-white dark:bg-white/5">
+          <h3 className="text-xs font-semibold text-slate-900 dark:text-white line-clamp-2 mb-1">
+            {blog.title || "Başlıksız"}
+          </h3>
+          <p className="text-[10px] text-slate-500 dark:text-white/50">
+            {blog.date || "Tarih yok"}
+          </p>
+          {blog.published ? (
+            <span className="inline-block mt-1 px-2 py-0.5 text-[10px] bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-300 rounded">
+              Yayında
+            </span>
+          ) : (
+            <span className="inline-block mt-1 px-2 py-0.5 text-[10px] bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-300 rounded">
+              Taslak
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   if (!authenticated) {
     return null;
   }
@@ -334,7 +458,15 @@ export default function AdminBlogEditor() {
                 disabled={saving}
                 className="px-6 py-2.5 bg-slate-900 dark:bg-white/20 backdrop-blur-md border border-slate-900 dark:border-white/30 text-white dark:text-white rounded-lg text-sm font-semibold hover:bg-slate-800 dark:hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 active:scale-95 shadow-lg"
               >
-                {saving ? "Kaydediliyor..." : "💾 Kaydet"}
+                {saving ? (
+                  <>
+                    <FiClock className="inline w-4 h-4 mr-2 animate-spin" /> Kaydediliyor...
+                  </>
+                ) : (
+                  <>
+                    <FiSave className="inline w-4 h-4 mr-2" /> Kaydet
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -351,6 +483,102 @@ export default function AdminBlogEditor() {
               {saveMessage.text}
             </div>
           )}
+        </div>
+
+        {/* Blog Listesi - Küçük Kapak Fotoğrafları */}
+        <div className="backdrop-blur-xl bg-white dark:bg-transparent rounded-xl p-4 mb-6 border border-slate-200 dark:border-white/20 shadow-lg transition-colors duration-500">
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 transition-colors duration-500 flex items-center gap-2">
+            <FiBookOpen className="w-5 h-5" />
+            Blog Listesi - Kapak Fotoğrafları
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {blogs.map((blog) => (
+              <BlogThumbnailCard
+                key={blog.id}
+                blog={blog}
+                isSelected={selectedBlogId === blog.id}
+                onSelect={() => handleBlogSelect(blog.id)}
+                onImageChange={async (file: File) => {
+                  try {
+                    const formData = new FormData();
+                    formData.append("file", file);
+                    formData.append("folder", "blog");
+
+                    const res = await fetch("/api/upload", {
+                      method: "POST",
+                      body: formData,
+                      credentials: "include",
+                    });
+
+                    if (!res.ok) throw new Error("Upload failed");
+
+                    const data = await res.json();
+                    if (data.url) {
+                      // Update blog image
+                      const updatedBlogs = blogs.map((b) =>
+                        b.id === blog.id ? { ...b, image: data.url } : b
+                      );
+                      
+                      // Save to backend
+                      const blogDataRes = await fetch("/api/content/blog");
+                      const blogData = await blogDataRes.json();
+                      
+                      await fetch("/api/content/blog", {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          ...blogData,
+                          posts: updatedBlogs,
+                        }),
+                        credentials: "include",
+                        cache: "no-store",
+                      });
+                      
+                      // Refresh blogs list
+                      await loadBlogs();
+                      
+                      // If this is the selected blog, update form too
+                      if (selectedBlogId === blog.id) {
+                        updateField("image", data.url);
+                      }
+                    }
+                  } catch (error) {
+                    console.error("Error uploading image:", error);
+                    alert("Fotoğraf yükleme hatası!");
+                  }
+                }}
+              />
+            ))}
+            {/* Yeni Blog Ekle Butonu */}
+            <button
+              onClick={() => {
+                setSelectedBlogId("");
+                setForm({
+                  id: "",
+                  title: "",
+                  excerpt: "",
+                  content: "",
+                  image: "",
+                  date: new Date().toLocaleDateString("tr-TR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }),
+                  author: "Loegs",
+                  category: "NEWS",
+                  readTime: "5 dk",
+                  published: false,
+                  tags: "",
+                });
+              }}
+              className="flex flex-col items-center justify-center h-40 border-2 border-dashed border-slate-300 dark:border-white/20 rounded-lg hover:border-slate-400 dark:hover:border-white/40 transition-all duration-200 bg-white dark:bg-white/5"
+            >
+              <FiPlus className="w-10 h-10 mb-2 text-slate-600 dark:text-white/60" />
+              <span className="text-sm font-medium text-slate-600 dark:text-white/60">
+                Yeni Blog
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Canlı Önizleme - Ortada */}

@@ -60,8 +60,8 @@ interface ProjectsProps {
 
 const Projects: React.FC<ProjectsProps> = ({ showHeader = true }) => {
   // State'leri kaldırdık, direkt sabit değerler kullanılıyor
-  const data = fallbackProjects;
-  const subdomainProjects: SubdomainProject[] = [];
+  const [data, setData] = useState<ProjectsData>(fallbackProjects);
+  const [subdomainProjects, setSubdomainProjects] = useState<SubdomainProject[]>([]);
   
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const sectionRef = useRef<HTMLElement>(null);
@@ -71,14 +71,29 @@ const Projects: React.FC<ProjectsProps> = ({ showHeader = true }) => {
     rootMargin: '-50px 0px',
   });
 
-  // API çağrıları TAMAMEN KALDIRILDI - başlangıç değerleri kalıcı
-  // Hiçbir veri API'den çekilmiyor, flash sorunu çözüldü
-  // useEffect(() => {
-  //   async function loadData() {
-  //     // API çağrıları kaldırıldı
-  //   }
-  //   loadData();
-  // }, []);
+  // Subdomain projelerini API'den yükle
+  useEffect(() => {
+    async function loadSubdomainProjects() {
+      try {
+        const timestamp = Date.now();
+        const res = await fetch(`/api/content/subdomainProjects?t=${timestamp}`, {
+          cache: 'no-store',
+        });
+        if (res.ok) {
+          const projects = await res.json();
+          // Sadece yayınlanmış projeleri göster
+          const publishedProjects = Array.isArray(projects) 
+            ? projects.filter((p: SubdomainProject) => p.published !== false)
+            : [];
+          setSubdomainProjects(publishedProjects);
+        }
+      } catch (error) {
+        console.error('Error loading subdomain projects:', error);
+        setSubdomainProjects([]);
+      }
+    }
+    loadSubdomainProjects();
+  }, []);
 
 
   // Tüm projeleri tek listede birleştir
@@ -142,32 +157,32 @@ const Projects: React.FC<ProjectsProps> = ({ showHeader = true }) => {
       style={{ position: "relative", zIndex: 10 }}
     >
       {showHeader ? (
-        <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
-          animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-          transition={{ 
-            duration: 0.8,
-            ease: [0.16, 1, 0.3, 1]
-          }}
-          className="text-center mb-12"
+      <motion.div
+        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+        transition={{ 
+          duration: 0.8,
+          ease: [0.16, 1, 0.3, 1]
+        }}
+        className="text-center mb-12"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-3xl md:text-4xl font-bold text-white mb-2"
         >
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl md:text-4xl font-bold text-white mb-2"
-          >
-            {data.title}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg md:text-xl text-gray-300"
-          >
-            {data.subtitle}
-          </motion.p>
-        </motion.div>
+          {data.title}
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-lg md:text-xl text-gray-300"
+        >
+          {data.subtitle}
+        </motion.p>
+      </motion.div>
       ) : null}
 
       {/* Filters */}
