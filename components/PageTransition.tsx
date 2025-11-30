@@ -18,8 +18,8 @@ export default function PageTransition({ children }: { children: React.ReactNode
         key={pathname}
         initial={{ 
           opacity: 0, 
-          scale: 1.05, 
-          filter: "blur(8px)" 
+          scale: 1.02, 
+          filter: "blur(4px)" 
         }}
         animate={{ 
           opacity: 1, 
@@ -28,10 +28,12 @@ export default function PageTransition({ children }: { children: React.ReactNode
         }}
         exit={{ 
           opacity: 0,
-          transition: { duration: 0.1 }
+          scale: 0.98,
+          filter: "blur(4px)",
+          transition: { duration: 0.15 }
         }}
         transition={{
-          duration: 0.6,
+          duration: 0.4,
           ease: [0.23, 1, 0.32, 1], // iOS easing
         }}
         style={{
@@ -39,6 +41,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
           pointerEvents: 'auto',
           position: 'relative',
           zIndex: 1,
+          backgroundColor: 'transparent',
         }}
       >
         {children}

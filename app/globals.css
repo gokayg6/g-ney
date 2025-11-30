@@ -10,8 +10,8 @@
 
 /* iOS Liquid Glass Background System */
 html, body {
-  background: transparent;
-  background-color: transparent;
+  background: #0a0a0a;
+  background-color: #0a0a0a;
 }
 
 /* iOS Light Bloom Overlays */
@@ -181,6 +181,20 @@ body::before {
 
 .page-transition-exit {
   animation: zoom-out 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevent white flash during page transitions */
+html {
+  background-color: #0a0a0a !important;
+}
+
+body {
+  background-color: #0a0a0a !important;
+}
+
+/* Ensure background is always visible during transitions */
+[data-framer-component-type] {
+  background-color: transparent !important;
 }
 
 /* Smooth transitions for interactive elements - Faster */
@@ -769,6 +783,29 @@ select.admin-select option:hover,
 select.admin-select option:checked {
   background-color: rgba(255, 255, 255, 0.2) !important;
   color: white !important;
+}
+
+/* Admin Panel - Blog Select Styling - Fix white text issue */
+select {
+  color: rgb(15, 23, 42) !important; /* slate-900 */
+}
+
+select option {
+  color: rgb(15, 23, 42) !important; /* slate-900 */
+  background-color: white !important;
+}
+
+/* Dark mode select styling */
+.dark select,
+.dark select option {
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(30, 41, 59) !important; /* slate-800 */
+}
+
+.dark select option:hover,
+.dark select option:checked {
+  background-color: rgb(51, 65, 85) !important; /* slate-700 */
+  color: rgb(255, 255, 255) !important;
 }
 
 /* HomeHero Buttons - Force clickable */

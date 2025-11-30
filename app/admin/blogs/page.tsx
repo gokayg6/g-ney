@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import type { BlogPost } from "@/lib/data";
 import EditableBlogPreview from "@/components/admin/EditableBlogPreview";
 import StarsCanvas from "@/components/main/StarsBackground";
@@ -322,83 +323,123 @@ export default function AdminBlogEditor() {
     };
 
     return (
-      <div
-        className={`relative group cursor-pointer rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className={`relative group cursor-pointer rounded-xl overflow-hidden transition-all duration-300 ${
           isSelected
-            ? "border-slate-900 dark:border-white shadow-lg scale-105"
-            : "border-slate-200 dark:border-white/20 hover:border-slate-300 dark:hover:border-white/40"
+            ? "ring-4 ring-blue-500 dark:ring-blue-400 ring-offset-2 dark:ring-offset-slate-800 shadow-2xl shadow-blue-500/30 dark:shadow-blue-400/20"
+            : "shadow-lg hover:shadow-xl"
         }`}
         onClick={onSelect}
       >
-        {/* Kapak Fotoğrafı */}
-        <div className="relative aspect-[3/4] bg-slate-100 dark:bg-white/5 overflow-hidden">
-          {blog.image ? (
-            <Image
-              src={blog.image}
-              alt={blog.title || "Blog kapak"}
-              fill
-              className="object-cover"
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-white/30">
-              <FiCamera className="w-12 h-12" />
-            </div>
+        {/* Gradient Background Container */}
+        <div className="relative backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 dark:from-slate-800/90 dark:to-slate-900/90 border border-slate-200/50 dark:border-white/10 overflow-hidden">
+          {/* Kapak Fotoğrafı */}
+          <div className="relative aspect-[4/5] bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 overflow-hidden">
+            {blog.image ? (
+              <>
+                <Image
+                  src={blog.image}
+                  alt={blog.title || "Blog kapak"}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              </>
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 dark:text-white/30 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800">
+                <FiCamera className="w-16 h-16 mb-2 opacity-50" />
+                <span className="text-xs font-medium">Kapak Fotoğrafı Yok</span>
+              </div>
+            )}
+            
+            {/* Seçili İndikator */}
+            {isSelected && (
+              <div className="absolute top-2 right-2 z-20">
+                <div className="w-6 h-6 bg-blue-500 dark:bg-blue-400 rounded-full flex items-center justify-center shadow-lg">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+              </div>
           )}
-          
-          {/* Fotoğraf Değiştirme Overlay */}
-          <div
-            className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleImageClick();
-            }}
-          >
-            <button
-              className="px-4 py-2 bg-white dark:bg-white/20 text-slate-900 dark:text-white rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-white/30 transition-all duration-200 flex items-center gap-2"
+
+            {/* Fotoğraf Değiştirme Overlay */}
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10"
               onClick={(e) => {
                 e.stopPropagation();
                 handleImageClick();
               }}
-              disabled={imageUploading}
             >
-              {imageUploading ? (
-                <><FiClock className="inline w-4 h-4 mr-2 animate-spin" /> Yükleniyor...</>
-              ) : (
-                <><FiCamera className="inline w-4 h-4 mr-2" /> Fotoğraf Değiştir</>
-              )}
-            </button>
+              <button
+                className="px-5 py-2.5 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm text-slate-900 dark:text-white rounded-xl text-sm font-semibold hover:bg-white dark:hover:bg-slate-700 transition-all duration-200 flex items-center gap-2 shadow-xl hover:scale-105"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleImageClick();
+                }}
+                disabled={imageUploading}
+              >
+                {imageUploading ? (
+                  <><FiClock className="w-4 h-4 animate-spin" /> Yükleniyor...</>
+                ) : (
+                  <><FiCamera className="w-4 h-4" /> Fotoğraf Değiştir</>
+                )}
+              </button>
+            </div>
+
+            {/* Gizli File Input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+            />
           </div>
 
-          {/* Gizli File Input */}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="hidden"
-          />
+          {/* Blog Bilgileri - Daha Güzel Tasarım */}
+          <div className="p-3 bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border-t border-slate-200/50 dark:border-white/5">
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white line-clamp-2 flex-1 leading-tight">
+                {blog.title || "Başlıksız Blog"}
+              </h3>
+              {isSelected && (
+                <div className="flex-shrink-0 mt-0.5">
+                  <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full animate-pulse"></div>
+                </div>
+              )}
+            </div>
+            
+            <div className="flex items-center justify-between mt-2">
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3 text-slate-500 dark:text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <p className="text-[10px] font-medium text-slate-500 dark:text-white/60">
+                  {blog.date || "Tarih yok"}
+                </p>
+              </div>
+              
+              {blog.published ? (
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-semibold bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-300 rounded-full border border-green-200 dark:border-green-500/30">
+                  <span className="w-1.5 h-1.5 bg-green-500 dark:bg-green-400 rounded-full mr-1.5"></span>
+                  Yayında
+                </span>
+              ) : (
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-semibold bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-300 rounded-full border border-yellow-200 dark:border-yellow-500/30">
+                  <span className="w-1.5 h-1.5 bg-yellow-500 dark:bg-yellow-400 rounded-full mr-1.5"></span>
+                  Taslak
+                </span>
+              )}
+            </div>
+          </div>
         </div>
-
-        {/* Blog Bilgileri */}
-        <div className="p-2 bg-white dark:bg-white/5">
-          <h3 className="text-xs font-semibold text-slate-900 dark:text-white line-clamp-2 mb-1">
-            {blog.title || "Başlıksız"}
-          </h3>
-          <p className="text-[10px] text-slate-500 dark:text-white/50">
-            {blog.date || "Tarih yok"}
-          </p>
-          {blog.published ? (
-            <span className="inline-block mt-1 px-2 py-0.5 text-[10px] bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-300 rounded">
-              Yayında
-            </span>
-          ) : (
-            <span className="inline-block mt-1 px-2 py-0.5 text-[10px] bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-300 rounded">
-              Taslak
-            </span>
-          )}
-        </div>
-      </div>
+      </motion.div>
     );
   };
 
@@ -433,24 +474,43 @@ export default function AdminBlogEditor() {
         </div>
 
         {/* Blog Seçimi ve Kaydet Butonu */}
-        <div className="backdrop-blur-xl bg-white dark:bg-transparent rounded-xl p-4 mb-6 border border-slate-200 dark:border-white/20 shadow-lg transition-colors duration-500">
+        <div className="backdrop-blur-xl bg-gradient-to-br from-white/95 to-white/90 dark:from-slate-800/95 dark:to-slate-900/95 rounded-xl p-5 mb-6 border border-slate-200/50 dark:border-white/10 shadow-lg transition-colors duration-500">
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
             <div className="flex-1 w-full">
-              <label className="block text-slate-900 dark:text-white/90 mb-2 font-semibold text-sm transition-colors duration-500">
+              <label className="block text-slate-900 dark:text-white mb-3 font-bold text-sm transition-colors duration-500 flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
                 Blog Seç
               </label>
-              <select
-                value={selectedBlogId}
-                onChange={(e) => handleBlogSelect(e.target.value)}
-                className="w-full px-4 py-2 bg-white dark:bg-white/5 border-2 border-slate-300 dark:border-white/20 rounded-lg text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-600 dark:focus:border-white/40 focus:ring-2 focus:ring-slate-500/50 dark:focus:ring-white/20 transition-all duration-300 font-medium"
-              >
-                <option value="">Yeni Blog Yazısı</option>
-                {blogs.map((blog) => (
-                  <option key={blog.id} value={blog.id}>
-                    {blog.title || `Blog ${blog.id}`}
+              <div className="relative">
+                <select
+                  value={selectedBlogId}
+                  onChange={(e) => handleBlogSelect(e.target.value)}
+                  className="blog-select-dropdown w-full px-4 py-3 bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-white/20 rounded-xl text-sm focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-400/50 transition-all duration-300 font-medium appearance-none cursor-pointer shadow-sm hover:shadow-md"
+                  style={{
+                    color: 'rgb(15, 23, 42)',
+                  }}
+                >
+                  <option value="" style={{ color: 'rgb(15, 23, 42)', backgroundColor: 'white' }}>
+                    Yeni Blog Yazısı
                   </option>
-                ))}
-              </select>
+                  {blogs.map((blog) => (
+                    <option 
+                      key={blog.id} 
+                      value={blog.id}
+                      style={{ color: 'rgb(15, 23, 42)', backgroundColor: 'white' }}
+                    >
+                      {blog.title || `Blog ${blog.id}`}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <svg className="w-5 h-5 text-slate-500 dark:text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
             <div className="flex gap-2 items-end">
               <button
@@ -485,13 +545,22 @@ export default function AdminBlogEditor() {
           )}
         </div>
 
-        {/* Blog Listesi - Küçük Kapak Fotoğrafları */}
-        <div className="backdrop-blur-xl bg-white dark:bg-transparent rounded-xl p-4 mb-6 border border-slate-200 dark:border-white/20 shadow-lg transition-colors duration-500">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 transition-colors duration-500 flex items-center gap-2">
-            <FiBookOpen className="w-5 h-5" />
-            Blog Listesi - Kapak Fotoğrafları
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {/* Blog Listesi - Küçük Kapak Fotoğrafları - Yeniden Tasarlandı */}
+        <div className="backdrop-blur-xl bg-gradient-to-br from-white/95 to-white/90 dark:from-slate-800/95 dark:to-slate-900/95 rounded-2xl p-6 mb-6 border border-slate-200/50 dark:border-white/10 shadow-2xl transition-colors duration-500">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white transition-colors duration-500 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
+                <FiBookOpen className="w-5 h-5 text-white" />
+              </div>
+              <span>Blog Listesi - Kapak Fotoğrafları</span>
+            </h2>
+            <div className="px-3 py-1.5 bg-slate-100 dark:bg-slate-700 rounded-lg">
+              <span className="text-sm font-semibold text-slate-700 dark:text-white">
+                {blogs.length} {blogs.length === 1 ? 'Blog' : 'Blog'}
+              </span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {blogs.map((blog) => (
               <BlogThumbnailCard
                 key={blog.id}
@@ -549,8 +618,12 @@ export default function AdminBlogEditor() {
                 }}
               />
             ))}
-            {/* Yeni Blog Ekle Butonu */}
-            <button
+            {/* Yeni Blog Ekle Butonu - Daha Güzel Tasarım */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setSelectedBlogId("");
                 setForm({
@@ -571,13 +644,21 @@ export default function AdminBlogEditor() {
                   tags: "",
                 });
               }}
-              className="flex flex-col items-center justify-center h-40 border-2 border-dashed border-slate-300 dark:border-white/20 rounded-lg hover:border-slate-400 dark:hover:border-white/40 transition-all duration-200 bg-white dark:bg-white/5"
+              className="relative flex flex-col items-center justify-center aspect-[4/5] border-2 border-dashed border-slate-300 dark:border-white/20 rounded-xl hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-300 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 group overflow-hidden"
             >
-              <FiPlus className="w-10 h-10 mb-2 text-slate-600 dark:text-white/60" />
-              <span className="text-sm font-medium text-slate-600 dark:text-white/60">
-                Yeni Blog
-              </span>
-            </button>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-300"></div>
+              <div className="relative z-10 flex flex-col items-center">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-3 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
+                  <FiPlus className="w-7 h-7 text-white" />
+                </div>
+                <span className="text-sm font-bold text-slate-700 dark:text-white/90 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                  Yeni Blog
+                </span>
+                <span className="text-xs text-slate-500 dark:text-white/50 mt-1">
+                  Ekle
+                </span>
+              </div>
+            </motion.button>
           </div>
         </div>
 
