@@ -6,7 +6,6 @@ import { useInView } from "react-intersection-observer";
 import { SkillsData } from "@/lib/data";
 import { 
   SiReact, 
-  SiReactnative, 
   SiNextdotjs, 
   SiTypescript, 
   SiJavascript,
@@ -14,11 +13,11 @@ import {
   SiFirebase,
   SiGit,
   SiFigma,
-  SiAmazonaws
+  SiAws
 } from "react-icons/si";
 
 const iconMap: { [key: string]: any } = {
-  "React Native": SiReactnative,
+  "React Native": SiReact,
   "React": SiReact,
   "Next.js": SiNextdotjs,
   "TypeScript": SiTypescript,
@@ -27,7 +26,7 @@ const iconMap: { [key: string]: any } = {
   "Firebase": SiFirebase,
   "Git": SiGit,
   "Figma": SiFigma,
-  "AWS": SiAmazonaws,
+  "AWS": SiAws,
 };
 
 export default function Skills() {

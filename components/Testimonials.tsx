@@ -116,7 +116,7 @@ export default function Testimonials() {
                 </div>
 
                 <p className="text-gray-200 leading-relaxed mb-3 text-sm">
-                  "{testimonial.content}"
+                  &ldquo;{testimonial.content}&rdquo;
                 </p>
 
                 <p className="text-gray-500 text-xs">{testimonial.date}</p>

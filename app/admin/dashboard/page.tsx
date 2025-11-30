@@ -6,17 +6,16 @@ import Link from 'next/link';
 import { PortfolioData } from '@/lib/data';
 import StarsCanvas from '@/components/main/StarsBackground';
 import { 
-  FiRocket, 
+  FiZap, 
   FiUser, 
   FiBriefcase, 
-  FiPalette, 
+  FiLayers, 
   FiGlobe, 
   FiFileText, 
   FiEdit, 
   FiMail, 
   FiLink, 
   FiFolder, 
-  FiZap, 
   FiBarChart, 
   FiSettings, 
   FiHelpCircle 
@@ -121,10 +120,10 @@ export default function AdminDashboard() {
   }
 
   const sections = [
-    { href: '/admin/edit/hero', title: 'Hero Section', desc: 'Ana sayfa hero içeriğini düzenle', icon: FiRocket },
+    { href: '/admin/edit/hero', title: 'Hero Section', desc: 'Ana sayfa hero içeriğini düzenle', icon: FiZap },
     { href: '/admin/edit/about', title: 'Hakkımda', desc: 'Hakkımda bölümünü düzenle', icon: FiUser },
     { href: '/admin/edit/experience', title: 'Deneyim', desc: 'İş deneyimlerini yönet', icon: FiBriefcase },
-    { href: '/admin/edit/projects', title: 'Projeler', desc: 'Projeleri ve şablonları yönet', icon: FiPalette },
+    { href: '/admin/edit/projects', title: 'Projeler', desc: 'Projeleri ve şablonları yönet', icon: FiLayers },
     { href: '/admin/edit/subdomainProjects', title: 'Subdomain Projeleri', desc: 'Subdomain projelerini ve görsellerini yönet', icon: FiGlobe },
     { href: '/admin/edit/blog', title: 'Blog', desc: 'Blog yazılarını yönet', icon: FiFileText },
     { href: '/admin/blogs', title: 'Blog Editörü', desc: 'Canlı önizleme ile blog yazılarını düzenle', icon: FiEdit },
