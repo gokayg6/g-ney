@@ -196,16 +196,14 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     const supportsSVGFilters = () => {
         if (typeof window === 'undefined') return false;
 
-        const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-        const isFirefox = /Firefox/.test(navigator.userAgent);
-
-        if (isWebkit || isFirefox) {
-            return false;
-        }
+        // Force enable for modern devices or let the feature detection below handle it
+        // Previously blocked WebKit/Firefox explicitly
 
         const div = document.createElement('div');
         div.style.backdropFilter = `url(#${filterId})`;
-        return div.style.backdropFilter !== '';
+        // Some browsers support the property but not the url() value for backdrop-filter
+        // so this check is still useful.
+        return div.style.backdropFilter !== '' && div.style.backdropFilter !== 'none';
     };
 
     const supportsBackdropFilter = () => {
