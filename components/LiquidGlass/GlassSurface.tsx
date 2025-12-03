@@ -80,7 +80,12 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     className = '',
     style = {}
 }) => {
-    const uniqueId = useId().replace(/:/g, '-');
+    const [uniqueId, setUniqueId] = useState<string>('');
+
+    useEffect(() => {
+        setUniqueId(Math.random().toString(36).substr(2, 9));
+    }, []);
+
     const filterId = `glass-filter-${uniqueId}`;
     const redGradId = `red-grad-${uniqueId}`;
     const blueGradId = `blue-grad-${uniqueId}`;
@@ -354,5 +359,6 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
         </div>
     );
 };
+
 
 export default GlassSurface;

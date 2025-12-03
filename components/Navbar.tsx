@@ -81,29 +81,48 @@ const Navbar: React.FC = () => {
         className="fixed bottom-2 left-2 right-2 z-[10000] pointer-events-auto md:hidden"
       >
         <div
-          className="relative px-2 py-2 rounded-[20px] backdrop-blur-3xl max-w-md mx-auto"
-          style={{
-            background: "rgba(255, 255, 255, 0.1)",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1) inset",
-          }}
+          className="relative max-w-md mx-auto"
         >
-          <div className="flex items-center justify-around gap-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const active = isActive(item.href);
+          <GlassSurface
+            width="100%"
+            height="auto"
+            borderRadius={20}
+            borderWidth={0.07}
+            brightness={50}
+            opacity={0.8}
+            blur={20}
+            displace={0.5}
+            backgroundOpacity={0.15}
+            saturation={1}
+            distortionScale={-180}
+            redOffset={0}
+            greenOffset={1}
+            blueOffset={2}
+            xChannel="R"
+            yChannel="G"
+            mixBlendMode="difference"
+            style={{
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1) inset",
+              border: "1px solid rgba(255, 255, 255, 0.2)"
+            }}
+          >
+            <div className="flex items-center justify-around gap-1 w-full px-2 py-2">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.href);
 
-              return (
-                <DockIcon
-                  key={item.href}
-                  href={item.href}
-                  icon={Icon}
-                  active={active}
-                  label={item.label}
-                />
-              );
-            })}
-          </div>
+                return (
+                  <DockIcon
+                    key={item.href}
+                    href={item.href}
+                    icon={Icon}
+                    active={active}
+                    label={item.label}
+                  />
+                );
+              })}
+            </div>
+          </GlassSurface>
         </div>
       </motion.nav>
     );
@@ -130,9 +149,9 @@ const Navbar: React.FC = () => {
             borderWidth={0.07}
             brightness={50}
             opacity={isHovered ? 0.93 : 0.6}
-            blur={isHovered ? 18 : 12}
-            displace={isHovered ? 1 : 0.5}
-            backgroundOpacity={isHovered ? 0.15 : 0.08}
+            blur={isHovered ? 25 : 15}
+            displace={isHovered ? 1.5 : 0.8}
+            backgroundOpacity={isHovered ? 0.2 : 0.1}
             saturation={1}
             distortionScale={distortion}
             redOffset={0}
