@@ -80,15 +80,19 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     className = '',
     style = {}
 }) => {
+    const [mounted, setMounted] = useState(false);
     const [uniqueId, setUniqueId] = useState<string>('');
 
     useEffect(() => {
+        setMounted(true);
         setUniqueId(Math.random().toString(36).substr(2, 9));
     }, []);
 
     const filterId = `glass-filter-${uniqueId}`;
     const redGradId = `red-grad-${uniqueId}`;
     const blueGradId = `blue-grad-${uniqueId}`;
+
+    if (!mounted) return <div className={className} style={{ width, height, borderRadius, ...style }} />;
 
     const containerRef = useRef<HTMLDivElement>(null);
     const feImageRef = useRef<SVGFEImageElement>(null);
