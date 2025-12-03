@@ -92,8 +92,6 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     const redGradId = `red-grad-${uniqueId}`;
     const blueGradId = `blue-grad-${uniqueId}`;
 
-    if (!mounted) return <div className={className} style={{ width, height, borderRadius, ...style }} />;
-
     const containerRef = useRef<HTMLDivElement>(null);
     const feImageRef = useRef<SVGFEImageElement>(null);
     const redChannelRef = useRef<SVGFEDisplacementMapElement>(null);
@@ -104,6 +102,7 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     const isDarkMode = useDarkMode();
 
     const generateDisplacementMap = useCallback(() => {
+        if (!mounted) return '';
         const rect = containerRef.current?.getBoundingClientRect();
         const actualWidth = rect?.width || 400;
         const actualHeight = rect?.height || 200;
@@ -129,13 +128,16 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     `;
 
         return `data:image/svg+xml,${encodeURIComponent(svgContent)}`;
-    }, [borderRadius, borderWidth, brightness, opacity, blur, mixBlendMode, redGradId, blueGradId]);
+    }, [mounted, borderRadius, borderWidth, brightness, opacity, blur, mixBlendMode, redGradId, blueGradId]);
 
     const updateDisplacementMap = useCallback(() => {
-        feImageRef.current?.setAttribute('href', generateDisplacementMap());
+        if (feImageRef.current) {
+            feImageRef.current.setAttribute('href', generateDisplacementMap());
+        }
     }, [generateDisplacementMap]);
 
     useEffect(() => {
+        if (!mounted) return;
         updateDisplacementMap();
         [
             { ref: redChannelRef, offset: redOffset },
@@ -149,8 +151,11 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
             }
         });
 
-        gaussianBlurRef.current?.setAttribute('stdDeviation', displace.toString());
+        if (gaussianBlurRef.current) {
+            gaussianBlurRef.current.setAttribute('stdDeviation', displace.toString());
+        }
     }, [
+        mounted,
         updateDisplacementMap,
         width,
         height,
@@ -170,7 +175,7 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     ]);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        if (!mounted || !containerRef.current) return;
 
         const resizeObserver = new ResizeObserver(() => {
             setTimeout(updateDisplacementMap, 0);
@@ -181,11 +186,12 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
         return () => {
             resizeObserver.disconnect();
         };
-    }, [updateDisplacementMap]);
+    }, [mounted, updateDisplacementMap]);
 
     useEffect(() => {
+        if (!mounted) return;
         setTimeout(updateDisplacementMap, 0);
-    }, [width, height, updateDisplacementMap]);
+    }, [mounted, width, height, updateDisplacementMap]);
 
     const supportsSVGFilters = () => {
         if (typeof window === 'undefined') return false;
@@ -296,6 +302,10 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     const focusVisibleClasses = isDarkMode
         ? 'focus-visible:outline-2 focus-visible:outline-[#0A84FF] focus-visible:outline-offset-2'
         : 'focus-visible:outline-2 focus-visible:outline-[#007AFF] focus-visible:outline-offset-2';
+
+    if (!mounted) {
+        return <div className={className} style={{ width, height, borderRadius, ...style }} />;
+    }
 
     return (
         <div
