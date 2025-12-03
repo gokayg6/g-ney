@@ -88,7 +88,7 @@ const Banner: React.FC<{}> = () => {
               {data.taglineHighlight}
             </span>
           </p>
-          
+
         </div>
 
         <p className="text-sm md:text-base text-gray-200 my-5 max-w-[600px] mx-auto px-4 animate-slide-up" style={{ animationDelay: '0.25s', animationFillMode: 'both' }}>

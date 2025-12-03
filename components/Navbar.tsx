@@ -6,11 +6,13 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { FiHome, FiUser, FiBriefcase, FiBookOpen, FiMail, FiMenu, FiX } from "react-icons/fi";
+import GlassSurface from "./LiquidGlass/GlassSurface";
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const navItems = [
     { href: "/", label: "Ana Sayfa", icon: FiHome },
@@ -46,6 +48,24 @@ const Navbar: React.FC = () => {
     return pathname.startsWith(href);
   }, [pathname]);
 
+  const [distortion, setDistortion] = useState(-180);
+
+  useEffect(() => {
+    let animationFrame: number;
+    if (isHovered) {
+      const startTime = Date.now();
+      const animate = () => {
+        const elapsed = Date.now() - startTime;
+        setDistortion(-180 + Math.sin(elapsed / 1000) * 10); // Slow oscillation
+        animationFrame = requestAnimationFrame(animate);
+      };
+      animate();
+    } else {
+      setDistortion(-180);
+    }
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isHovered]);
+
   // Admin sayfalarında navbar'ı gizle (TÜM hooks'lardan sonra)
   if (pathname?.startsWith('/admin')) {
     return null;
@@ -72,7 +92,7 @@ const Navbar: React.FC = () => {
             {navItems.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.href);
-              
+
               return (
                 <DockIcon
                   key={item.href}
@@ -97,68 +117,86 @@ const Navbar: React.FC = () => {
       transition={{ type: "spring", stiffness: 200, damping: 25 }}
       className="fixed top-0 left-0 right-0 z-[10000] pointer-events-auto"
     >
-      <div className="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 md:py-4">
+      <div className="w-fit mx-auto mt-4">
         <div
-          className="rounded-[20px] backdrop-blur-3xl px-3 sm:px-4 md:px-6 py-2 md:py-3"
-          style={{
-            background: "rgba(255, 255, 255, 0.1)",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
-          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="transition-all duration-300 ease-in-out"
         >
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" prefetch={true} className="flex items-center space-x-2 group flex-shrink-0">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.94 }}
-                transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center shadow-lg overflow-hidden"
-              >
-                <Image
-                  src="/loegs.png"
-                  alt="Loegs"
-                  width={36}
-                  height={36}
-                  className="object-contain"
-                  unoptimized
-                />
-              </motion.div>
-              <span className="hidden sm:inline text-white font-semibold text-base sm:text-lg tracking-tight">Loegs</span>
-            </Link>
+          <GlassSurface
+            width="100%"
+            height="auto"
+            borderRadius={40}
+            borderWidth={0.07}
+            brightness={50}
+            opacity={isHovered ? 0.93 : 0.6}
+            blur={isHovered ? 18 : 12}
+            displace={isHovered ? 1 : 0.5}
+            backgroundOpacity={isHovered ? 0.15 : 0.08}
+            saturation={1}
+            distortionScale={distortion}
+            redOffset={0}
+            greenOffset={1}
+            blueOffset={2}
+            xChannel="R"
+            yChannel="G"
+            mixBlendMode="difference"
+            style={{ boxShadow: 'none', border: '1px solid rgba(255, 255, 255, 0.3)' }}
+          >
+            <div className="flex items-center justify-between gap-8 px-6 py-2">
+              {/* Logo */}
+              <Link href="/" prefetch={true} className="flex items-center space-x-2 group flex-shrink-0">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.94 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shadow-lg overflow-hidden"
+                >
+                  <Image
+                    src="/loegs.png"
+                    alt="Loegs"
+                    width={36}
+                    height={36}
+                    className="object-contain"
+                    unoptimized
+                  />
+                </motion.div>
+                <span className="hidden sm:inline text-white font-semibold text-base sm:text-lg tracking-tight">Loegs</span>
+              </Link>
 
-            {/* Desktop Navigation */}
-            <div className="flex items-center space-x-1 lg:space-x-2">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const active = isActive(item.href);
-                
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    prefetch={true}
-                    className="relative px-2 sm:px-3 lg:px-4 py-2 rounded-[12px] text-xs sm:text-sm font-medium transition-all duration-200"
-                  >
-                    {active && (
-                      <motion.div
-                        layoutId="activeTab"
-                        className="absolute inset-0 bg-white/20 rounded-[12px]"
-                        transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                        style={{
-                          filter: "drop-shadow(0 0 15px rgba(255,255,255,0.6))",
-                        }}
-                      />
-                    )}
-                    <span className="relative flex items-center space-x-1 lg:space-x-2">
-                      <Icon className="w-4 h-4 flex-shrink-0" />
-                      <span className="hidden lg:inline whitespace-nowrap">{item.label}</span>
-                    </span>
-                  </Link>
-                );
-              })}
+              {/* Desktop Navigation */}
+              <div className="flex items-center space-x-1 lg:space-x-1">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  const active = isActive(item.href);
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      prefetch={true}
+                      className="relative px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 hover:bg-white/10"
+                    >
+                      {active && (
+                        <motion.div
+                          layoutId="activeTab"
+                          className="absolute inset-0 bg-white/20 rounded-full"
+                          transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                          style={{
+                            filter: "drop-shadow(0 0 15px rgba(255,255,255,0.6))",
+                          }}
+                        />
+                      )}
+                      <span className="relative flex items-center space-x-2">
+                        <Icon className="w-4 h-4 flex-shrink-0" />
+                        <span className="hidden lg:inline whitespace-nowrap">{item.label}</span>
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          </GlassSurface>
         </div>
       </div>
     </motion.nav>
@@ -212,9 +250,8 @@ const DockIcon: React.FC<DockIconProps> = ({ href, icon: Icon, active, label }) 
           />
         )}
         <Icon
-          className={`relative w-5 h-5 ${
-            active ? "text-white" : "text-white/70"
-          } transition-colors duration-200`}
+          className={`relative w-5 h-5 ${active ? "text-white" : "text-white/70"
+            } transition-colors duration-200`}
         />
       </Link>
     </motion.div>

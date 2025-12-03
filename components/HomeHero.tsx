@@ -16,7 +16,7 @@ const HomeHero: React.FC = () => {
     buttonLink: "mail:exapmle@exapmle.com",
     image: "/loegs.png",
   });
-  
+
   // API'den veri çek
   useEffect(() => {
     fetch("/api/content/hero")
@@ -37,36 +37,36 @@ const HomeHero: React.FC = () => {
         // Silent fail - başlangıç değerlerini koru
       });
   }, []);
-  
+
   // Glassmorphism blur animasyonu için state değerleri
   const [backdropBlur, setBackdropBlur] = useState("blur(20px) saturate(180%)");
   const [containerOpacity, setContainerOpacity] = useState(0.5);
-  
+
   // Motion values - component seviyesinde tanımlanmalı
   const blurProgress = useMotionValue(20);
   const opacityProgress = useMotionValue(0.5);
-  
+
   // Blur ve opacity animasyonunu başlat
   useEffect(() => {
     const blurAnimation = animate(blurProgress, 0, {
       duration: 0.8,
       ease: [0.16, 1, 0.3, 1],
     });
-    
+
     const opacityAnimation = animate(opacityProgress, 1, {
       duration: 0.8,
       ease: [0.16, 1, 0.3, 1],
     });
-    
+
     // Motion value'ları state'e dönüştür
     const unsubscribeBlur = blurProgress.on("change", (value) => {
       setBackdropBlur(`blur(${value}px) saturate(180%)`);
     });
-    
+
     const unsubscribeOpacity = opacityProgress.on("change", (value) => {
       setContainerOpacity(value);
     });
-    
+
     return () => {
       blurAnimation.stop();
       opacityAnimation.stop();
@@ -100,7 +100,7 @@ const HomeHero: React.FC = () => {
         style={{ position: 'relative', zIndex: 1 }}
       >
         {/* Hero Kartı - iOS Glassmorphism efekti */}
-        <div 
+        <div
           className="relative overflow-hidden rounded-[2rem]"
           style={{
             backdropFilter: backdropBlur,
@@ -110,9 +110,9 @@ const HomeHero: React.FC = () => {
         >
           {/* Glassmorphism arka plan katmanı - Light/Dark */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/90 dark:from-white/5 via-white/85 dark:via-white/5 to-white/80 dark:to-white/5 rounded-[2rem] border border-slate-200 dark:border-white/20 shadow-2xl dark:shadow-xl pointer-events-none transition-colors duration-500" />
-          
-           {/* İçerik container */}
-           <div className="relative p-8 md:p-12 lg:p-16 z-10">
+
+          {/* İçerik container */}
+          <div className="relative p-8 md:p-12 lg:p-16 z-10">
             {/* Logo - Daha zarif animasyon */}
             <motion.div
               className="flex justify-center mb-10"
@@ -186,7 +186,7 @@ const HomeHero: React.FC = () => {
             </motion.p>
 
             {/* Butonlar Container - Glassmorphism butonlar */}
-            <motion.div 
+            <motion.div
               className="home-hero-buttons flex flex-col sm:flex-row gap-4 md:gap-5 relative"
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
